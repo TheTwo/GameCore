@@ -1,0 +1,10 @@
+{
+  "name": "com.funplus.dragonreborn",
+  "version": "1.0.0",
+  "displayName": "DragonReborn Framework",
+  "description": "The Game Framework",
+  "unity": "2018.4",
+  "dependencies": {
+    "com.funplus.dragonreborn.interface": ""
+  }
+}

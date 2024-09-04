@@ -1,0 +1,176 @@
+--local PoolUsage = require("PoolUsage")
+--local PooledGameObjectHandle = CS.DragonReborn.AssetTool.PooledGameObjectHandle
+--local MapHudTransformControl = require("MapHudTransformControl")
+--local Utils = require("Utils")
+--
+--local Zero = CS.UnityEngine.Vector3.zero
+--local One = CS.UnityEngine.Vector3.one
+--local Identity = CS.UnityEngine.Quaternion.identity
+--
+-----@class KingdomBaseAsset
+-----@field lastPrefabName string
+-----@field position CS.UnityEngine.Vector3
+-----@field objectType number
+-----@field id number
+-----@field data any
+-----@field root CS.UnityEngine.Transform
+-----@field staticMapData CS.Grid.StaticMapData
+-----@field x number
+-----@field z number
+--local KingdomBaseAsset = class("KingdomBaseAsset")
+--
+--function KingdomBaseAsset:ctor()
+--    self.handle = PooledGameObjectHandle(PoolUsage.Kingdom)
+--    self.prefabName = string.Empty
+--    self.position = Zero
+--end
+--
+--function KingdomBaseAsset:Release()
+--    if self.handle then
+--        self.handle:Delete()
+--        self.handle = nil
+--    end
+--    self.root = nil
+--    self.staticMapData = nil
+--    self.lod = nil
+--end
+--
+-----@return CS.UnityEngine.GameObject
+--function KingdomBaseAsset:GetAsset()
+--    return self.handle.Asset
+--end
+--
+-----@param objectType number
+-----@param id number
+-----@param lod number
+-----@param data any
+-----@param root CS.UnityEngine.Transform
+-----@param staticMapData CS.Grid.StaticMapData
+--function KingdomBaseAsset:FeedData(id, objectType, lod, data, root, staticMapData, x, z)
+--    self.objectType = objectType
+--    self.id = id
+--    self.lod = lod
+--    self.data = data
+--    self.root = root
+--    self.staticMapData = staticMapData
+--    self.x = x
+--    self.z = z
+--    self:SetPosition(x, z)
+--    self:OnFeedData()
+--end
+--
+--function KingdomBaseAsset:CheckLod(lod)
+--    return lod and lod == self.lod
+--end
+--
+--function KingdomBaseAsset:UpdateLod(lod)
+--    local prefabName = self:GetPrefabName(lod)
+--    if string.IsNullOrEmpty(self.lastPrefabName) then
+--        if not string.IsNullOrEmpty(prefabName) then
+--            self:Show(lod)
+--        end
+--    else
+--        if string.IsNullOrEmpty(prefabName) then
+--            self:Hide()
+--        else
+--            if self.lastPrefabName ~= prefabName then
+--                self:Hide()
+--                self:Show(lod)
+--            else
+--                self:OnConstructionUpdate(lod)
+--            end
+--        end
+--    end
+--end
+--
+-----@param go CS.UnityEngine.GameObject
+-----@param data KingdomBaseAsset
+--local function LoadCallback(go, data)
+--    if data ~= nil then
+--        data:PostLoaded()
+--        data:SetScale(MapHudTransformControl.scale)
+--    end
+--end
+--
+--function KingdomBaseAsset:Show(lod, overridePriority)
+--    if self.handle and self.handle.Idle then
+--        self.lastPrefabName = self:GetPrefabName(lod)
+--        local prefabName = self.lastPrefabName
+--        if not string.IsNullOrEmpty(prefabName) then
+--            local priority = self:GetPriority() + (overridePriority or 0)
+--            self.handle:Create(prefabName, self.root, self:GetPosition(), Identity, One, LoadCallback, self, priority)
+--        end
+--    end
+--end
+--
+--function KingdomBaseAsset:Hide()
+--    self:OnConstructionShutdown()
+--    if self.handle then
+--        self.handle:Delete()
+--    end
+--    self.lastPrefabName = string.Empty
+--end
+--
+--function KingdomBaseAsset:PostLoaded()
+--    self:OnConstructionSetup()
+--end
+--
+--function KingdomBaseAsset:SetPosition(x, y)
+--    self.position.x =  x * self.staticMapData.UnitsPerTileX
+--    self.position.z =  y * self.staticMapData.UnitsPerTileZ
+--end
+--
+--function KingdomBaseAsset:OnFeedData()
+--    
+--end
+--
+--function KingdomBaseAsset:SetScale(scale)
+--    if Utils.IsNotNull(self.behaviour) then
+--        self.behaviour.root.localScale = One * scale
+--    end
+--end
+--
+--function KingdomBaseAsset:GetID()
+--    return self.id
+--end
+--
+--function KingdomBaseAsset:GetObjectType()
+--    return self.objectType
+--end
+--
+-----@return CS.UnityEngine.Vector3
+--function KingdomBaseAsset:GetPosition()
+--    return self.position
+--end
+--
+----override this
+--function KingdomBaseAsset:GetPrefabName(lod)
+--    
+--end
+--
+----override this
+--function KingdomBaseAsset:GetPriority()
+--    return 100
+--end
+--
+--function KingdomBaseAsset:OnConstructionUpdate()
+--    -- 重载此函数
+--end
+--
+--function KingdomBaseAsset:OnConstructionShutdown()
+--    -- 重载此函数
+--end
+--
+--function KingdomBaseAsset:OnConstructionSetup()
+--    -- 重载此函数
+--end
+--
+--function KingdomBaseAsset:FadeIn()
+--end
+--
+--function KingdomBaseAsset:FadeOut()
+--end
+--
+--
+--
+--return KingdomBaseAsset

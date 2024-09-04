@@ -1,0 +1,101 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Funplus.DragonReborn.Interface", "Funplus.DragonReborn.Interface.csproj", "{f062a1e2-1695-e580-50e6-e34f6251c9e9}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YamlDotNet", "YamlDotNet.csproj", "{5611779c-abc9-b113-1fc2-0ba71f66d75d}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Funplus.DragonReborn.AssetTool", "Funplus.DragonReborn.AssetTool.csproj", "{ce98db5c-4e02-c0d5-2739-e769a2616df8}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Funplus.DragonReborn.CSharpReflectionTool", "Funplus.DragonReborn.CSharpReflectionTool.csproj", "{193b9ec6-9613-ab55-3ddd-272181dbebb6}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "com.funplus.dragonreborn.plugins.editor", "com.funplus.dragonreborn.plugins.editor.csproj", "{b0ac2e34-1cde-8845-6bf5-455dd7b30ba5}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Funplus.DragonReborn.AssetTool.Editor", "Funplus.DragonReborn.AssetTool.Editor.csproj", "{6115710d-8170-76b2-4490-95b64dd87279}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Funplus.DragonReborn.U2D", "Funplus.DragonReborn.U2D.csproj", "{17a33ab6-7349-c481-54c1-6bcad460d8c2}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{c761e073-5e30-2414-a735-b3371ec95a0d}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Funplus.DragonReborn.VersionControl", "Funplus.DragonReborn.VersionControl.csproj", "{bce77b74-19d6-7a9b-05ec-20f07e08a6dc}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Funplus.DragonReborn.Runtime", "Funplus.DragonReborn.Runtime.csproj", "{e2e6598d-1bde-a0f5-f9b5-d2ca0d4f5e17}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp-Editor", "Assembly-CSharp-Editor.csproj", "{72fca7a3-529e-9de3-47f9-4576e8dd1054}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Funplus.DragonReborn.Plugin.Runtime", "Funplus.DragonReborn.Plugin.Runtime.csproj", "{c0d5899b-fc03-97c8-3327-71a2174830c7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Funplus.DragonReborn.U2D.Editor", "Funplus.DragonReborn.U2D.Editor.csproj", "{26ba3746-a0a3-1875-ccfc-187a243770fb}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Funplus.DragonReborn.VersionControl.Editor", "Funplus.DragonReborn.VersionControl.Editor.csproj", "{3a5561c4-30d7-d7e1-ba15-c3fbdbacf8d0}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Funplus.DragonReborn.Editor", "Funplus.DragonReborn.Editor.csproj", "{b755f792-8656-c823-7a09-4a43cd0d9d58}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Funplus.DragonReborn.GestureManager", "Funplus.DragonReborn.GestureManager.csproj", "{a6ca4526-c6ff-8116-ed40-5d00309203c4}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Funplus.DragonReborn.LuaHintGenerator.Editor", "Funplus.DragonReborn.LuaHintGenerator.Editor.csproj", "{805bdac3-b704-9b4e-cdfe-e596072e75fd}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Funplus.DragonReborn.SoundFramework", "Funplus.DragonReborn.SoundFramework.csproj", "{c49cef70-be53-a8d8-2786-dfebb1c6f199}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Funplus.DragonReborn.CsvReader", "Funplus.DragonReborn.CsvReader.csproj", "{3e4c9303-02c7-1c59-dedd-bf29e5a80acd}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Funplus.DragonReborn.LuaHintGenerator", "Funplus.DragonReborn.LuaHintGenerator.csproj", "{2f3f3693-7574-6db0-ee08-ba7dab6acc97}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sirenix.OdinInspector.Modules.UnityMathematics", "Sirenix.OdinInspector.Modules.UnityMathematics.csproj", "{110b8bc8-b3ea-d8bc-9f78-c5c3c16ba1af}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Funplus.DragonReborn.AssetTool.Profiler", "Funplus.DragonReborn.AssetTool.Profiler.csproj", "{e8a9e79b-7cdd-53c3-f6b0-7f07241bac2d}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{f062a1e2-1695-e580-50e6-e34f6251c9e9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{f062a1e2-1695-e580-50e6-e34f6251c9e9}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5611779c-abc9-b113-1fc2-0ba71f66d75d}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5611779c-abc9-b113-1fc2-0ba71f66d75d}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{ce98db5c-4e02-c0d5-2739-e769a2616df8}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{ce98db5c-4e02-c0d5-2739-e769a2616df8}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{193b9ec6-9613-ab55-3ddd-272181dbebb6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{193b9ec6-9613-ab55-3ddd-272181dbebb6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{b0ac2e34-1cde-8845-6bf5-455dd7b30ba5}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{b0ac2e34-1cde-8845-6bf5-455dd7b30ba5}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6115710d-8170-76b2-4490-95b64dd87279}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6115710d-8170-76b2-4490-95b64dd87279}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17a33ab6-7349-c481-54c1-6bcad460d8c2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17a33ab6-7349-c481-54c1-6bcad460d8c2}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{c761e073-5e30-2414-a735-b3371ec95a0d}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{c761e073-5e30-2414-a735-b3371ec95a0d}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{bce77b74-19d6-7a9b-05ec-20f07e08a6dc}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{bce77b74-19d6-7a9b-05ec-20f07e08a6dc}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{e2e6598d-1bde-a0f5-f9b5-d2ca0d4f5e17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{e2e6598d-1bde-a0f5-f9b5-d2ca0d4f5e17}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72fca7a3-529e-9de3-47f9-4576e8dd1054}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72fca7a3-529e-9de3-47f9-4576e8dd1054}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{c0d5899b-fc03-97c8-3327-71a2174830c7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{c0d5899b-fc03-97c8-3327-71a2174830c7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{26ba3746-a0a3-1875-ccfc-187a243770fb}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{26ba3746-a0a3-1875-ccfc-187a243770fb}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3a5561c4-30d7-d7e1-ba15-c3fbdbacf8d0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3a5561c4-30d7-d7e1-ba15-c3fbdbacf8d0}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{b755f792-8656-c823-7a09-4a43cd0d9d58}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{b755f792-8656-c823-7a09-4a43cd0d9d58}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{a6ca4526-c6ff-8116-ed40-5d00309203c4}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{a6ca4526-c6ff-8116-ed40-5d00309203c4}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{805bdac3-b704-9b4e-cdfe-e596072e75fd}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{805bdac3-b704-9b4e-cdfe-e596072e75fd}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{c49cef70-be53-a8d8-2786-dfebb1c6f199}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{c49cef70-be53-a8d8-2786-dfebb1c6f199}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3e4c9303-02c7-1c59-dedd-bf29e5a80acd}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3e4c9303-02c7-1c59-dedd-bf29e5a80acd}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2f3f3693-7574-6db0-ee08-ba7dab6acc97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2f3f3693-7574-6db0-ee08-ba7dab6acc97}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{110b8bc8-b3ea-d8bc-9f78-c5c3c16ba1af}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{110b8bc8-b3ea-d8bc-9f78-c5c3c16ba1af}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{e8a9e79b-7cdd-53c3-f6b0-7f07241bac2d}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{e8a9e79b-7cdd-53c3-f6b0-7f07241bac2d}.Debug|Any CPU.Build.0 = Debug|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

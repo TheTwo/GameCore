@@ -1,0 +1,7 @@
+{
+    "name": "com.funplus.dragonreborn.csvreader",
+    "displayName": "DragonReborn CSV Reader",
+    "description": "读游戏内csv配置的工具",
+    "version": "1.0.0"
+  }
+  

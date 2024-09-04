@@ -1,0 +1,8 @@
+
+local PvPTileAssetHUDConstructionFlexibleMapBuilding = require("PvPTileAssetHUDConstructionFlexibleMapBuilding")
+
+---@class PvPTileAssetHUDConstructionDefenseTower : PvPTileAssetHUDConstructionFlexibleMapBuilding
+---@field super PvPTileAssetHUDConstructionFlexibleMapBuilding
+local PvPTileAssetHUDConstructionDefenseTower = class("PvPTileAssetHUDConstructionDefenseTower", PvPTileAssetHUDConstructionFlexibleMapBuilding)
+
+return PvPTileAssetHUDConstructionDefenseTower

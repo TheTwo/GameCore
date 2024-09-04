@@ -1,0 +1,7 @@
+---@class bytearray
+---@field new fun():bytearray
+---@field get fun(self:bytearray):number
+---@field set fun(self:bytearray, value:number)
+---@field size fun(self:bytearray):number
+---@field topointer fun(self:bytearray):userdata, number
+---@field __len fun(self:bytearray):number

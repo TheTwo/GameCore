@@ -1,0 +1,2 @@
+local CityPetVfxDispatcherSchema = {}
+return CityPetVfxDispatcherSchema

@@ -1,0 +1,21 @@
+{
+    "name": "Funplus.DragonReborn.VersionControl.Editor",
+    "rootNamespace": "Funplus.DragonReborn.VersionControl",
+    "references": [
+        "GUID:5c4de2bbf66824d49a2bda2523a52870",
+        "GUID:b3fce681fe34f4f458d568619049a964",
+        "GUID:905d4ecad2b654edf943a601a364bc67",
+        "GUID:343deaaf83e0cee4ca978e7df0b80d21"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

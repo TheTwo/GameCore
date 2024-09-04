@@ -1,0 +1,24 @@
+{
+    "name": "Funplus.DragonReborn.AssetTool",
+    "rootNamespace": "DragonReborn.AssetTool",
+    "references": [
+        "GUID:b3fce681fe34f4f458d568619049a964",
+        "GUID:5a98b6cbcc15c4299b9cff8fd4187741",
+        "GUID:e7d8523a927b14ddb93984cac5dc63ed",
+        "GUID:5c4de2bbf66824d49a2bda2523a52870",
+        "GUID:5f3cf485eb0554709a8abbeace890c86",
+        "GUID:478a2357cc57436488a56e564b08d223",
+        "GUID:343deaaf83e0cee4ca978e7df0b80d21",
+        "GUID:2665a8d13d1b3f18800f46e256720795",
+        "GUID:e0cd26848372d4e5c891c569017e11f1"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": true,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

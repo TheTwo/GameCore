@@ -1,0 +1,112 @@
+--local ObjectType = require("ObjectType")
+--local ConfigRefer = require("ConfigRefer")
+--local KingdomMapUtils = require("KingdomMapUtils")
+--
+-----@class KingdomAssetFactory
+-----@field pool table<number, table<table>>
+--local KingdomAssetFactory = class("KingdomAssetFactory")
+--
+--local TypeToAsset =
+--{
+--    [ObjectType.SlgCastle] = require("KingdomBuildingAsset"),
+--    [ObjectType.SlgEnergyTower] = require("KingdomBuildingAsset"),
+--    [ObjectType.SlgDefenceTower] = require("KingdomBuildingAsset"),
+--    [ObjectType.SlgMobileFortress] = require("KingdomBuildingAsset"),
+--    [ObjectType.SlgVillage] = require("KingdomBuildingAsset"),
+--    [ObjectType.SlgCreepTumor] = require("KingdomBuildingAsset"),
+--    --[ObjectType.SlgExpedition] = require("KingdomExpeditionAsset"),
+--}
+--
+--local TypeToPrefabName =
+--{
+--    [ObjectType.SlgCastle] = "ui3d_building_lod",
+--    [ObjectType.SlgEnergyTower] = "ui3d_building_lod",
+--    [ObjectType.SlgDefenceTower] = "ui3d_building_lod",
+--    [ObjectType.SlgMobileFortress] = "ui3d_building_lod",
+--    [ObjectType.SlgVillage] = "ui3d_building_lod",
+--    [ObjectType.SlgCreepTumor] = "ui3d_building_lod",
+--    --[ObjectType.SlgExpedition] = "ui3d_world_events_lod"
+--}
+--
+--function KingdomAssetFactory:ctor()
+--    self.pool = {}
+--end
+--
+-----@return string
+--function KingdomAssetFactory:GetPrefabName(type)
+--    return TypeToPrefabName[type]
+--end
+--
+-----@return KingdomBaseAsset
+--function KingdomAssetFactory:Create(type)
+--    local list = self.pool[type]
+--    if not list then
+--        list = {}
+--        self.pool[type] = list
+--    end
+--
+--    local count = #list
+--    if  count > 0 then
+--        local asset = list[count]
+--        table.remove(list)
+--        return asset
+--    end
+--    
+--    local luaClass = TypeToAsset[type]
+--    if luaClass then
+--        return luaClass.new()
+--    end
+--    return nil
+--end
+--
+--function KingdomAssetFactory:Recycle(type, asset)
+--    local list = self.pool[type]
+--    if not list then
+--        list = {}
+--        self.pool[type] = list
+--    end
+--    table.insert(list, asset)
+--end
+--
+-----@param brief wds.MapEntityBrief
+--function KingdomAssetFactory.CreateOperationCoordinate(brief)
+--    local x = 0
+--    local y = 0
+--    if brief.ObjectType == ObjectType.SlgVillage then
+--        local config = ConfigRefer.Territory:Find(brief.CfgId)
+--        if not config then
+--            g_Logger.Error("can't find village config! id=%s", brief.CfgId)
+--            return x, y
+--        end
+--        local template = ConfigRefer.FixedMapBuilding:Find(config:VillageId())
+--        if not template then
+--            g_Logger.Error("can't find village template config! id=%s", config:VillageId())
+--            return x, y
+--        end
+--
+--        x, y = KingdomMapUtils.ParseCoordinate(config:VillagePosition():X(), config:VillagePosition():Y())
+--    elseif brief.ObjectType == ObjectType.SlgCreepTumor then
+--        local config = ConfigRefer.SlgCreepTumorInstance:Find(brief.CfgId)
+--        if not config then
+--            g_Logger.Error("can't find tumor config! id=%s", brief.CfgId)
+--            return x, y
+--        end
+--        local template = ConfigRefer.SlgCreepTumor:Find(config:Template())
+--        if not template then
+--            g_Logger.Error("can't find tumor template config! id=%s", config:Template())
+--            return x, y
+--        end
+--
+--        x, y = KingdomMapUtils.ParseCoordinate(config:Pos():X(), config:Pos():Y())
+--    elseif brief.ObjectType == ObjectType.SlgExpedition then
+--        local config = ConfigRefer.WorldExpeditionTemplateInstance:Find(brief.CfgId)
+--        if not config then
+--            g_Logger.Error("can't find expedition config! id=%s", brief.CfgId)
+--            return x, y
+--        end
+--        x, y = KingdomMapUtils.ParseCoordinate(config:Pos():X(), config:Pos():Y())
+--    end 
+--    return x, y
+--end
+--
+--return KingdomAssetFactory

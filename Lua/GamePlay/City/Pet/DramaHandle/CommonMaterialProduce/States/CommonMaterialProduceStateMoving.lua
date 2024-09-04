@@ -1,0 +1,33 @@
+local DramaStateDefine = require("DramaStateDefine")
+
+local CommonMaterialProduceState = require("CommonMaterialProduceState")
+
+---@class CommonMaterialProduceStateMoving:CommonMaterialProduceState
+---@field super CommonMaterialProduceState
+local CommonMaterialProduceStateMoving = class("CommonMaterialProduceStateMoving", CommonMaterialProduceState)
+
+function CommonMaterialProduceStateMoving:Enter()
+    self.checkMoving = true
+    self.handle:SetIgnoreStrictMovingSpeedUp(true)
+    self.handle.petUnit:PlayMove()
+end
+
+function CommonMaterialProduceStateMoving:Exit()
+    self.handle:SetIgnoreStrictMovingSpeedUp(false)
+    local pos, dir = self.handle:GetTargetPositionWithPetCenterFix()
+    self.handle.petUnit:StopMove(pos, dir)
+    self.handle.petUnit:SyncAnimatorSpeed()
+end
+
+function CommonMaterialProduceStateMoving:Tick()
+    if self.checkMoving then
+        if self.handle.petUnit._moveAgent._isMoving or self.handle.petUnit:IsFindingPath() then
+            return
+        end
+
+        self.checkMoving = false
+        self.stateMachine:ChangeState(DramaStateDefine.State.route)
+    end
+end
+
+return CommonMaterialProduceStateMoving

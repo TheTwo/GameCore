@@ -1,0 +1,73 @@
+--local KingdomBaseAsset = require("KingdomBaseAsset")
+--local Utils = require("Utils")
+--local Delegate = require("Delegate")
+--local ModuleRefer = require("ModuleRefer")
+--local ConfigRefer = require("ConfigRefer")
+--local KingdomTouchInfoFactory = require("KingdomTouchInfoFactory")
+--local KingdomMapUtils = require("KingdomMapUtils")
+--local AreaShape = require('AreaShape')
+--local ProgressType = require('ProgressType')
+--local MapUtils = CS.Grid.MapUtils
+--
+-----@class KingdomExpeditionAsset : KingdomBaseAsset
+-----@field data wds.MapEntityBrief
+-----@field behaviour KingdomExpeditionAssetBehaviour
+-----@field expeditionConfig WorldExpeditionTemplateConfigCell
+-----@field sovereignConfig SovereignConfigCell
+--local KingdomExpeditionAsset = class("KingdomExpeditionAsset", KingdomBaseAsset)
+--
+-----@return string
+--function KingdomExpeditionAsset:GetPrefabName(lod)
+--    if KingdomMapUtils.InMapKingdomLod(lod) then
+--        return "ui3d_world_events_lod"
+--    end
+--    return string.Empty
+--end
+--
+--function KingdomExpeditionAsset:OnConstructionSetup()
+--    local asset = self:GetAsset()
+--    if Utils.IsNull(asset) then
+--        return
+--    end
+--
+--    ---@type PvETileAssetWorldEventBehavior
+--    self.behaviour = asset:GetLuaBehaviour("KingdomExpeditionAssetBehaviour").Instance
+--    self.behaviour:SetTrigger(Delegate.GetOrCreate(self, self.OnIconClick))
+--    self.behaviour.facingCamera = KingdomMapUtils.GetBasicCamera().mainCamera
+--    if self.sovereignConfig then
+--        self.behaviour:SetIcon(self.sovereignConfig:Icon())
+--    else
+--        self.behaviour:SetIcon("sp_comp_icon_worldevent")
+--    end
+--
+--    local radarInfo = ModuleRefer.RadarModule:GetRadarInfo()
+--    local quality = (radarInfo.ExpeditionQuality[self.data.ObjectId] or {}).QualityType or 0
+--    self.behaviour:SetQualityFrame(quality)  
+--    self.behaviour:SetGroup(self.expeditionConfig:ProgressType() == ProgressType.Whole)
+--end
+--
+--function KingdomExpeditionAsset:OnConstructionShutdown()
+--    self.behaviour = nil
+--    self.expeditionConfig = nil
+--    self.sovereignConfig = nil
+--end
+--
+--function KingdomExpeditionAsset:OnIconClick()
+--    local position = MapUtils.CalculateCoordToWorldPosition(self.x, self.z, KingdomMapUtils.GetStaticMapData())
+--    self.touchData = KingdomTouchInfoFactory.CreateExpedition(self.data.CfgId, position)
+--
+--    ModuleRefer.KingdomTouchInfoModule:Hide()
+--    ModuleRefer.KingdomTouchInfoModule:Show(self.touchData)
+--end
+--
+--function KingdomExpeditionAsset:OnFeedData()
+--    local config = ConfigRefer.WorldExpeditionTemplateInstance:Find(self.data.CfgId)
+--    if not config then
+--        g_Logger.Error("can't find expedition config! id=%s", brief.CfgId)
+--        return
+--    end
+--    self.expeditionConfig = ConfigRefer.WorldExpeditionTemplate:Find(config:Template())
+--    self.sovereignConfig = ConfigRefer.Sovereign:Find(self.expeditionConfig:SovereignConfig())  
+--end
+--
+--return KingdomExpeditionAsset

@@ -1,0 +1,19 @@
+{
+    "name": "Funplus.DragonReborn.U2D.Editor",
+    "rootNamespace": "",
+    "references": [
+        "GUID:e7d8523a927b14ddb93984cac5dc63ed",
+        "GUID:343deaaf83e0cee4ca978e7df0b80d21"
+    ],
+    "includePlatforms": [
+        "Editor"
+    ],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

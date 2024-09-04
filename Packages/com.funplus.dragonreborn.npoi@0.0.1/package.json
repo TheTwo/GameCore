@@ -1,0 +1,7 @@
+{
+  "name": "com.funplus.dragonreborn.npoi",
+  "description": "NPOI 2.5.1 Lib For Editor, target .NETFramework 4.0",
+  "version": "0.0.1",
+  "unity": "2021.2",
+  "displayName": "DragonReborn NPOI"
+}

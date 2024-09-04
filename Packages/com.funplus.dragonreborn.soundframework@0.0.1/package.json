@@ -1,0 +1,8 @@
+{
+  "name": "com.funplus.dragonreborn.soundframework",
+  "displayName": "DragonReborn Sound Framework",
+  "description": "\u63d0\u4f9b\u58f0\u97f3\u7ba1\u7406",
+  "version": "0.0.1",
+  "hideInEditor": false,
+  "unity": "2019.4"
+}

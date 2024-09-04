@@ -1,0 +1,39 @@
+local City3DBubbleStandardSchema = {
+    --- 根节点
+    {"transform", typeof(CS.UnityEngine.Transform)},
+    {"p_rotation", typeof(CS.UnityEngine.Transform)},
+    {"p_position", typeof(CS.UnityEngine.Transform)},
+    {"trigger", typeof(CS.DragonReborn.LuaBehaviour)},
+    --- 主气泡
+    {"p_bubble", typeof(CS.UnityEngine.GameObject)},
+    {"p_bubble_collider", typeof(CS.UnityEngine.Collider)},
+    {"bubbleNormalBg", typeof(CS.U2DSpriteMesh)},
+    {"bubbleSeBg", typeof(CS.U2DSpriteMesh)},
+    {"p_base_nomal", typeof(CS.UnityEngine.GameObject)},
+    {"p_base_red", typeof(CS.UnityEngine.GameObject)},
+    {"iconEffectHolder", typeof(CS.UnityEngine.Transform)},
+    {"p_icon_status", typeof(CS.U2DSpriteMesh)},
+    {"p_text_quantity", typeof(CS.U2DTextMesh)},
+    {"p_icon_check", typeof(CS.UnityEngine.GameObject)},
+    --- 主气泡附着气泡
+    {"p_bubble_1", typeof(CS.UnityEngine.GameObject)},
+    {"p_icon_status_1", typeof(CS.U2DSpriteMesh)},
+    --- 缩略进度球
+    {"p_progress", typeof(CS.UnityEngine.GameObject)},
+    {"p_progress_collider", typeof(CS.UnityEngine.Collider)},
+    {"p_icon", typeof(CS.U2DSpriteMesh)},
+    {"p_bar_blue", typeof(CS.U2DSpriteMesh)},
+    {"p_bar_red", typeof(CS.U2DSpriteMesh)},
+    {"p_text_time", typeof(CS.U2DTextMesh)},
+    {"p_text_number", typeof(CS.U2DTextMesh)},
+    --- 危险标记
+    {"p_icon_danger", typeof(CS.UnityEngine.GameObject)},
+    --- 其他状态
+    {"p_icon_ban", typeof(CS.UnityEngine.GameObject)},
+    --- 齿轮
+    {"p_icon_process", typeof(CS.UnityEngine.GameObject)},
+    --- vxTrigger
+    {"p_vx_trigger", typeof(CS.FpAnimation.FpAnimationCommonTrigger)},
+    {"trigger_new", typeof(CS.FpAnimation.FpAnimationCommonTrigger)},
+}
+return City3DBubbleStandardSchema

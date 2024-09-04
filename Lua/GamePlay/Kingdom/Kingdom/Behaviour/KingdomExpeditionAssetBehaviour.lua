@@ -1,0 +1,42 @@
+--local Utils = require("Utils")
+--
+-----@class KingdomExpeditionAssetBehaviour
+-----@field root CS.UnityEngine.Transform
+-----@field trigger MapUITrigger
+-----@field icon CS.U2DSpriteMesh
+-----@field frame CS.U2DSpriteMesh
+-----@field facingCamera CS.U2DFacingCamera
+--local KingdomExpeditionAssetBehaviour = class("KingdomExpeditionAssetBehaviour")
+--
+--local QualitySprite =
+--{
+--    "sp_world_base_1",
+--    "sp_world_base_2",
+--    "sp_world_base_3",
+--    "sp_world_base_4",
+--}
+--
+--function KingdomExpeditionAssetBehaviour:SetTrigger(callback)
+--    if Utils.IsNull(self.trigger) then return end
+--    self.trigger.Instance:SetTrigger(callback)
+--end
+--
+--function KingdomExpeditionAssetBehaviour:SetIcon(iconName)
+--    g_Game.SpriteManager:LoadSprite(iconName, self.icon)
+--end
+--
+--function KingdomExpeditionAssetBehaviour:SetQualityFrame(quality)
+--    if quality and quality >= 0 then
+--        local qualityIndex = math.clamp(quality + 1, 1, #QualitySprite)
+--        local qualitySprite = QualitySprite[qualityIndex]
+--        g_Game.SpriteManager:LoadSprite(qualitySprite, self.frame)
+--    else
+--        g_Game.SpriteManager:LoadSprite(QualitySprite[1], self.frame)
+--    end
+--end
+--
+--function KingdomExpeditionAssetBehaviour:SetGroup(isShow)
+--    self.group:SetActive(isShow)
+--end
+--
+--return KingdomExpeditionAssetBehaviour

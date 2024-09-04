@@ -1,0 +1,202 @@
+local NotificationType = {}
+
+NotificationType.HERO_UPGRADE_BTN = 1
+NotificationType.HERO_BREAK_BTN = 2
+NotificationType.HERO_STRENGTH_BTN = 3
+NotificationType.HERO_SKILL_SLOT = 4
+NotificationType.HERO_NEW_CARD1 = 5
+NotificationType.HERO_NEW_CARD2 = 6
+NotificationType.HERO_UPGRADE_TAB = 7
+NotificationType.HERO_STRENGTH_TAB = 8
+NotificationType.HERO_SKILL_TAB = 9
+NotificationType.HERO_SE_TAB = 10
+NotificationType.HERO_HEAD_ICON = 11
+NotificationType.HERO_ENTRANCE = 12
+NotificationType.HERO_CITIZEN = 13
+NotificationType.HERO_GET = 14
+
+NotificationType.CITY_FURNITURE_PROCESS_FORMULA = 20
+
+NotificationType.ALLIANCE_ENTRANCE = 21
+
+NotificationType.MAIL_MAIN = 40
+NotificationType.MAIL_SYSTEM = 41
+NotificationType.MAIL_GAMEPLAY = 42
+NotificationType.MAIL_ALLIANCE = 43
+NotificationType.MAIL_SYSTEM_ITEM = 44
+NotificationType.MAIL_GAMEPLAY_ITEM = 45
+NotificationType.MAIL_ALLIANCE_ITEM = 46
+NotificationType.MAIL_BATTLE_REPORT = 50
+NotificationType.MAIL_BATTLE_REPORT_ITEM = 51
+NotificationType.MAIL_GATHER_REPORT = 52
+NotificationType.MAIL_GATHER_REPORT_ITEM = 53
+
+NotificationType.CITY_CONSTRUCTION = 101
+NotificationType.CITY_CONSTRUCTION_TAG_BUILDING = 102
+NotificationType.CITY_CONSTRUCTION_TAG_FURNITURE = 103
+NotificationType.CITY_CONSTRUCTION_TAG_TOWER = 104
+NotificationType.CITY_CONSTRUCTION_TAG_DECORATION = 105
+NotificationType.CITY_CONSTRUCTION_TAG_ROOM = 106
+NotificationType.CITY_CONSTRUCTION_BUILDING = 110
+NotificationType.CITY_CONSTRUCTION_FURNITURE = 111
+NotificationType.CITY_CONSTRUCTION_TOWER = 112
+NotificationType.CITY_CONSTRUCTION_DECORATION = 113
+NotificationType.CITY_CONSTRUCTION_ROOM = 114
+
+NotificationType.CITY_FURNITURE_OVERVIEW = 140
+NotificationType.CITY_FURNITURE_OVERVIEW_UNIT = 141
+NotificationType.CITY_FURNITURE_GACHA = 142
+NotificationType.CITY_FURNITURE_TRAIN = 143
+NotificationType.CITY_FURNITURE_LEVEL_UP_FREE_ROOT = 144
+NotificationType.CITY_FURNITURE_LEVEL_UP_FREE = 145
+
+NotificationType.CITY_FURNIURE_PLACE = 150
+NotificationType.CITY_FURNIURE_PLACE_TOGGLE = 151
+NotificationType.CITY_FURNIURE_PLACE_UNIT = 152
+
+NotificationType.CITY_LEGOBUILDING_NEW_BUFF = 153
+
+
+NotificationType.CITY_HUD_PLAYER_HEAD = 201
+NotificationType.LEADERBOARD_ENTRY = 202
+NotificationType.LEADERBOARD_HONOR_TAB = 203
+NotificationType.LEADERBOARD_HONOR_DAILY_REWARD = 204
+
+NotificationType.EQUIP_WEAPON_MAIN = 501
+NotificationType.EQUIP_HEAD_MAIN = 502
+NotificationType.EQUIP_CLOTH_MAIN = 503
+NotificationType.EQUIP_BELT_MAIN = 504
+NotificationType.EQUIP_SHOE_MAIN = 505
+NotificationType.EQUIP_WEAPON_SUB = 506
+NotificationType.EQUIP_HEAD_SUB = 507
+NotificationType.EQUIP_CLOTH_SUB = 508
+NotificationType.EQUIP_BELT_SUB = 509
+NotificationType.EQUIP_SHOE_SUB = 510
+NotificationType.EQUIP_TAB = 511
+
+NotificationType.ALLIANCE_MAIN_WAR = 601
+NotificationType.ALLIANCE_MAIN_MEMBER = 602
+NotificationType.ALLIANCE_MAIN_OTHER = 603
+NotificationType.ALLIANCE_MAIN_SHOP = 604
+NotificationType.ALLIANCE_MAIN_ENTRANCE_NEED_JOIN = 605
+NotificationType.ALLIANCE_MEMBER_APPLIES_SELECTION = 606
+NotificationType.ALLIANCE_MAIN_NOTICE = 607
+NotificationType.ALLIANCE_NOTICE_NEW = 608
+NotificationType.ALLIANCE_MAIN_TERRITORY = 609
+NotificationType.ALLIANCE_MAIN_TECH_ENTRY = 610
+NotificationType.ALLIANCE_MAIN_TECH_ENTRY_UPDATE = 611
+NotificationType.ALLIANCE_LABEL_ENTRY = 901
+NotificationType.ALLIANCE_MAIN_IMPEACHMENT_ENTRY = 9101
+NotificationType.ALLIANCE_MAIN_GIFT_ENTRY = 9102
+NotificationType.ALLIANCE_MAIN_HELP_ENTRY = 9103
+NotificationType.ALLIANCE_MAIN_BEHEMOTH_ENTRY = 9104
+NotificationType.ALLIANCE_BEHEMOTH_LIST_ENTRY = 9105
+NotificationType.ALLIANCE_BEHEMOTH_NEW = 9106
+NotificationType.ALLIANCE_TERRITORY_CENTER_MOVE = 9107
+NotificationType.ALLIANCE_TERRITORY_DAILY_GIFT = 9108
+
+NotificationType.CITY_RADAR = 701
+NotificationType.WORLD_RADAR = 702
+NotificationType.RADAR_TASK_INFO = 703
+NotificationType.RADAR_TRACE_NEW_PET = 704
+NotificationType.RADAR_ENTRY_RED_DOT = 705
+
+NotificationType.FACTON_BTN = 801
+
+NotificationType.NOVICE_HUD = 901
+NotificationType.NOVICE_DAY_TAB = 902
+NotificationType.NOVICE_REWARD = 903
+NotificationType.NOVICE_POPUP_BTN = 904
+
+NotificationType.ACTIVITY_SHOP_HUD = 1001
+NotificationType.ACTIVITY_SHOP_TAB = 1002
+NotificationType.ACTIVITY_SHOP_PACK = 1003
+
+NotificationType.SHOP_FREE_DOT = 1101
+
+NotificationType.WORLD_TREND = 1201
+NotificationType.BOTTOM_RIGHT_BUTTON = 1202
+
+NotificationType.ACTIVITY_CENTER_HUD = 1301
+NotificationType.ACTIVITY_CENTER_TAB = 1302
+
+NotificationType.HUNTING_HUD = 1401
+NotificationType.HUNTING_STAR_REWARD = 1402
+NotificationType.HUNTING_DAILY_REWARD = 1403
+
+NotificationType.BATTLEPASS_HUD = 1501
+NotificationType.BATTLEPASS_TASK_SUB = 1502
+NotificationType.BATTLEPASS_REWARD = 1503
+NotificationType.BATTLEPASS_TASK = 1504
+
+NotificationType.PERSONALISE = 1601
+NotificationType.PERSONALISE_MAIN_HEAD_FRAME = 1602
+NotificationType.PERSONALISE_MAIN_CASTLE_SKIN = 1603
+NotificationType.PERSONALISE_MAIN_TITLE = 1604
+NotificationType.PERSONALISE_TAB_HEAD_FRAME = 1605
+NotificationType.PERSONALISE_TAB_CASTLE_SKIN = 1606
+NotificationType.PERSONALISE_TAB_TITLE = 1607
+NotificationType.PERSONALISE_ITEM_HEAD_FRAME = 1608
+NotificationType.PERSONALISE_ITEM_CASTLE_SKIN = 1609
+NotificationType.PERSONALISE_ITEM_TITLE = 1610
+
+NotificationType.EARTHREVIVAL_TAB_NEWS = 1701
+NotificationType.EARTHREVIVAL_TAB_MAP = 1702
+NotificationType.EARTHREVIVAL_TAB_TASK = 1703
+NotificationType.EARTHREVIVAL_GROUP_NEWS = 1704
+NotificationType.EARTHREVIVAL_GROUP_MAP = 1705
+NotificationType.EARTHREVIVAL_GROUP_TASK = 1706
+NotificationType.EARTHREVIVAL_TAB_PERSONAL = 1707
+NotificationType.EARTHREVIVAL_TAB_ALLIANCE = 1708
+NotificationType.EARTHREVIVAL_TAB_DAY = 1709
+NotificationType.EARTHREVIVAL_BTN = 1710
+NotificationType.EARTHREVIVAL_TAB_TIMELINE = 1711
+
+NotificationType.PET_MAIN = 2001
+NotificationType.PET_TYPE = 2002
+NotificationType.PET_LEVEL_UP = 2003
+NotificationType.PET_SKILL_RECEIVE = 2004
+NotificationType.PET_SKILL_CELL= 2005
+NotificationType.PET_SKILL_EQUIP = 2006
+NotificationType.PET_SKILL_UPGRADE = 2007
+NotificationType.PET_MAIN_ICON = 2008
+NotificationType.PET_STORY = 2009
+
+NotificationType.LANDFORM_TASK_MAIN = 2100
+NotificationType.LANDFORM_TASK_END = 2150
+
+
+NotificationType.RESCUE_BEAUTY_USE_ITEM = 3000
+
+NotificationType.ALLIANCE_WAR_TAB_RALLY = 6011
+NotificationType.ALLIANCE_WAR_TAB_WAR = 6012
+NotificationType.ALLIANCE_WAR_TAB_SIEGE = 6013
+
+NotificationType.ALLIANCE_TECH_MAIN_TAB_ALLIANCE = 6014
+NotificationType.ALLIANCE_TECH_MAIN_TAB_PRODUCTION = 6015
+NotificationType.ALLIANCE_TECH_MAIN_TAB_FIGHT = 6016
+
+NotificationType.ALLIANCE_ACHIEVEMENT = 6020
+NotificationType.ALLIANCE_ACHIEVEMENT_LONG = 6021
+NotificationType.ALLIANCE_ACHIEVEMENT_SHORT = 6022
+NotificationType.ALLIANCE_ACHIEVEMENT_LEADER = 6023
+
+NotificationType.ALLIANCE_RECRUIT = 6024
+
+NotificationType.ALLIANCE_LABEL_UNREAD = 9011
+
+NotificationType.TROOP_CITY_HUD = 7001
+NotificationType.TROOP_UI_TEAM_PET = 7002
+NotificationType.TROOP_UI_TEAM_HERO = 7003
+NotificationType.TROOP_UI_TEAM = 7004
+
+NotificationType.BATTLE_ENTRY_CELL = 8001
+NotificationType.BATTLE_ENTRY_HUD = 8002
+
+NotificationType.WORLD_EVENT_USEITEM = 9001
+
+NotificationType.CHAT_MAIN = 77771
+NotificationType.CHAT_SESSION = 77772
+
+
+return NotificationType
