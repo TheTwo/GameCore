@@ -13,8 +13,10 @@ namespace DragonReborn.AssetTool.Editor
 	    private static readonly Type GameObjectType = typeof(GameObject);
 	    private static readonly List<UnityEngine.Object> TempList = new();
 	    
-	    private static bool CheckIsSomePath(string path, string[] paths) 
+	    private static bool CheckIsSomePath(string path, string[] paths)
 	    {
+		    return true;
+		    
 		    if (path.Contains(" "))
 		    {
 			    NLogger.Error("文件名字含有空格:" + Path.GetFileNameWithoutExtension(path));
@@ -29,6 +31,7 @@ namespace DragonReborn.AssetTool.Editor
 	    
 		private static void OnPostprocessAllAssets(string[] importedAssets, string[] deletedAssets, string[] movedAssets, string[] movedFromAssetPaths)
 		{
+			return;
 			TempList.Clear();
 			for (int i = 0; i < importedAssets.Length; i++)
 			{

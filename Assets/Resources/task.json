@@ -1,0 +1,68 @@
+[
+  {
+    "Type": "EatCubeTask",
+    "Target": "10",
+    "Reward": "1",
+    "TaskName": "EatCubeTask10"
+  },
+  {
+    "Type": "EatCubeTask",
+    "Target": "20",
+    "Reward": "2",
+    "TaskName": "EatCubeTask20"
+  },
+  {
+    "Type": "ScoreTask",
+    "Target": "100",
+    "Reward": "2",
+    "TaskName": "ScoreTask100"
+  },
+  {
+    "Type": "ScoreTask",
+    "Target": "200",
+    "Reward": "4",
+    "TaskName": "ScoreTask200"
+  },
+  {
+    "Type": "MatchCubeTask",
+    "Target": "10",
+    "Reward": "2",
+    "TaskName": "MatchCubeTask10"
+  },
+  {
+    "Type": "ScoreTask",
+    "Target": "500",
+    "Reward": "10",
+    "TaskName": "ScoreTask500"
+  },
+  {
+    "Type": "MatchCubeTask",
+    "Target": "50",
+    "Reward": "5",
+    "TaskName": "MatchCubeTask50"
+  },
+  {
+    "Type": "MatchCubeTask",
+    "Target": "100",
+    "Reward": "10",
+    "TaskName": "MatchCubeTask100"
+  },
+  {
+    "Type": "EatCubeTask",
+    "Target": "50",
+    "Reward": "5",
+    "TaskName": "EatCubeTask50"
+  },
+  {
+    "Type": "ScoreTask",
+    "Target": "800",
+    "Reward": "16",
+    "TaskName": "ScoreTask800"
+  },
+  {
+    "Type": "ScoreTask",
+    "Target": "1000",
+    "Reward": "20",
+    "TaskName": "ScoreTask1000"
+  }
+]

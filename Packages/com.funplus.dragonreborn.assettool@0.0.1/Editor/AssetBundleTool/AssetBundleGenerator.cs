@@ -708,8 +708,8 @@ namespace DragonReborn.AssetTool.Editor
 
 				// build AssetBundles
 				_taskList = DefaultBuildTasks.Create(DefaultBuildTasks.Preset.AssetBundleCompatible);
-				PruneSpriteAtlasSingleTextureTask.AddToBuildTasks(_taskList, spriteToBundleName);
-				RecordSpriteTextureReferenceTask.AddToBuildTasks(_taskList, spriteToBundleName);
+				// PruneSpriteAtlasSingleTextureTask.AddToBuildTasks(_taskList, spriteToBundleName);
+				// RecordSpriteTextureReferenceTask.AddToBuildTasks(_taskList, spriteToBundleName);
 				var ignoreGuids = new HashSet<GUID>()
 				{
 					BuildTaskHelper.GetUnityDefaultResourceGuid(),
@@ -764,7 +764,7 @@ namespace DragonReborn.AssetTool.Editor
 				OutPutAssetDependenceBundleMapTask.AddToBuildTasks(_taskList);
 				_implicitDependenciesAssets = GetResultTask<IImplicitDependenciesAssets>.AddToBuildTasks(_taskList);
 				_detailManifest = GetResultTask<IDetailManifest>.AddToBuildTasks(_taskList);
-				_spriteTextureReferences = GetResultTask<ISpriteTextureReferenceRecord>.AddToBuildTasks(_taskList);
+				// _spriteTextureReferences = GetResultTask<ISpriteTextureReferenceRecord>.AddToBuildTasks(_taskList);
 				_inValidAssetReferenceRecord = GetResultTask<IInValidAssetReferenceRecord>.AddToBuildTasks(_taskList, default, false);
 				_markStaticBundleProcessRule = GetResultTask<IMarkStaticBundleProcessRule>.AddToBuildTasks(_taskList, default, false);
 				_injectUserDefineContext = new IContextObject[] { new InValidAssetCheckRule(false, new HashSet<GUID>()
@@ -863,22 +863,22 @@ namespace DragonReborn.AssetTool.Editor
 
 				//var reportImplicitDependencies = Path.Combine(Application.dataPath, "../Logs", "ImplicitDependenciesAssets.json");
 				//_implicitDependenciesAssets.Result.WriteToFile(reportImplicitDependencies);
-				var spriteTextureReferences = Path.Combine(Application.dataPath, "../Logs", "SpriteTextureReferences.json");
-				_spriteTextureReferences.Result.WriteToFile(spriteTextureReferences);
-				if (null != _inValidAssetReferenceRecord.Result)
-				{
-					var inValidAssetReferenceRecord = Path.Combine(Application.dataPath, "../Logs", "InValidAssetReferenceRecord.json");
-					if (File.Exists(inValidAssetReferenceRecord)) File.Delete(inValidAssetReferenceRecord);
-					_inValidAssetReferenceRecord.Result.WriteToFile(inValidAssetReferenceRecord);
-				}
-				if (null != _markStaticBundleProcessRule.Result)
-				{
-					var staticBundleRefAndNoRefDetail = Path.Combine(Application.dataPath, "../Logs", "StaticBundleRefAndNoRefDetail.json");
-					var staticBundleRefAndNoRefDetailCsv = Path.Combine(Application.dataPath, "../Logs", "StaticBundleRefAndNoRefDetail.csv");
-					if (File.Exists(staticBundleRefAndNoRefDetail)) File.Delete(staticBundleRefAndNoRefDetail);
-					if (File.Exists(staticBundleRefAndNoRefDetailCsv)) File.Delete(staticBundleRefAndNoRefDetailCsv);
-					_markStaticBundleProcessRule.Result.WriteToFile(staticBundleRefAndNoRefDetail, staticBundleRefAndNoRefDetailCsv);
-				}
+				// var spriteTextureReferences = Path.Combine(Application.dataPath, "../Logs", "SpriteTextureReferences.json");
+				// _spriteTextureReferences.Result.WriteToFile(spriteTextureReferences);
+				// if (null != _inValidAssetReferenceRecord.Result)
+				// {
+				// 	var inValidAssetReferenceRecord = Path.Combine(Application.dataPath, "../Logs", "InValidAssetReferenceRecord.json");
+				// 	if (File.Exists(inValidAssetReferenceRecord)) File.Delete(inValidAssetReferenceRecord);
+				// 	_inValidAssetReferenceRecord.Result.WriteToFile(inValidAssetReferenceRecord);
+				// }
+				// if (null != _markStaticBundleProcessRule.Result)
+				// {
+				// 	var staticBundleRefAndNoRefDetail = Path.Combine(Application.dataPath, "../Logs", "StaticBundleRefAndNoRefDetail.json");
+				// 	var staticBundleRefAndNoRefDetailCsv = Path.Combine(Application.dataPath, "../Logs", "StaticBundleRefAndNoRefDetail.csv");
+				// 	if (File.Exists(staticBundleRefAndNoRefDetail)) File.Delete(staticBundleRefAndNoRefDetail);
+				// 	if (File.Exists(staticBundleRefAndNoRefDetailCsv)) File.Delete(staticBundleRefAndNoRefDetailCsv);
+				// 	_markStaticBundleProcessRule.Result.WriteToFile(staticBundleRefAndNoRefDetail, staticBundleRefAndNoRefDetailCsv);
+				// }
 
 				return _exitCode;
 			}

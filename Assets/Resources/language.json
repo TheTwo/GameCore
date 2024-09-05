@@ -1,0 +1,140 @@
+{
+  "LocalizationDic": {
+    "EatCubeTask_Achievement_10": [
+      "初试牛刀",
+      "FIRST EAT"
+    ],
+    "EatCubeTask_Achievement_20": [
+      "渐入佳境",
+      "GETTING BETTER"
+    ],
+    "EatCubeTask_Achievement_50": [
+      "高手诞生",
+      "MASTER BORN"
+    ],
+    "ScoreTask_Achievement_100": [
+      "一百分",
+      "ONE HUNDRED"
+    ],
+    "ScoreTask_Achievement_200": [
+      "两百分",
+      "TWO HUNDRED"
+    ],
+    "ScoreTask_Achievement_500": [
+      "五百分",
+      "FIVE HUNDRED"
+    ],
+    "ScoreTask_Achievement_800": [
+      "八百分",
+      "EIGHT HUNDRED"
+    ],
+	"ScoreTask_Achievement_1000": [
+      "一千分",
+      "ONE THOUSAND"
+    ],
+    "MatchTask_Achievement_10": [
+      "消除10个方块",
+      "MATCH 10 CUBES"
+    ],
+    "MatchTask_Achievement_50": [
+      "消除50个方块",
+      "MATCH 50 CUBES"
+    ],
+    "MatchTask_Achievement_100": [
+      "消除100个方块",
+      "MATCH 100 CUBES"
+    ],
+    "EatCubeTask": [
+      "吃掉 <color=orange>{0}</color>个方块",
+      "Eat <color=orange>{0}</color> Cubes."
+    ],
+    "ScoreTask": [
+      "获得<color=orange>{0}</color>分",
+      "Get<color=orange>{0}</color>Points"
+    ],
+    "MatchTask": [
+      "消除<color=orange>{0}</color>个方块",
+      "Remove<color=orange>{0}</color>Cubes"
+    ],
+    "Tap To Play": [
+      "点击开始",
+      "Tap To Play"
+    ],
+    "Tap To Gain": [
+      "点击获取",
+      "Tap To Gain"
+    ],
+    "Score": [
+      "得分",
+      "Score"
+    ],
+    "Free Revive": [
+      "免费复活",
+      "Free Revive"
+    ],
+    "New Best Score!": [
+      "获得了新高分！",
+      "New Best Score!"
+    ],
+    "Continue": [
+      "继续",
+      "Continue"
+    ],
+    "LEVEL UP": [
+      "升级了",
+      "LEVEL UP"
+    ],
+    "GET REWARD": [
+      "获得奖励",
+      "GET REWARD"
+    ],
+    "TIP": [
+      "小贴士",
+      "TIP"
+    ],
+    "OK!": [
+      "好",
+      "OK!"
+    ],
+    "MatchTip": [
+      "哇，尾巴上已经有3个相同的方块了，再吃一个不同的方块试试看!",
+      "Three same color cubes on the tail, eat another different color cube, Bang!"
+    ],
+    "RemoveTip": [
+      "好棒，相同的方块被消除了!记住消除规则A+A+···A+B=B",
+      "See? Three same color and another differnt color, Bang!"
+    ],
+    "WelcomeTip": [
+      "欢迎来到这个彩色世界，让我们一起冒险吧！",
+      "Welcom to this colorful world, let's take the adventure together."
+    ],
+    "TreeTip": [
+      "不好，前面的森林是不能碰的，点击屏幕可以转向！",
+      "The trees are dangours, tap to avoid them."
+    ],
+    "EatCubeTip": [
+      "彩色方块是可以吃的，控制方向吃掉他们~",
+      "The cube are eatalbe, control move direction to eat them."
+    ],
+    "LevelTip": [
+      "升级啦，每升级一次就会有一段时间的无敌状态，看，大地都在颤抖！",
+      "Level up, you are invincible for a while, look, the earth is shaking!"
+    ],
+	"Misson": [
+      "任务:",
+      "MISSON:"
+    ],
+	"Buy": [
+      "购买",
+      "Buy"
+    ],
+	"Select": [
+      "选择",
+      "Select"
+    ],
+	"Using": [
+      "正在使用",
+      "Using"
+    ]
+  }
+}

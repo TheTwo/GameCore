@@ -1,6 +1,8 @@
 ﻿
 Microsoft Visual Studio Solution File, Format Version 11.00
 # Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{c761e073-5e30-2414-a735-b3371ec95a0d}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Funplus.DragonReborn.Interface", "Funplus.DragonReborn.Interface.csproj", "{f062a1e2-1695-e580-50e6-e34f6251c9e9}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "YamlDotNet", "YamlDotNet.csproj", "{5611779c-abc9-b113-1fc2-0ba71f66d75d}"
@@ -13,17 +15,17 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "com.funplus.dragonreborn.pl
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Funplus.DragonReborn.AssetTool.Editor", "Funplus.DragonReborn.AssetTool.Editor.csproj", "{6115710d-8170-76b2-4490-95b64dd87279}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Funplus.DragonReborn.U2D", "Funplus.DragonReborn.U2D.csproj", "{17a33ab6-7349-c481-54c1-6bcad460d8c2}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp-firstpass", "Assembly-CSharp-firstpass.csproj", "{add71b74-15fd-0040-d2c4-a04844f4b49e}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp", "Assembly-CSharp.csproj", "{c761e073-5e30-2414-a735-b3371ec95a0d}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Funplus.DragonReborn.U2D", "Funplus.DragonReborn.U2D.csproj", "{17a33ab6-7349-c481-54c1-6bcad460d8c2}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Funplus.DragonReborn.VersionControl", "Funplus.DragonReborn.VersionControl.csproj", "{bce77b74-19d6-7a9b-05ec-20f07e08a6dc}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Funplus.DragonReborn.Runtime", "Funplus.DragonReborn.Runtime.csproj", "{e2e6598d-1bde-a0f5-f9b5-d2ca0d4f5e17}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp-Editor", "Assembly-CSharp-Editor.csproj", "{72fca7a3-529e-9de3-47f9-4576e8dd1054}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Funplus.DragonReborn.Plugin.Runtime", "Funplus.DragonReborn.Plugin.Runtime.csproj", "{c0d5899b-fc03-97c8-3327-71a2174830c7}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp-Editor", "Assembly-CSharp-Editor.csproj", "{72fca7a3-529e-9de3-47f9-4576e8dd1054}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Funplus.DragonReborn.U2D.Editor", "Funplus.DragonReborn.U2D.Editor.csproj", "{26ba3746-a0a3-1875-ccfc-187a243770fb}"
 EndProject
@@ -50,6 +52,8 @@ Global
 		Debug|Any CPU = Debug|Any CPU
 	EndGlobalSection
 	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{c761e073-5e30-2414-a735-b3371ec95a0d}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{c761e073-5e30-2414-a735-b3371ec95a0d}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{f062a1e2-1695-e580-50e6-e34f6251c9e9}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{f062a1e2-1695-e580-50e6-e34f6251c9e9}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{5611779c-abc9-b113-1fc2-0ba71f66d75d}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
@@ -62,18 +66,18 @@ Global
 		{b0ac2e34-1cde-8845-6bf5-455dd7b30ba5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{6115710d-8170-76b2-4490-95b64dd87279}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{6115710d-8170-76b2-4490-95b64dd87279}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{add71b74-15fd-0040-d2c4-a04844f4b49e}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{add71b74-15fd-0040-d2c4-a04844f4b49e}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{17a33ab6-7349-c481-54c1-6bcad460d8c2}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{17a33ab6-7349-c481-54c1-6bcad460d8c2}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{c761e073-5e30-2414-a735-b3371ec95a0d}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{c761e073-5e30-2414-a735-b3371ec95a0d}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{bce77b74-19d6-7a9b-05ec-20f07e08a6dc}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{bce77b74-19d6-7a9b-05ec-20f07e08a6dc}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{e2e6598d-1bde-a0f5-f9b5-d2ca0d4f5e17}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{e2e6598d-1bde-a0f5-f9b5-d2ca0d4f5e17}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{72fca7a3-529e-9de3-47f9-4576e8dd1054}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{72fca7a3-529e-9de3-47f9-4576e8dd1054}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{c0d5899b-fc03-97c8-3327-71a2174830c7}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{c0d5899b-fc03-97c8-3327-71a2174830c7}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{72fca7a3-529e-9de3-47f9-4576e8dd1054}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{72fca7a3-529e-9de3-47f9-4576e8dd1054}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{26ba3746-a0a3-1875-ccfc-187a243770fb}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{26ba3746-a0a3-1875-ccfc-187a243770fb}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{3a5561c4-30d7-d7e1-ba15-c3fbdbacf8d0}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
