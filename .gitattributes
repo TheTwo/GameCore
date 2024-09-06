@@ -1,5 +1,5 @@
-#Unity Asset Use lf
-*.prefab text eol=lf
+#Use lf
+* text eol=lf
 *.asset text=auto eol=lf
 *.jpg filter=lfs diff=lfs merge=lfs -text
 *.jpeg filter=lfs diff=lfs merge=lfs -text
