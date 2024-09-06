@@ -15,9 +15,9 @@ MonoBehaviour:
   ProjectConf:
     projectName: "\u5F69\u8272\u5C3E\u5DF4"
     Appid: wxe006e2a0ca88d035
-    CDN: http://localhost:8000/
+    CDN: http://10.7.152.52:8000/
     assetLoadType: 0
-    compressDataPackage: 0
+    compressDataPackage: 1
     VideoUrl: 
     DST: output
     StreamCDN: 
@@ -50,9 +50,9 @@ MonoBehaviour:
     AutoProfile: 0
     ScriptOnly: 0
     Il2CppOptimizeSize: 1
-    profilingFuncs: 1
-    Webgl2: 1
-    fbslim: 0
+    profilingFuncs: 0
+    Webgl2: 0
+    fbslim: 1
     DeleteStreamingAssets: 1
     ProfilingMemory: 0
     CleanBuild: 1
