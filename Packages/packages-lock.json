@@ -1,5 +1,21 @@
 {
   "dependencies": {
+    "cn.unity.uos.cdn": {
+      "version": "https://e.coding.net/unitychina/uos/UosCdnSDK.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "cc3c7677ee21902706f20f76e48da57424d0efb9"
+    },
+    "cn.unity.uos.launcher": {
+      "version": "https://e.coding.net/unitychina/uos/UOSLauncher.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.nuget.newtonsoft-json": "3.2.1"
+      },
+      "hash": "33f9b150dff94817b3734f24c6e3782724d8fa45"
+    },
     "com.funplus.dragonreborn": {
       "version": "file:com.funplus.dragonreborn@1.0.0",
       "depth": 0,

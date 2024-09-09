@@ -43,6 +43,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Funplus.DragonReborn.CsvRea
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Funplus.DragonReborn.LuaHintGenerator", "Funplus.DragonReborn.LuaHintGenerator.csproj", "{2f3f3693-7574-6db0-ee08-ba7dab6acc97}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.UOS.Encrypt", "Unity.UOS.Encrypt.csproj", "{acbd3bb4-5b0e-6d5e-2448-219b1af07698}"
+EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sirenix.OdinInspector.Modules.UnityMathematics", "Sirenix.OdinInspector.Modules.UnityMathematics.csproj", "{110b8bc8-b3ea-d8bc-9f78-c5c3c16ba1af}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Funplus.DragonReborn.AssetTool.Profiler", "Funplus.DragonReborn.AssetTool.Profiler.csproj", "{e8a9e79b-7cdd-53c3-f6b0-7f07241bac2d}"
@@ -94,6 +96,8 @@ Global
 		{3e4c9303-02c7-1c59-dedd-bf29e5a80acd}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{2f3f3693-7574-6db0-ee08-ba7dab6acc97}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{2f3f3693-7574-6db0-ee08-ba7dab6acc97}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{acbd3bb4-5b0e-6d5e-2448-219b1af07698}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{acbd3bb4-5b0e-6d5e-2448-219b1af07698}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{110b8bc8-b3ea-d8bc-9f78-c5c3c16ba1af}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{110b8bc8-b3ea-d8bc-9f78-c5c3c16ba1af}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{e8a9e79b-7cdd-53c3-f6b0-7f07241bac2d}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
