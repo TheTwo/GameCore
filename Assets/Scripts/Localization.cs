@@ -13,7 +13,7 @@ public class Localization
 
     private static Source source;
 
-    private static int language = 1;
+    private static int language = 0;
 
     public static Dictionary<string, string[]> LocalizationDic;
 

@@ -86,11 +86,19 @@ public class HeadNode : BasicNode
 
     public void ShowExplosionFX()
     {
+        if (fx == null)
+        {
+            return;
+        }
         fx.SetActive(true);
     }
 
     public void HideExplosionFX()
     {
+        if (fx == null)
+        {
+            return;
+        }
         fx.SetActive(false);
     }
 }

@@ -44,14 +44,14 @@ MonoBehaviour:
     UseFriendRelation: 0
     UseCompressedTexture: 0
     UseMiniGameChat: 0
-    PreloadWXFont: 0
+    PreloadWXFont: 1
   CompileOptions:
     DevelopBuild: 0
     AutoProfile: 0
     ScriptOnly: 0
     Il2CppOptimizeSize: 1
     profilingFuncs: 0
-    Webgl2: 0
+    Webgl2: 1
     fbslim: 1
     DeleteStreamingAssets: 1
     ProfilingMemory: 0
@@ -62,7 +62,7 @@ MonoBehaviour:
     enableProfileStats: 0
     enableRenderAnalysis: 0
     iOSAutoGCInterval: 10000
-    enableIOSPerformancePlus: 0
+    enableIOSPerformancePlus: 1
     brotliMT: 1
   CompressTexture:
     halfSize: 0
@@ -93,4 +93,4 @@ MonoBehaviour:
     Arrows: 1
     Geometric_Shapes: 1
     Mathematical_Operators: 1
-    CustomUnicode: 
+    CustomUnicode: "\u521D\u8BD5\u725B\u5200\u6E10\u5165\u4F73\u5883\u9AD8\u624B\u8BDE\u751F\u4E00\u767E\u5206\u4E24\u4E94\u516B\u5343\u6D88\u9664\u4E2A\u65B9\u5757\u5403\u6389\u83B7\u5F97\u70B9\u51FB\u5F00\u59CB\u53D6\u514D\u8D39\u590D\u6D3B\u4E86\u65B0\u7EE7\u7EED\u5347\u7EA7\u5956\u52B1\u5C0F\u8D34\u58EB\u597D\u54C7\u5C3E\u5DF4\u4E0A\u5DF2\u7ECF\u6709\u76F8\u540C\u7684\u518D\u4E0D\u770B\u68D2\u88AB\u8BB0\u4F4F\u89C4\u5219\u6B22\u8FCE\u6765\u5230\u8FD9\u5F69\u8272\u4E16\u754C\u8BA9\u6211\u4EEC\u8D77\u5192\u9669\u5427\u524D\u9762\u68EE\u6797\u662F\u80FD\u78B0\u5C4F\u5E55\u53EF\u4EE5\u8F6C\u5411\u63A7\u5236\u4ED6\u5566\u6BCF\u6B21\u5C31\u4F1A\u6BB5\u65F6\u95F4\u65E0\u654C\u72B6\u6001\u5927\u5730\u90FD\u5728\u98A4\u6296\u4EFB\u52A1\u8D2D\u4E70\u9009\u62E9\u6B63\u4F7F\u7528"
