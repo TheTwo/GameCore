@@ -1,5 +1,7 @@
 ﻿using UnityEngine;
 using UnityEngine.SceneManagement;
+using WeChatWASM;
+
 // using WeChatWASM;
 //using System.Collections;
 //using cn.sharesdk.unity3d;
@@ -12,6 +14,7 @@ public class GameController : MonoBehaviour
 	public bool inTutorial = false;
 	public bool paused = false;
 	public TutorialController tutorialController;
+	public Ranking ranking;
 
 	public delegate void OnGameStarted (GameData gameData);
 
@@ -58,7 +61,7 @@ public class GameController : MonoBehaviour
 
 	void Start ()
 	{
-		// WX.ReportGameStart();
+		WX.ReportGameStart();
 		
 		SoundManager.instance.startBGM ();   
 
@@ -107,7 +110,11 @@ public class GameController : MonoBehaviour
                 Debug.Log(success ? "Reported score successfully" : "Failed to report score");
             });
         }
+		
+		
 #endif
+		ranking.ReportScore(gameData.HighScore);
+		
 		CancelInvoke ();
 
 		uiController.OnGameEnd (gameData);
@@ -190,7 +197,7 @@ public class GameController : MonoBehaviour
 
 	public void ShowLeaderboardUI ()
 	{
-		//SoundManager.instance.PlayingSound ("Button", 1f, Camera.main.transform.position);
+		SoundManager.instance.PlayingSound ("Button", 1f, Camera.main.transform.position);
 
 		//Social.localUser.Authenticate (success => {
 		//	if (success) {
@@ -205,6 +212,8 @@ public class GameController : MonoBehaviour
 		//	} else
 		//		Debug.Log ("Authentication failed");
 		//});
+		
+		ranking.ShowRanking();		
 	}
 
 
@@ -294,6 +303,10 @@ public class GameController : MonoBehaviour
 ////        content["musicUrl"] = "http://mp3.mwap8.com/destdir/Music/2009/20090601/ZuiXuanMinZuFeng20090601119.mp3";
 //
 ////		ssdk.ShareContent (1, PlatformType.WeChatTimeline, content);
+
+		ranking.Share();
+		
+		Revive ();
 	}
 
 	void HandleOnGameDataChange (GameData gamedata)

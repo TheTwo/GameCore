@@ -1,9 +1,0 @@
-{
-  "name": "com.funplus.dragonreborn.versioncontrol",
-  "version": "0.0.1",
-  "displayName": "DragonReborn Version Control",
-  "description": "DragonReborn Version Control",
-  "unity": "2019.1",
-  "hideInEditor": false,
-  "documentationUrl" : "https://funplus.yuque.com/slgtech/gazp4w/lystpp"
-}

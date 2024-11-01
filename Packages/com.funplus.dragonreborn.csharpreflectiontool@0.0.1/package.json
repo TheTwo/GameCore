@@ -1,8 +1,0 @@
-{
-  "name": "com.funplus.dragonreborn.csharpreflectiontool",
-  "displayName": "DragonReborn Editor C# Reflection Tool",
-  "description": "一些方便编辑器下反射c# 代码做生成的工具",
-  "version": "0.0.1",
-  "hideInEditor": false,
-  "unity": "2019.4"
-}

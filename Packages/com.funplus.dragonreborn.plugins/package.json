@@ -1,7 +1,0 @@
-{
-  "name": "com.funplus.dragonreborn.plugins",
-  "description": "DragonReborn Plugins, Import 3rd Plugins below:\nEasyTouch\nUIParticle",
-  "version": "0.0.2",
-  "unity": "2021.2",
-  "displayName": "DragonReborn Plugins"
-}

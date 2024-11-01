@@ -1,9 +1,0 @@
-{
-  "name": "com.funplus.dragonreborn.interface",
-  "version": "0.0.1",
-  "displayName": "DragonReborn Framework Interface",
-  "description": "The Game Framework Interface",
-  "unity": "2019.1",
-  "hideInEditor": false,
-  "documentationUrl" : "https://funplus.yuque.com/slgtech/gazp4w/lystpp"
-}

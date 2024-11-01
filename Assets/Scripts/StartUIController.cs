@@ -38,6 +38,8 @@ public class StartUIController : MonoBehaviour
         gamecenterBtn.SetActive(false);
 #endif
 
+        gamecenterBtn.SetActive(true);
+
         //shopBtn.SetActive(false);
     }
 
@@ -124,5 +126,16 @@ public class StartUIController : MonoBehaviour
     public void HideTask()
     {
         taskPanelController.gameObject.SetActive(false);        
-    }                                             
+    }  
+    
+    public void ShowLeaderboard()
+    {
+        SoundManager.instance.PlayingSound("Button", 1f, Camera.main.transform.position);
+        // APIForXcode.ShowLeaderboard();
+    }
+    
+    public void HideLeaderboard()
+    {
+        // APIForXcode.HideLeaderboard();
+    }
 }

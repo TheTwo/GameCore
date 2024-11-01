@@ -168,10 +168,15 @@ public class EffectManager : MonoBehaviour
 
     public void ShowStarAdd(int star)
     {
-        starAddEffect.SetActive(true);
-        starAddEffect.GetComponentInChildren<Text>().text = "+ " + star;
+        if (starAddEffect == null)
+        {
+            return;
+        }
+        
+        // starAddEffect.SetActive(true);
+        // starAddEffect.GetComponentInChildren<Text>().text = "+ " + star;
 
-        Invoke("HideStarAdd", 2f);
+        // Invoke("HideStarAdd", 2f);
     }
 
     private void HideFlare()

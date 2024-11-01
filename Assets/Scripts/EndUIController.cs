@@ -19,6 +19,7 @@ public class EndUIController : MonoBehaviour
 
     public GameObject reviveGameobject;
     public Button reviveBtn;
+    public Button sharBtn;
 
     private List<ITask> processing;
     private GameData gameData;
