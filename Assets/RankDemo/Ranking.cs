@@ -22,6 +22,7 @@ public class Ranking : MonoBehaviour
     public RawImage RankBody;
     public GameObject RankMask;
     public GameObject RankingBox;
+    public Button CloseButton;
 
     void Start()
     {
@@ -112,6 +113,13 @@ public class Ranking : MonoBehaviour
                 RankingBox.SetActive(false);
                 WX.HideOpenData();
             });
+
+        CloseButton.onClick.AddListener(() =>
+        {
+            RankMask.SetActive(false);
+            RankingBox.SetActive(false);
+            WX.HideOpenData();
+        });
     }
     
     public void ShowRanking()
@@ -130,10 +138,10 @@ public class Ranking : MonoBehaviour
         WX.ShareAppMessage(
             new ShareAppMessageOption()
             {
-                title = "最高得分排行！谁是第一？",
+                title = "帮我复活一次吧,打下最高分！",
                 query = "minigame_action=show_group_list",
-                imageUrl =
-                    "https://a.unity.cn/client_api/v1/buckets/38abf271-e18c-4c8a-9c35-8c8104b5cbf3/content/logo.png",
+//                imageUrl =
+  //                  "https://a.unity.cn/client_api/v1/buckets/38abf271-e18c-4c8a-9c35-8c8104b5cbf3/content/logo.png",
             }
         );
     }

@@ -307,6 +307,7 @@ public class GameController : MonoBehaviour
 		ranking.Share();
 		
 		Revive ();
+		Pause();
 	}
 
 	void HandleOnGameDataChange (GameData gamedata)

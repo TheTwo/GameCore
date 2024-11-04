@@ -96,6 +96,7 @@
     <Compile Include="Assets/Scripts/DestrotyInSectond.cs" />
     <Compile Include="Assets/Scripts/CubePool.cs" />
     <Compile Include="Assets/Scripts/Pool/U3D/PositionBaseChecker.cs" />
+    <Compile Include="Assets/Scripts/Camera/CameraSize.cs" />
     <Compile Include="Assets/Scripts/Node/BasicNode.cs" />
     <Compile Include="Assets/Scripts/Task/MatchTask.cs" />
     <Compile Include="Assets/Scripts/StartUIController.cs" />
