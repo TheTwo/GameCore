@@ -183,6 +183,7 @@
     <Compile Include="Assets/__Script/Utilities/CommonMeshInstancingBaker.cs" />
     <Compile Include="Assets/__Script/Utilities/PlayableDirectorListenerWrapper.cs" />
     <Compile Include="Assets/Scripts/Node/NodeStatus.cs" />
+    <None Include="Assets/Resources/PerformanceTestRunInfo.json" />
     <None Include="Assets/__Art/Resources/ResourcesPath.txt" />
     <None Include="Assets/Resources/BillingMode.json" />
     <None Include="Assets/Plugin/ThirdParty/Demigiant/readme_DOTweenPro.txt" />
@@ -200,6 +201,7 @@
     <None Include="Assets/Plugin/ThirdParty/Demigiant/DOTweenPro/readme.txt" />
     <None Include="Assets/Plugin/ThirdParty/Sirenix/Assemblies/link.xml" />
     <None Include="Assets/Plugin/ThirdParty/Demigiant/DemiLib/Core/DemiLib.xml" />
+    <None Include="Assets/Resources/PerformanceTestRunSettings.json" />
     <None Include="Packages/com.unity.nuget.newtonsoft-json@3.2.1/Runtime/AOT/Newtonsoft.Json.xml" />
     <None Include="Assets/Plugin/ThirdParty/Sirenix/Assemblies/Sirenix.Utilities.Editor.xml" />
     <None Include="Assets/Plugin/ThirdParty/Demigiant/DOTween/readme.txt" />
