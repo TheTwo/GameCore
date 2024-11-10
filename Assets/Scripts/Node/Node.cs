@@ -10,6 +10,8 @@ public abstract class Node : MonoBehaviour
 
     public abstract void MeetSnake(Snake snake);
     public abstract void MoveBy(Vector3 step, Snake snake, GameData gameData);
+    public abstract void StopMoveBy();
+    
     public abstract void Fllow(Vector3 lastPostion, Snake snake, GameData gameData);
     public abstract void BesselTo(int add);
     public abstract void OnUpdate();

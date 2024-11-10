@@ -24,6 +24,8 @@ public class Snake : MonoBehaviour
     private int currentLevel = 0;
     private GameUIController gameUIController;
 
+    private bool transforming = false;
+
 //    private bool invinsibleSpeedUp;
 
     private TutorialData tutorialData;
@@ -66,6 +68,13 @@ public class Snake : MonoBehaviour
 
     public void StartInvincible(float second)
     {
+        if (!gameData.isSnakeInvinciable)
+        {
+            transforming = false;
+            head.status = NodeStatus.TRANSFORMING;
+        }
+        
+        head.StopMoveBy();
         CancelInvoke();
         gameData.isSnakeInvinciable = true;
         gameData.Energy = GameConfig.MAX_ENERGY;
@@ -93,33 +102,22 @@ public class Snake : MonoBehaviour
             snakeNodes [i].RemoveFromSnake(this, i);
         }
 
-        InvokeRepeating("ShakeCamera", 0.2f, GameConfig.INVINSIBLE_CAMERA_SHAKE_RATE);
+        InvokeRepeating("ShakeCamera", 0, GameConfig.INVINSIBLE_CAMERA_SHAKE_RATE);
 
         lastNode = headNode;
 
         headNode.ShowExplosionFX();
+        
+        TransformSnake();
     }
 
-
-
-    private void ResetInvincible()
+    private void ResetInvincible()  
     {
-        gameData.NodeSpeed = GameConfig.LevelSpeed [gameData.Level % (GameConfig.LevelSpeed.Count)];
+        head.status = NodeStatus.TRANSFORMING;
+        head.StopMoveBy();
         gameData.isSnakeInvinciable = false;
 
-//        FindObjectOfType<CameralFollow>().Speed = 1;         
-
-        gameController.UpdateLevelSlider();
-        CancelInvoke();
-
-        if(gameUIController == null)
-        {
-            gameUIController = FindObjectOfType<GameUIController>();
-        }
-
-        gameUIController.SetLevelUpSliderColor(Color.white);
-
-        headNode.HideExplosionFX();
+        TransformSnake();
 
 //        Debug.Log("ResetInvincible");
 
@@ -133,10 +131,9 @@ public class Snake : MonoBehaviour
             return;
         }
 
-        gameData.remainInvinciableTime -= GameConfig.INVINSIBLE_CAMERA_SHAKE_RATE;
         if (gameData.remainInvinciableTime > 0)
         {
-            if(gameData.remainInvinciableTime > 2)
+            // if(gameData.remainInvinciableTime > 2)
             {
                 iTween.ShakePosition(Camera.main.gameObject, iTween.Hash("y", 0.2f, "x", 0.2f, "time", 0.2f));
             }
@@ -144,10 +141,17 @@ public class Snake : MonoBehaviour
             level.Shake(head.transform.position);
             gameController.UpdateLevelSlider();
         }
-        else
+        
+        if (gameData.isSnakeInvinciable && head.status != NodeStatus.TRANSFORMING)
+        {
+            gameData.remainInvinciableTime -= GameConfig.INVINSIBLE_CAMERA_SHAKE_RATE;
+        }
+
+        if (gameData.remainInvinciableTime <= 0)
         {
             ResetInvincible();
         }
+
     }
 
     void Update()
@@ -160,10 +164,17 @@ public class Snake : MonoBehaviour
         head.transform.localRotation = Quaternion.Lerp(head.transform.localRotation, targetQuternion, Time.deltaTime * 10);
 
         CheckInput();
-
-        if (head.status == NodeStatus.NONE)
+        
+        if(head.status == NodeStatus.TRANSFORMING)
         {
-            MoveSnake();
+            TransformSnake();
+        }
+        else
+        {
+            if (head.status == NodeStatus.NONE)
+            {
+                MoveSnake();    
+            }
         }
 
         CheckOutOfScreen();
@@ -316,6 +327,67 @@ public class Snake : MonoBehaviour
             return level.Nodes;
         }
     }
+
+    private void TransformSnake()
+    {
+        if (gameData.isSnakeInvinciable)
+        {
+            if (!transforming)
+            {
+                transforming = true;
+                iTween.MoveTo(head.gameObject, iTween.Hash("y", 1, "time", 1f,"easetype", iTween.EaseType.linear));
+                
+                // 0.3s localScale 变为 1
+                iTween.ScaleTo(head.gameObject,
+                    iTween.Hash("scale", Vector3.one * 3, "time", 1f, "oncomplete", "AnimationInvincibleEnd",
+                        "oncompletetarget", gameObject, "easetype", iTween.EaseType.linear));
+            }
+        }
+        else
+        {
+            if (!transforming)
+            {
+                transforming = true;
+                
+                // position 1s 变为 0
+                iTween.MoveTo(head.gameObject, iTween.Hash("y", 0, "time", 2f,"easetype", iTween.EaseType.linear));
+                
+                // 0.3s localScale 变为 1
+                iTween.ScaleTo(head.gameObject,
+                    iTween.Hash("scale", Vector3.one, "time", 2f, "oncomplete", "AnimationResetInvincibleEnd",
+                        "oncompletetarget", gameObject,"easetype", iTween.EaseType.linear));
+            }
+        }
+    }
+
+    private void AnimationInvincibleEnd()
+    {
+        transforming = false;
+        head.status = NodeStatus.NONE;
+    }
+    
+    private  void AnimationResetInvincibleEnd()
+    {
+        transforming = false;
+        head.status = NodeStatus.NONE;
+        
+        gameData.NodeSpeed = GameConfig.LevelSpeed [gameData.Level % (GameConfig.LevelSpeed.Count)];
+
+//        FindObjectOfType<CameralFollow>().Speed = 1;         
+
+        gameController.UpdateLevelSlider();
+        CancelInvoke();
+
+        if(gameUIController == null)
+        {
+            gameUIController = FindObjectOfType<GameUIController>();
+        }
+
+        gameUIController.SetLevelUpSliderColor(Color.white);
+
+        headNode.HideExplosionFX();
+    }
+    
     
     private void MoveSnake()
     {
@@ -333,17 +405,6 @@ public class Snake : MonoBehaviour
         else
         {
             Debug.Log("last node is null =========");
-        }
-
-		if (!gameData.isSnakeInvinciable && head.transform.position.y > 0)
-        {
-            head.transform.Translate(Vector3.down);
-            head.transform.localScale = Vector3.one;
-        }
-		else if (gameData.isSnakeInvinciable && head.transform.position.y < 1)
-        {
-            head.transform.Translate(Vector3.up);
-            head.transform.localScale = Vector3.one * 3;
         }
         
         Vector3 targetPosition = StablePostion(head.transform.position + headDirection);
@@ -379,7 +440,10 @@ public class Snake : MonoBehaviour
 
         Vector3 lastPostion = head.transform.position;
 
-        head.MoveBy(headDirection, this, gameData);
+        if (!transforming)
+        {
+            head.MoveBy(headDirection, this, gameData);    
+        }
       
         for (int i = 1; i < snakeNodes.Count; i++)
         {

@@ -2615,7 +2615,7 @@ GameObject:
   - component: {fileID: 104355859}
   - component: {fileID: 104355860}
   m_Layer: 9
-  m_Name: line_1_12
+  m_Name: line_1_0
   m_TagString: Tree
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2629,9 +2629,9 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 104355858}
   serializedVersion: 2
-  m_LocalRotation: {x: 0.653282, y: 0.270598, z: -0.270598, w: 0.653281}
-  m_LocalPosition: {x: 13.783314, y: 1, z: 20.812082}
-  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_LocalRotation: {x: 0.3535534, y: 0.3535534, z: -0.14644663, w: 0.85355335}
+  m_LocalPosition: {x: 0.083924636, y: 1, z: 7.01767}
+  m_LocalScale: {x: 1.5, y: 1.5, z: 1.5}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 553184951}
@@ -4764,7 +4764,7 @@ Transform:
   m_GameObject: {fileID: 196789624}
   serializedVersion: 2
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: -0.000030517578, z: 0}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []

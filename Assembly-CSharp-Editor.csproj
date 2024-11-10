@@ -327,7 +327,7 @@
       <HintPath>/Users/unity-ci/GitHub/GameCore/Assets/Plugin/ThirdParty/Demigiant/DemiLib/Core/Editor/DemiEditor.dll</HintPath>
     </Reference>
     <Reference Include="wx-runtime-editor">
-      <HintPath>/Users/unity-ci/GitHub/GameCore/Library/PackageCache/com.qq.weixin.minigame@981890fdaa/Runtime/Plugins/wx-runtime-editor.dll</HintPath>
+      <HintPath>/Users/unity-ci/GitHub/GameCore/Packages/com.qq.weixin.minigame@981890fdaa/Runtime/Plugins/wx-runtime-editor.dll</HintPath>
     </Reference>
     <Reference Include="Sirenix.Reflection.Editor">
       <HintPath>/Users/unity-ci/GitHub/GameCore/Assets/Plugin/ThirdParty/Sirenix/Assemblies/Sirenix.Reflection.Editor.dll</HintPath>
@@ -339,7 +339,7 @@
       <HintPath>/Users/unity-ci/GitHub/GameCore/Library/PackageCache/com.unity.ext.nunit@2.0.3/net40/unity-custom/nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="Unity.FontABTool">
-      <HintPath>/Users/unity-ci/GitHub/GameCore/Library/PackageCache/com.qq.weixin.minigame@981890fdaa/Runtime/Plugins/Unity.FontABTool.dll</HintPath>
+      <HintPath>/Users/unity-ci/GitHub/GameCore/Packages/com.qq.weixin.minigame@981890fdaa/Runtime/Plugins/Unity.FontABTool.dll</HintPath>
     </Reference>
     <Reference Include="ICSharpCode.SharpZipLib">
       <HintPath>/Users/unity-ci/GitHub/GameCore/Assets/Plugin/ThirdParty/SharpZipLib/ICSharpCode.SharpZipLib.dll</HintPath>
@@ -348,7 +348,7 @@
       <HintPath>/Users/unity-ci/GitHub/GameCore/Assets/Plugin/ThirdParty/Sirenix/Assemblies/Sirenix.Serialization.dll</HintPath>
     </Reference>
     <Reference Include="LitJson">
-      <HintPath>/Users/unity-ci/GitHub/GameCore/Library/PackageCache/com.qq.weixin.minigame@981890fdaa/Runtime/Plugins/LitJson.dll</HintPath>
+      <HintPath>/Users/unity-ci/GitHub/GameCore/Packages/com.qq.weixin.minigame@981890fdaa/Runtime/Plugins/LitJson.dll</HintPath>
     </Reference>
     <Reference Include="COSXML">
       <HintPath>/Users/unity-ci/GitHub/GameCore/Library/PackageCache/cn.unity.uos.launcher@33f9b150df/Plugins/COSXML.dll</HintPath>
@@ -387,7 +387,7 @@
       <HintPath>/Users/unity-ci/GitHub/GameCore/Assets/Plugin/ThirdParty/Demigiant/DOTweenPro/DOTweenPro.dll</HintPath>
     </Reference>
     <Reference Include="wx-editor">
-      <HintPath>/Users/unity-ci/GitHub/GameCore/Library/PackageCache/com.qq.weixin.minigame@981890fdaa/Editor/wx-editor.dll</HintPath>
+      <HintPath>/Users/unity-ci/GitHub/GameCore/Packages/com.qq.weixin.minigame@981890fdaa/Editor/wx-editor.dll</HintPath>
     </Reference>
     <Reference Include="Google.Protobuf">
       <HintPath>/Users/unity-ci/GitHub/GameCore/Library/PackageCache/cn.unity.uos.launcher@33f9b150df/Plugins/Google.Protobuf.dll</HintPath>
@@ -815,14 +815,8 @@
     <Reference Include="Unity.ScriptableBuildPipeline">
       <HintPath>/Users/unity-ci/GitHub/GameCore/Library/ScriptAssemblies/Unity.ScriptableBuildPipeline.dll</HintPath>
     </Reference>
-    <Reference Include="Wx">
-      <HintPath>/Users/unity-ci/GitHub/GameCore/Library/ScriptAssemblies/Wx.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEditor.UI">
       <HintPath>/Users/unity-ci/GitHub/GameCore/Library/ScriptAssemblies/UnityEditor.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="WxEditor">
-      <HintPath>/Users/unity-ci/GitHub/GameCore/Library/ScriptAssemblies/WxEditor.dll</HintPath>
     </Reference>
     <Reference Include="UnityEngine.UI">
       <HintPath>/Users/unity-ci/GitHub/GameCore/Library/ScriptAssemblies/UnityEngine.UI.dll</HintPath>
@@ -890,6 +884,14 @@
     <ProjectReference Include="Assembly-CSharp.csproj">
       <Project>{c761e073-5e30-2414-a735-b3371ec95a0d}</Project>
       <Name>Assembly-CSharp</Name>
+    </ProjectReference>
+    <ProjectReference Include="Wx.csproj">
+      <Project>{fe8ab389-5ca7-fb50-e190-51f75cf84f31}</Project>
+      <Name>Wx</Name>
+    </ProjectReference>
+    <ProjectReference Include="WxEditor.csproj">
+      <Project>{86decc0b-f3c8-c6db-7269-e152a0dead8f}</Project>
+      <Name>WxEditor</Name>
     </ProjectReference>
     <ProjectReference Include="Sirenix.OdinInspector.Modules.UnityMathematics.csproj">
       <Project>{110b8bc8-b3ea-d8bc-9f78-c5c3c16ba1af}</Project>

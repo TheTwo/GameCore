@@ -1,5 +1,6 @@
 ﻿public enum NodeStatus
 {
     NONE,
-    MOVING
+    MOVING,
+    TRANSFORMING
 }

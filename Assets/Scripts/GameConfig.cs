@@ -50,7 +50,7 @@ public class GameConfig
         {NodeType.RAINBOW, Color.white}
     };
 
-    public static List<int> LevelScore = new List<int>{0,50,100,200,300,400,500,600,700,800,900,1000,1100,1200,1300,1400,1500,1600,1700,1800,1900,2000,2100,2200,2300,2400,2500,int.MaxValue};
+    public static List<int> LevelScore = new List<int>{0,50,200,300,400,500,600,700,800,900,1000,1100,1200,1300,1400,1500,1600,1700,1800,1900,2000,2100,2200,2300,2400,2500,int.MaxValue};
 
-    public static List<int> LevelSpeed = new List<int>{4,7,11,15,18};
+    public static List<int> LevelSpeed = new List<int>{4,5,7,10,11,15,18};
 }

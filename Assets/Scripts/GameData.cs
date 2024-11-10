@@ -13,7 +13,7 @@ public class GameData
     private const string ROLE = "role";
     private const string UNLOCKED_ROLE_PRE = "unlocked_role";
     private int score;
-    private int level = 2;
+    private int level = 1;
     private int energy = GameConfig.MAX_ENERGY;
     private bool isHight = false;
     private float speed = GameConfig.LevelSpeed[0];

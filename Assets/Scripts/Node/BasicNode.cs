@@ -9,6 +9,8 @@ public class BasicNode : Node
 //    protected JellyMesh jellyMesh;
     protected GameController gameController;
 
+    private Coroutine moveCoroutine;
+
     Color[] colors = new Color[]{Color.blue, Color.red, Color.black, Color.white, Color.green};
 
     void Start()
@@ -53,7 +55,15 @@ public class BasicNode : Node
         float scale = 0.9f + Random.value / 3;
         gameObject.transform.localScale = new Vector3(scale, scale, scale);
         targetPosition = transform.position + step;
-        StartCoroutine(Move(snake, gameData));
+        moveCoroutine = StartCoroutine(Move(snake, gameData));
+    }
+    
+    public override void StopMoveBy()
+    {
+        if (moveCoroutine != null)
+        {
+            StopCoroutine(moveCoroutine);
+        }
     }
 
     protected IEnumerator Move(Snake snake, GameData gameData)
