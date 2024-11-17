@@ -371,6 +371,8 @@ public class Snake : MonoBehaviour
         transforming = false;
         head.status = NodeStatus.NONE;
         
+        head.transform.position = StablePostion(head.transform.position);
+        
         gameData.NodeSpeed = GameConfig.LevelSpeed [gameData.Level % (GameConfig.LevelSpeed.Count)];
 
 //        FindObjectOfType<CameralFollow>().Speed = 1;         
