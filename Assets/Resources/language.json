@@ -68,9 +68,13 @@
       "得分",
       "Score"
     ],
-    "Free Revive": [
+    "Share Revive": [
       "分享复活",
-      "Free Revive"
+      "Share Revive"
+    ],
+    "AD Revive": [
+      "广告复活",
+      "AD Revive"
     ],
     "New Best Score!": [
       "获得了新高分！",

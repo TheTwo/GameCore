@@ -20,7 +20,10 @@ public class GameData
 
 	public int countOfPlay = 0;
 	public bool canRevive = true;
+    public int reviceCount = 0;
 
+    public const int MAX_REVIVE_COUNT = 2;
+    
     public delegate void GameDataChange(GameData gamedata);
     public event GameDataChange OnGameDataChange;
 

@@ -77,6 +77,7 @@ public class StartUIController : MonoBehaviour
 		gameData.countOfPlay++;
 		// 点击开始按钮，可以复活了
 		gameData.canRevive = true;
+        gameData.reviceCount = 0;   
     }
 
     private void StartGame()

@@ -58,14 +58,21 @@ public class EndUIController : MonoBehaviour
             animator.enabled = false;
         }
 
-		if (gameData.canRevive) {
-			reviveGameobject.SetActive(true);
-			reviveBtn.interactable = true;
-			reviveBtn.GetComponent<Animator>().enabled = reviveBtn.interactable;
-		}
-		else {
-			reviveGameobject.SetActive(false);
-		}
+        reviveBtn.gameObject.SetActive(false);
+        sharBtn.gameObject.SetActive(false);
+        
+        if (gameData.ReviveCount == 0)
+        {
+            reviveBtn.gameObject.SetActive(true);
+            reviveBtn.interactable = true;
+            reviveBtn.GetComponent<Animator>().enabled = reviveBtn.interactable;
+        }
+        else if (gameData.ReviveCount == 1)
+        {
+            sharBtn.gameObject.SetActive(true);
+            sharBtn.interactable = true;
+            sharBtn.GetComponent<Animator>().enabled = sharBtn.interactable;
+        }
                 
 //        gameData.Energy = 0; 
 

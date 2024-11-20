@@ -28,6 +28,8 @@ public class GameController : MonoBehaviour
 	private BackgroundController backgroundController;
 
 	public CameralFollow cameralFollow;
+	
+	private WXRewardedVideoAd videoAd;
 
 //	public ShareSDK ssdk;
 
@@ -62,6 +64,12 @@ public class GameController : MonoBehaviour
 	void Start ()
 	{
 		WX.ReportGameStart();
+		
+		// 创建激励视频广告实例，提前初始化
+		var adParam = new WXCreateRewardedVideoAdParam();
+		adParam.adUnitId = "adunit-ad4f10cca41ee2c7";
+		videoAd = WX.CreateRewardedVideoAd(adParam);
+		
 		
 		SoundManager.instance.startBGM ();   
 
@@ -157,6 +165,7 @@ public class GameController : MonoBehaviour
 		gameData.countOfPlay++;
 		// 点击重新开始按钮，可以复活了
 		gameData.canRevive = true;
+		gameData.reviceCount = 0;
 
 		SoundManager.instance.PlayingSound ("Button", 1f, Camera.main.transform.position);
 		PersistenceData.Instance.StartGameImmediatly = true;
@@ -172,7 +181,9 @@ public class GameController : MonoBehaviour
 		Time.timeScale = 1;
 		gameData.ReviveCount++;
 		// 已经复活一次了，本局不能再次复活了
-		gameData.canRevive = false;
+		if (gameData.ReviveCount >= GameData.MAX_REVIVE_COUNT) {
+			gameData.canRevive = false;
+		}
 		
 		gameData.Energy = GameConfig.MAX_ENERGY;
 		uiController.OnGameStart (gameData);
@@ -193,6 +204,26 @@ public class GameController : MonoBehaviour
 		//			}
 		//		});
 		//	}
+		
+
+
+// 用户触发广告后，显示激励视频广告
+		videoAd.Load(
+			// 激励视频广告关闭
+			response =>
+			{
+				Revive();
+			},
+			// 激励视频广告加载失败
+			response =>
+			{
+				Debug.Log(response.errMsg);
+			}
+		);
+		
+		#if UNITY_EDITOR
+			Revive();
+		#endif
 	}
 
 	public void ShowLeaderboardUI ()
@@ -304,7 +335,7 @@ public class GameController : MonoBehaviour
 //
 ////		ssdk.ShareContent (1, PlatformType.WeChatTimeline, content);
 
-		ranking.Share();
+		ranking.Share(gameData.HighScore);
 		
 		Revive ();
 		Pause();

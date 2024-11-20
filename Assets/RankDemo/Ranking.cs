@@ -133,12 +133,12 @@ public class Ranking : MonoBehaviour
         WX.GetOpenDataContext().PostMessage(msg);
     }
     
-    public void Share()
+    public void Share(int highScore)
     {
         WX.ShareAppMessage(
             new ShareAppMessageOption()
             {
-                title = "帮我复活一次吧,打下最高分！",
+                title = $"我在彩色尾巴拿到了 {highScore} 分，你也来试试吧！",
                 query = "minigame_action=show_group_list",
 //                imageUrl =
   //                  "https://a.unity.cn/client_api/v1/buckets/38abf271-e18c-4c8a-9c35-8c8104b5cbf3/content/logo.png",

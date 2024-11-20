@@ -1988,7 +1988,7 @@ MonoBehaviour:
   - {fileID: 0}
   reviveGameobject: {fileID: 1879401362}
   reviveBtn: {fileID: 1879401364}
-  sharBtn: {fileID: 0}
+  sharBtn: {fileID: 1284470622}
 --- !u!95 &67318706
 Animator:
   serializedVersion: 5
@@ -3706,7 +3706,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: Free Revive
+  m_Text: AD Revive
 --- !u!222 &157118634
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -14528,7 +14528,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_Sprite: {fileID: 21300000, guid: ac26836e9eea14866b84ac899b44886f, type: 3}
+  m_Sprite: {fileID: 21300000, guid: 5900ef9f073fd4b8aba6936216e9c156, type: 3}
   m_Type: 0
   m_PreserveAspect: 0
   m_FillCenter: 1
@@ -25212,7 +25212,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 64.481, y: -14.6}
+  m_AnchoredPosition: {x: 0, y: 435}
   m_SizeDelta: {x: 438.4, y: 77.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1082728019
@@ -29729,8 +29729,8 @@ MonoBehaviour:
     m_PersistentCalls:
       m_Calls:
       - m_Target: {fileID: 1250882882}
-        m_TargetAssemblyTypeName: 
-        m_MethodName: ShowReviveAD
+        m_TargetAssemblyTypeName: GameController, Assembly-CSharp
+        m_MethodName: Share
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -30066,8 +30066,8 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 0.00006937981, y: 49.449974}
-  m_SizeDelta: {x: 62, y: 98.9}
+  m_AnchoredPosition: {x: 2.25, y: 49.449974}
+  m_SizeDelta: {x: 41.071, y: 98.9}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1296756826
 MonoBehaviour:
@@ -30093,8 +30093,8 @@ MonoBehaviour:
     m_Font: {fileID: 12800000, guid: 46b8f4322123049018623d8137e7ec10, type: 3}
     m_FontSize: 60
     m_FontStyle: 0
-    m_BestFit: 0
-    m_MinSize: 50
+    m_BestFit: 1
+    m_MinSize: 20
     m_MaxSize: 100
     m_Alignment: 4
     m_AlignByGeometry: 0
@@ -30102,7 +30102,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: 8
+  m_Text: 81
 --- !u!222 &1296756827
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -43231,7 +43231,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &1879401363
 RectTransform:
   m_ObjectHideFlags: 0
@@ -43299,7 +43299,7 @@ MonoBehaviour:
       m_Calls:
       - m_Target: {fileID: 1250882882}
         m_TargetAssemblyTypeName: GameController, Assembly-CSharp
-        m_MethodName: Share
+        m_MethodName: ShowReviveAD
         m_Mode: 1
         m_Arguments:
           m_ObjectArgument: {fileID: 0}
@@ -46979,7 +46979,7 @@ MonoBehaviour:
     m_HorizontalOverflow: 0
     m_VerticalOverflow: 0
     m_LineSpacing: 1
-  m_Text: "\u514D\u8D39\u590D\u6D3B"
+  m_Text: Share Revive
 --- !u!222 &2071535649
 CanvasRenderer:
   m_ObjectHideFlags: 0
