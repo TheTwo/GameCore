@@ -205,21 +205,20 @@ public class GameController : MonoBehaviour
 		//		});
 		//	}
 		
-
-
-// 用户触发广告后，显示激励视频广告
-		videoAd.Load(
-			// 激励视频广告关闭
-			response =>
+		videoAd.Show();
+		
+		videoAd.onCloseAction = (res) =>
+		{
+			if ((res != null && res.isEnded) || res == null)
 			{
 				Revive();
-			},
-			// 激励视频广告加载失败
-			response =>
-			{
-				Debug.Log(response.errMsg);
 			}
-		);
+			else
+			{
+				Debug.Log("广告未播放完毕");
+			}
+		};
+		
 		
 		#if UNITY_EDITOR
 			Revive();
