@@ -364,12 +364,14 @@ public class Snake : MonoBehaviour
     {
         transforming = false;
         head.status = NodeStatus.NONE;
+        head.gameObject.transform.position = new Vector3(head.transform.position.x, 1, head.transform.position.z);
     }
     
     private  void AnimationResetInvincibleEnd()
     {
         transforming = false;
         head.status = NodeStatus.NONE;
+        head.gameObject.transform.position = new Vector3(head.transform.position.x, 0, head.transform.position.z);
         
         gameData.NodeSpeed = GameConfig.LevelSpeed [gameData.Level % (GameConfig.LevelSpeed.Count)];
 

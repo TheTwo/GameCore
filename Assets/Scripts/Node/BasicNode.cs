@@ -99,6 +99,9 @@ public class BasicNode : Node
         {
             transform.localScale = new Vector3(GameConfig.Factor1 * (1 + scaleFactor), GameConfig.Factor1 * (1 + scaleFactor), GameConfig.Factor1 * (1 + scaleFactor));
         }
+        
+        // 将y轴的位置设置为0，防止在y轴上的移动
+        lastPostion.y = 0;
 
         MoveBy(lastPostion - transform.position, snake, gameData);
     }
