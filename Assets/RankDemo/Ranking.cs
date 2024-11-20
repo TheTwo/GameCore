@@ -24,15 +24,24 @@ public class Ranking : MonoBehaviour
     public GameObject RankingBox;
     public Button CloseButton;
 
-    void Start()
+    public void Init()
     {
-        WX.InitSDK(
-            (code) =>
+        RankMask
+            .GetComponent<Button>()
+            .onClick.AddListener(() =>
             {
-                Init();
-            }
-        );
+                RankMask.SetActive(false);
+                RankingBox.SetActive(false);
+                WX.HideOpenData();
+            });
 
+        CloseButton.onClick.AddListener(() =>
+        {
+            RankMask.SetActive(false);
+            RankingBox.SetActive(false);
+            WX.HideOpenData();
+        });
+        
         /**
          * 使用群排行功能需要特殊设置分享功能，详情可见链接
          * https://developers.weixin.qq.com/minigame/dev/guide/open-ability/share/share.html
@@ -103,25 +112,6 @@ public class Ranking : MonoBehaviour
         );
     }
 
-    void Init()
-    {
-        RankMask
-            .GetComponent<Button>()
-            .onClick.AddListener(() =>
-            {
-                RankMask.SetActive(false);
-                RankingBox.SetActive(false);
-                WX.HideOpenData();
-            });
-
-        CloseButton.onClick.AddListener(() =>
-        {
-            RankMask.SetActive(false);
-            RankingBox.SetActive(false);
-            WX.HideOpenData();
-        });
-    }
-    
     public void ShowRanking()
     {
         ShowOpenData();

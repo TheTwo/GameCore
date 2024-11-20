@@ -1,4 +1,5 @@
-﻿using UnityEngine;
+﻿using System;
+using UnityEngine;
 using UnityEngine.SceneManagement;
 using WeChatWASM;
 
@@ -30,6 +31,8 @@ public class GameController : MonoBehaviour
 	public CameralFollow cameralFollow;
 	
 	private WXRewardedVideoAd videoAd;
+	private WXCustomAd customAdBottom;
+	private WXCustomAd customAdTop;
 
 //	public ShareSDK ssdk;
 
@@ -63,14 +66,13 @@ public class GameController : MonoBehaviour
 
 	void Start ()
 	{
-		WX.ReportGameStart();
-		
-		// 创建激励视频广告实例，提前初始化
-		var adParam = new WXCreateRewardedVideoAdParam();
-		adParam.adUnitId = "adunit-ad4f10cca41ee2c7";
-		videoAd = WX.CreateRewardedVideoAd(adParam);
-		
-		
+		WX.InitSDK(
+			(code) =>
+			{
+				InitWX();
+			}
+		);
+
 		SoundManager.instance.startBGM ();   
 
 		if (PersistenceData.Instance.StartGameImmediatly) {
@@ -79,6 +81,25 @@ public class GameController : MonoBehaviour
 		}
 
 		tutorialData = FindObjectOfType<TutorialController> ().TutorialData;
+	}
+
+	private void InitWX()
+	{
+		WX.ReportGameStart();
+		
+		ranking.Init();
+		
+		// 创建激励视频广告实例，提前初始化
+		var adParam = new WXCreateRewardedVideoAdParam();
+		adParam.adUnitId = "adunit-ad4f10cca41ee2c7";
+		videoAd = WX.CreateRewardedVideoAd(adParam);
+		
+		// 创建 原生模板 广告实例，提前初始化
+		var styleBottom = new CustomStyle() { left = 0, top = Screen.height - 108, width = Screen.width };
+		customAdBottom = new WXCustomAd("adunit-2a23b71cf12a6294", styleBottom);
+
+		var styleTop = new CustomStyle() { left = 0, top = 0, width = Screen.width };
+		customAdTop = new WXCustomAd("adunit-cd9a4114ac2b9bce", styleTop);
 	}
 
 	public void StartGame ()
@@ -137,6 +158,9 @@ public class GameController : MonoBehaviour
 			// APIForXcode.ShowBanner(false);
 		}
 //        Invoke("ShowAD", 2f);
+
+		// 每局游戏结束后，显示原生模板广告
+		customAdBottom.Show();
 	}
 
 	public void AddScore (int add)
@@ -255,6 +279,8 @@ public class GameController : MonoBehaviour
 //        Time.timeScale = 0;
 		uiController.OnPause (gameData);
 		paused = true;
+		
+		customAdTop.Show();
 	}
 
 	public void Resume ()
@@ -267,12 +293,17 @@ public class GameController : MonoBehaviour
 //        Time.timeScale = 1;
 		uiController.OnResume ();
 		paused = false;
+		
+		customAdTop.Hide();
 	}
 
 	public void HomePage ()
 	{
 		// 移除Banner
 		// APIForXcode.RemoveBanner();
+		
+		// 每局游戏结束后，显示原生模板广告
+		customAdBottom.Hide();
 
 		SoundManager.instance.PlayingSound ("Button", 1f, Camera.main.transform.position);
 		Time.timeScale = 1;
