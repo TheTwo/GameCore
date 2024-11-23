@@ -9,10 +9,6 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp-firstpass",
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Assembly-CSharp-Editor", "Assembly-CSharp-Editor.csproj", "{72fca7a3-529e-9de3-47f9-4576e8dd1054}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "WxEditor", "WxEditor.csproj", "{86decc0b-f3c8-c6db-7269-e152a0dead8f}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Wx", "Wx.csproj", "{fe8ab389-5ca7-fb50-e190-51f75cf84f31}"
-EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Unity.UOS.Encrypt", "Unity.UOS.Encrypt.csproj", "{acbd3bb4-5b0e-6d5e-2448-219b1af07698}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Sirenix.OdinInspector.Modules.UnityMathematics", "Sirenix.OdinInspector.Modules.UnityMathematics.csproj", "{110b8bc8-b3ea-d8bc-9f78-c5c3c16ba1af}"
@@ -30,10 +26,6 @@ Global
 		{add71b74-15fd-0040-d2c4-a04844f4b49e}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{72fca7a3-529e-9de3-47f9-4576e8dd1054}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{72fca7a3-529e-9de3-47f9-4576e8dd1054}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{86decc0b-f3c8-c6db-7269-e152a0dead8f}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{86decc0b-f3c8-c6db-7269-e152a0dead8f}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{fe8ab389-5ca7-fb50-e190-51f75cf84f31}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{fe8ab389-5ca7-fb50-e190-51f75cf84f31}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{acbd3bb4-5b0e-6d5e-2448-219b1af07698}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{acbd3bb4-5b0e-6d5e-2448-219b1af07698}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{110b8bc8-b3ea-d8bc-9f78-c5c3c16ba1af}.Debug|Any CPU.ActiveCfg = Debug|Any CPU

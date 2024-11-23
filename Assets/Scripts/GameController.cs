@@ -33,6 +33,8 @@ public class GameController : MonoBehaviour
 	private WXRewardedVideoAd videoAd;
 	private WXCustomAd customAdBottom;
 	private WXCustomAd customAdTop;
+	
+	private static bool wxInited = false;
 
 //	public ShareSDK ssdk;
 
@@ -66,12 +68,15 @@ public class GameController : MonoBehaviour
 
 	void Start ()
 	{
-		WX.InitSDK(
-			(code) =>
-			{
-				InitWX();
-			}
-		);
+		if (!wxInited)
+		{
+			WX.InitSDK(
+				(code) =>
+				{
+					InitWX();
+				}
+			);
+		}
 
 		SoundManager.instance.startBGM ();   
 
@@ -95,11 +100,24 @@ public class GameController : MonoBehaviour
 		videoAd = WX.CreateRewardedVideoAd(adParam);
 		
 		// 创建 原生模板 广告实例，提前初始化
-		var styleBottom = new CustomStyle() { left = 0, top = Screen.height - 108, width = Screen.width };
-		customAdBottom = new WXCustomAd("adunit-2a23b71cf12a6294", styleBottom);
+		var styleBottom = new CustomStyle() { left = 0, top = Screen.height - 108, width = 360 };
+		// customAdBottom = new WXCustomAd("adunit-2a23b71cf12a6294", styleBottom);
+		var param = new WXCreateCustomAdParam
+		{
+			adUnitId = "adunit-2a23b71cf12a6294",
+			style = styleBottom
+		};
+		customAdBottom = WX.CreateCustomAd(param);
+		
+		customAdBottom.OnError((res) =>
+		{
+			Debug.LogError("原生模板广告加载失败" + res.errMsg);
+		});
 
-		var styleTop = new CustomStyle() { left = 0, top = 0, width = Screen.width };
-		customAdTop = new WXCustomAd("adunit-cd9a4114ac2b9bce", styleTop);
+		/*var styleTop = new CustomStyle() { left = 0, top = 0, width = Screen.width };
+		customAdTop = new WXCustomAd("adunit-cd9a4114ac2b9bce", styleTop);*/
+		
+		wxInited = true;
 	}
 
 	public void StartGame ()
@@ -160,7 +178,10 @@ public class GameController : MonoBehaviour
 //        Invoke("ShowAD", 2f);
 
 		// 每局游戏结束后，显示原生模板广告
-		customAdBottom.Show();
+		if (customAdBottom != null)
+		{
+			customAdBottom.Show();
+		}
 	}
 
 	public void AddScore (int add)
@@ -279,8 +300,11 @@ public class GameController : MonoBehaviour
 //        Time.timeScale = 0;
 		uiController.OnPause (gameData);
 		paused = true;
-		
-		customAdTop.Show();
+
+		if (customAdTop != null)
+		{
+			customAdTop.Show();	
+		}
 	}
 
 	public void Resume ()
@@ -293,8 +317,11 @@ public class GameController : MonoBehaviour
 //        Time.timeScale = 1;
 		uiController.OnResume ();
 		paused = false;
-		
-		customAdTop.Hide();
+
+		if (customAdTop != null)
+		{
+			customAdTop.Hide();	
+		}
 	}
 
 	public void HomePage ()
@@ -303,7 +330,10 @@ public class GameController : MonoBehaviour
 		// APIForXcode.RemoveBanner();
 		
 		// 每局游戏结束后，显示原生模板广告
-		customAdBottom.Hide();
+		if (customAdBottom != null)
+		{
+			customAdBottom.Hide();	
+		}
 
 		SoundManager.instance.PlayingSound ("Button", 1f, Camera.main.transform.position);
 		Time.timeScale = 1;

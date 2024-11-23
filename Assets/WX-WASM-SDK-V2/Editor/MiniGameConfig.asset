@@ -19,7 +19,7 @@ MonoBehaviour:
     assetLoadType: 0
     compressDataPackage: 1
     VideoUrl: 
-    DST: output
+    DST: /Users/unity-ci/GitHub/GameCore/output
     StreamCDN: 
     bundleHashLength: 32
     bundlePathIdentifier: StreamingAssets;
@@ -61,6 +61,7 @@ MonoBehaviour:
     showMonitorSuggestModal: 0
     enableProfileStats: 0
     enableRenderAnalysis: 0
+    enablePerfAnalysis: 0
     iOSAutoGCInterval: 10000
     enableIOSPerformancePlus: 1
     brotliMT: 1
