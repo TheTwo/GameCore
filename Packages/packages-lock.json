@@ -17,11 +17,10 @@
       "hash": "33f9b150dff94817b3734f24c6e3782724d8fa45"
     },
     "com.qq.weixin.minigame": {
-      "version": "https://github.com/wechat-miniprogram/minigame-tuanjie-transform-sdk.git",
+      "version": "file:com.qq.weixin.minigame@65b7e86611",
       "depth": 0,
-      "source": "git",
-      "dependencies": {},
-      "hash": "65b7e866110df9c6fb2a9d6ee7ff5a57c6d77924"
+      "source": "embedded",
+      "dependencies": {}
     },
     "com.unity.burst": {
       "version": "1.8.17",

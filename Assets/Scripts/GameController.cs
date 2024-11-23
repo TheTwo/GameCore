@@ -30,9 +30,9 @@ public class GameController : MonoBehaviour
 
 	public CameralFollow cameralFollow;
 	
-	private WXRewardedVideoAd videoAd;
-	private WXCustomAd customAdBottom;
-	private WXCustomAd customAdTop;
+	private static WXRewardedVideoAd videoAd;
+	private static WXCustomAd customAdBottom;
+	private static WXCustomAd customAdTop;
 	
 	private static bool wxInited = false;
 
@@ -98,26 +98,54 @@ public class GameController : MonoBehaviour
 		var adParam = new WXCreateRewardedVideoAdParam();
 		adParam.adUnitId = "adunit-ad4f10cca41ee2c7";
 		videoAd = WX.CreateRewardedVideoAd(adParam);
-		
-		// 创建 原生模板 广告实例，提前初始化
-		var styleBottom = new CustomStyle() { left = 0, top = Screen.height - 108, width = 360 };
-		// customAdBottom = new WXCustomAd("adunit-2a23b71cf12a6294", styleBottom);
-		var param = new WXCreateCustomAdParam
-		{
-			adUnitId = "adunit-2a23b71cf12a6294",
-			style = styleBottom
-		};
-		customAdBottom = WX.CreateCustomAd(param);
-		
-		customAdBottom.OnError((res) =>
-		{
-			Debug.LogError("原生模板广告加载失败" + res.errMsg);
-		});
 
-		/*var styleTop = new CustomStyle() { left = 0, top = 0, width = Screen.width };
-		customAdTop = new WXCustomAd("adunit-cd9a4114ac2b9bce", styleTop);*/
+		CreateBottomAd();
+		CreateTopAd();
 		
 		wxInited = true;
+	}
+
+	private void CreateBottomAd()
+	{
+		var windowInfo = WX.GetWindowInfo();
+		int marginLeft = (int)((windowInfo.windowWidth - 360) / 2);
+		
+		customAdBottom = WX.CreateCustomAd(new WXCreateCustomAdParam()
+		{
+			adUnitId = "adunit-2a23b71cf12a6294",
+			adIntervals = 30,
+			style = new CustomStyle()
+			{
+				left = marginLeft,
+				top = (int)(windowInfo.windowHeight - 106),
+				width = 360,
+			}
+		});
+		customAdBottom.OnError((WXADErrorResponse res) => { Debug.Log("bannerad error response"); });
+		customAdBottom.OnLoad((WXADLoadResponse res) => { Debug.Log("bannerad load response"); });
+	}
+	
+	private void CreateTopAd()
+	{
+		// 360×106
+		
+		var windowInfo = WX.GetWindowInfo();
+		
+		int marginLeft = (int)((windowInfo.windowWidth - 360) / 2);
+		
+		customAdTop = WX.CreateCustomAd(new WXCreateCustomAdParam()
+		{
+			adUnitId = "adunit-cd9a4114ac2b9bce",
+			adIntervals = 30,
+			style = new CustomStyle()
+			{
+				left = marginLeft,
+				top = 0,
+				width = 360,
+			}
+		});
+		customAdTop.OnError((WXADErrorResponse res) => { Debug.Log("bannerad error response"); });
+		customAdTop.OnLoad((WXADLoadResponse res) => { Debug.Log("bannerad load response"); });
 	}
 
 	public void StartGame ()
@@ -207,6 +235,16 @@ public class GameController : MonoBehaviour
 
 	public void Restart ()
 	{
+		if(customAdTop != null)
+		{
+			customAdTop.Hide();
+		}
+		
+		if (customAdBottom != null)
+		{
+			customAdBottom.Hide();	
+		}
+		
 		gameData.countOfPlay++;
 		// 点击重新开始按钮，可以复活了
 		gameData.canRevive = true;
@@ -330,6 +368,11 @@ public class GameController : MonoBehaviour
 		// APIForXcode.RemoveBanner();
 		
 		// 每局游戏结束后，显示原生模板广告
+		if(customAdTop != null)
+		{
+			customAdTop.Hide();
+		}
+		
 		if (customAdBottom != null)
 		{
 			customAdBottom.Hide();	
@@ -391,9 +434,9 @@ public class GameController : MonoBehaviour
 //		content ["type"] = ContentType.News;
 //		content ["siteUrl"] = "http://weibo.com/ariequ";
 //		content ["site"] = "作者微博";
-////        content["musicUrl"] = "http://mp3.mwap8.com/destdir/Music/2009/20090601/ZuiXuanMinZuFeng20090601119.mp3";
+ //        content["musicUrl"] = "http://mp3.mwap8.com/destdir/Music/2009/20090601/ZuiXuanMinZuFeng20090601119.mp3";
 //
-////		ssdk.ShareContent (1, PlatformType.WeChatTimeline, content);
+ //		ssdk.ShareContent (1, PlatformType.WeChatTimeline, content);
 
 		ranking.Share(gameData.HighScore);
 		

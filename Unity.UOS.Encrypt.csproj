@@ -301,7 +301,7 @@
       <HintPath>/Users/unity-ci/GitHub/GameCore/Assets/Plugin/ThirdParty/Demigiant/DemiLib/Core/Editor/DemiEditor.dll</HintPath>
     </Reference>
     <Reference Include="wx-runtime-editor">
-      <HintPath>/Users/unity-ci/GitHub/GameCore/Library/PackageCache/com.qq.weixin.minigame@65b7e86611/Runtime/Plugins/wx-runtime-editor.dll</HintPath>
+      <HintPath>/Users/unity-ci/GitHub/GameCore/Packages/com.qq.weixin.minigame@65b7e86611/Runtime/Plugins/wx-runtime-editor.dll</HintPath>
     </Reference>
     <Reference Include="Sirenix.Reflection.Editor">
       <HintPath>/Users/unity-ci/GitHub/GameCore/Assets/Plugin/ThirdParty/Sirenix/Assemblies/Sirenix.Reflection.Editor.dll</HintPath>
@@ -313,7 +313,7 @@
       <HintPath>/Users/unity-ci/GitHub/GameCore/Library/PackageCache/com.unity.ext.nunit@2.0.3/net40/unity-custom/nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="Unity.FontABTool">
-      <HintPath>/Users/unity-ci/GitHub/GameCore/Library/PackageCache/com.qq.weixin.minigame@65b7e86611/Runtime/Plugins/Unity.FontABTool.dll</HintPath>
+      <HintPath>/Users/unity-ci/GitHub/GameCore/Packages/com.qq.weixin.minigame@65b7e86611/Runtime/Plugins/Unity.FontABTool.dll</HintPath>
     </Reference>
     <Reference Include="ICSharpCode.SharpZipLib">
       <HintPath>/Users/unity-ci/GitHub/GameCore/Assets/Plugin/ThirdParty/SharpZipLib/ICSharpCode.SharpZipLib.dll</HintPath>
@@ -322,7 +322,7 @@
       <HintPath>/Users/unity-ci/GitHub/GameCore/Assets/Plugin/ThirdParty/Sirenix/Assemblies/Sirenix.Serialization.dll</HintPath>
     </Reference>
     <Reference Include="LitJson">
-      <HintPath>/Users/unity-ci/GitHub/GameCore/Library/PackageCache/com.qq.weixin.minigame@65b7e86611/Runtime/Plugins/LitJson.dll</HintPath>
+      <HintPath>/Users/unity-ci/GitHub/GameCore/Packages/com.qq.weixin.minigame@65b7e86611/Runtime/Plugins/LitJson.dll</HintPath>
     </Reference>
     <Reference Include="COSXML">
       <HintPath>/Users/unity-ci/GitHub/GameCore/Library/PackageCache/cn.unity.uos.launcher@33f9b150df/Plugins/COSXML.dll</HintPath>
@@ -361,7 +361,7 @@
       <HintPath>/Users/unity-ci/GitHub/GameCore/Assets/Plugin/ThirdParty/Demigiant/DOTweenPro/DOTweenPro.dll</HintPath>
     </Reference>
     <Reference Include="wx-editor">
-      <HintPath>/Users/unity-ci/GitHub/GameCore/Library/PackageCache/com.qq.weixin.minigame@65b7e86611/Editor/wx-editor.dll</HintPath>
+      <HintPath>/Users/unity-ci/GitHub/GameCore/Packages/com.qq.weixin.minigame@65b7e86611/Editor/wx-editor.dll</HintPath>
     </Reference>
     <Reference Include="Google.Protobuf">
       <HintPath>/Users/unity-ci/GitHub/GameCore/Library/PackageCache/cn.unity.uos.launcher@33f9b150df/Plugins/Google.Protobuf.dll</HintPath>
@@ -376,7 +376,7 @@
       <HintPath>/Users/unity-ci/GitHub/GameCore/Assets/Plugin/ThirdParty/Sirenix/Assemblies/Sirenix.OdinValidator.Editor.dll</HintPath>
     </Reference>
     <Reference Include="wx-perf">
-      <HintPath>/Users/unity-ci/GitHub/GameCore/Library/PackageCache/com.qq.weixin.minigame@65b7e86611/Runtime/Plugins/wx-perf.dll</HintPath>
+      <HintPath>/Users/unity-ci/GitHub/GameCore/Packages/com.qq.weixin.minigame@65b7e86611/Runtime/Plugins/wx-perf.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.iOS.Extensions.Xcode">
       <HintPath>/Applications/Unity/Hub/Editor/2022.3.46f1/Unity.app/Contents/PlaybackEngines/MacStandaloneSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>

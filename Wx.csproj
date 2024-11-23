@@ -45,19 +45,22 @@
     <Analyzer Include="/Applications/Unity/Hub/Editor/2022.3.46f1/Unity.app/Contents/Tools/Unity.SourceGenerators/Unity.Properties.SourceGenerator.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Packages/com.qq.weixin.minigame@981890fdaa/Runtime/WXTouchInputOverride.cs" />
-    <Compile Include="Packages/com.qq.weixin.minigame@981890fdaa/Runtime/WXBase.cs" />
-    <Compile Include="Packages/com.qq.weixin.minigame@981890fdaa/Runtime/WX.cs" />
-    <Compile Include="Packages/com.qq.weixin.minigame@981890fdaa/Runtime/WXProfileStatsScript.cs" />
-    <Compile Include="Packages/com.qq.weixin.minigame@981890fdaa/Runtime/WebAES.cs" />
-    <Compile Include="Packages/com.qq.weixin.minigame@981890fdaa/Runtime/HideLoadingPage.cs" />
-    <Compile Include="Packages/com.qq.weixin.minigame@981890fdaa/Runtime/WebMD5.cs" />
-    <None Include="Packages/com.qq.weixin.minigame@981890fdaa/Runtime/Plugins/wx-runtime.xml" />
-    <None Include="Packages/com.qq.weixin.minigame@981890fdaa/Runtime/Plugins/link.xml" />
-    <None Include="Packages/com.qq.weixin.minigame@981890fdaa/Runtime/wechat-default/project.config.json" />
-    <None Include="Packages/com.qq.weixin.minigame@981890fdaa/Runtime/wechat-default/game.json" />
-    <None Include="Packages/com.qq.weixin.minigame@981890fdaa/Runtime/WxWasmSDKRuntime.asmdef" />
-    <None Include="Packages/com.qq.weixin.minigame@981890fdaa/Runtime/Plugins/wx-runtime-editor.xml" />
+    <Compile Include="Packages/com.qq.weixin.minigame@65b7e86611/Runtime/WXSDKPerf/WXPerfEngine.cs" />
+    <Compile Include="Packages/com.qq.weixin.minigame@65b7e86611/Runtime/WXTouchInputOverride.cs" />
+    <Compile Include="Packages/com.qq.weixin.minigame@65b7e86611/Runtime/WXBase.cs" />
+    <Compile Include="Packages/com.qq.weixin.minigame@65b7e86611/Runtime/WX.cs" />
+    <Compile Include="Packages/com.qq.weixin.minigame@65b7e86611/Runtime/WXRuntimeExtDef.cs" />
+    <Compile Include="Packages/com.qq.weixin.minigame@65b7e86611/Runtime/WXProfileStatsScript.cs" />
+    <Compile Include="Packages/com.qq.weixin.minigame@65b7e86611/Runtime/WebAES.cs" />
+    <Compile Include="Packages/com.qq.weixin.minigame@65b7e86611/Runtime/HideLoadingPage.cs" />
+    <Compile Include="Packages/com.qq.weixin.minigame@65b7e86611/Runtime/WebMD5.cs" />
+    <None Include="Packages/com.qq.weixin.minigame@65b7e86611/Runtime/Plugins/link.xml" />
+    <None Include="Packages/com.qq.weixin.minigame@65b7e86611/Runtime/Plugins/wx-runtime-editor.xml" />
+    <None Include="Packages/com.qq.weixin.minigame@65b7e86611/Runtime/Plugins/wx-runtime.xml" />
+    <None Include="Packages/com.qq.weixin.minigame@65b7e86611/Runtime/wechat-default/game.json" />
+    <None Include="Packages/com.qq.weixin.minigame@65b7e86611/Runtime/WxWasmSDKRuntime.asmdef" />
+    <None Include="Packages/com.qq.weixin.minigame@65b7e86611/Runtime/wechat-default/project.config.json" />
+    <None Include="Packages/com.qq.weixin.minigame@65b7e86611/Runtime/Plugins/wx-perf.xml" />
     <Reference Include="UnityEngine">
       <HintPath>/Applications/Unity/Hub/Editor/2022.3.46f1/Unity.app/Contents/Managed/UnityEngine/UnityEngine.dll</HintPath>
     </Reference>
@@ -311,7 +314,7 @@
       <HintPath>/Users/unity-ci/GitHub/GameCore/Assets/Plugin/ThirdParty/Demigiant/DemiLib/Core/Editor/DemiEditor.dll</HintPath>
     </Reference>
     <Reference Include="wx-runtime-editor">
-      <HintPath>/Users/unity-ci/GitHub/GameCore/Packages/com.qq.weixin.minigame@981890fdaa/Runtime/Plugins/wx-runtime-editor.dll</HintPath>
+      <HintPath>/Users/unity-ci/GitHub/GameCore/Packages/com.qq.weixin.minigame@65b7e86611/Runtime/Plugins/wx-runtime-editor.dll</HintPath>
     </Reference>
     <Reference Include="Sirenix.Reflection.Editor">
       <HintPath>/Users/unity-ci/GitHub/GameCore/Assets/Plugin/ThirdParty/Sirenix/Assemblies/Sirenix.Reflection.Editor.dll</HintPath>
@@ -323,7 +326,7 @@
       <HintPath>/Users/unity-ci/GitHub/GameCore/Library/PackageCache/com.unity.ext.nunit@2.0.3/net40/unity-custom/nunit.framework.dll</HintPath>
     </Reference>
     <Reference Include="Unity.FontABTool">
-      <HintPath>/Users/unity-ci/GitHub/GameCore/Packages/com.qq.weixin.minigame@981890fdaa/Runtime/Plugins/Unity.FontABTool.dll</HintPath>
+      <HintPath>/Users/unity-ci/GitHub/GameCore/Packages/com.qq.weixin.minigame@65b7e86611/Runtime/Plugins/Unity.FontABTool.dll</HintPath>
     </Reference>
     <Reference Include="ICSharpCode.SharpZipLib">
       <HintPath>/Users/unity-ci/GitHub/GameCore/Assets/Plugin/ThirdParty/SharpZipLib/ICSharpCode.SharpZipLib.dll</HintPath>
@@ -332,7 +335,7 @@
       <HintPath>/Users/unity-ci/GitHub/GameCore/Assets/Plugin/ThirdParty/Sirenix/Assemblies/Sirenix.Serialization.dll</HintPath>
     </Reference>
     <Reference Include="LitJson">
-      <HintPath>/Users/unity-ci/GitHub/GameCore/Packages/com.qq.weixin.minigame@981890fdaa/Runtime/Plugins/LitJson.dll</HintPath>
+      <HintPath>/Users/unity-ci/GitHub/GameCore/Packages/com.qq.weixin.minigame@65b7e86611/Runtime/Plugins/LitJson.dll</HintPath>
     </Reference>
     <Reference Include="COSXML">
       <HintPath>/Users/unity-ci/GitHub/GameCore/Library/PackageCache/cn.unity.uos.launcher@33f9b150df/Plugins/COSXML.dll</HintPath>
@@ -371,7 +374,7 @@
       <HintPath>/Users/unity-ci/GitHub/GameCore/Assets/Plugin/ThirdParty/Demigiant/DOTweenPro/DOTweenPro.dll</HintPath>
     </Reference>
     <Reference Include="wx-editor">
-      <HintPath>/Users/unity-ci/GitHub/GameCore/Packages/com.qq.weixin.minigame@981890fdaa/Editor/wx-editor.dll</HintPath>
+      <HintPath>/Users/unity-ci/GitHub/GameCore/Packages/com.qq.weixin.minigame@65b7e86611/Editor/wx-editor.dll</HintPath>
     </Reference>
     <Reference Include="Google.Protobuf">
       <HintPath>/Users/unity-ci/GitHub/GameCore/Library/PackageCache/cn.unity.uos.launcher@33f9b150df/Plugins/Google.Protobuf.dll</HintPath>
@@ -384,6 +387,9 @@
     </Reference>
     <Reference Include="Sirenix.OdinValidator.Editor">
       <HintPath>/Users/unity-ci/GitHub/GameCore/Assets/Plugin/ThirdParty/Sirenix/Assemblies/Sirenix.OdinValidator.Editor.dll</HintPath>
+    </Reference>
+    <Reference Include="wx-perf">
+      <HintPath>/Users/unity-ci/GitHub/GameCore/Packages/com.qq.weixin.minigame@65b7e86611/Runtime/Plugins/wx-perf.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.iOS.Extensions.Xcode">
       <HintPath>/Applications/Unity/Hub/Editor/2022.3.46f1/Unity.app/Contents/PlaybackEngines/MacStandaloneSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
