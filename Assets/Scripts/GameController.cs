@@ -94,6 +94,8 @@ public class GameController : MonoBehaviour
 		
 		ranking.Init();
 		
+		
+#if !UNITY_EDITOR
 		// 创建激励视频广告实例，提前初始化
 		var adParam = new WXCreateRewardedVideoAdParam();
 		adParam.adUnitId = "adunit-ad4f10cca41ee2c7";
@@ -101,6 +103,7 @@ public class GameController : MonoBehaviour
 
 		CreateBottomAd();
 		CreateTopAd();
+#endif
 		
 		wxInited = true;
 	}

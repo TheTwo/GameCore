@@ -316,6 +316,9 @@
     <Reference Include="wx-runtime-editor">
       <HintPath>/Users/unity-ci/GitHub/GameCore/Packages/com.qq.weixin.minigame@65b7e86611/Runtime/Plugins/wx-runtime-editor.dll</HintPath>
     </Reference>
+    <Reference Include="wx-perf">
+      <HintPath>/Users/unity-ci/GitHub/GameCore/Packages/com.qq.weixin.minigame@65b7e86611/Runtime/Plugins/wx-perf.dll</HintPath>
+    </Reference>
     <Reference Include="Sirenix.Reflection.Editor">
       <HintPath>/Users/unity-ci/GitHub/GameCore/Assets/Plugin/ThirdParty/Sirenix/Assemblies/Sirenix.Reflection.Editor.dll</HintPath>
     </Reference>
@@ -387,9 +390,6 @@
     </Reference>
     <Reference Include="Sirenix.OdinValidator.Editor">
       <HintPath>/Users/unity-ci/GitHub/GameCore/Assets/Plugin/ThirdParty/Sirenix/Assemblies/Sirenix.OdinValidator.Editor.dll</HintPath>
-    </Reference>
-    <Reference Include="wx-perf">
-      <HintPath>/Users/unity-ci/GitHub/GameCore/Packages/com.qq.weixin.minigame@65b7e86611/Runtime/Plugins/wx-perf.dll</HintPath>
     </Reference>
     <Reference Include="UnityEditor.iOS.Extensions.Xcode">
       <HintPath>/Applications/Unity/Hub/Editor/2022.3.46f1/Unity.app/Contents/PlaybackEngines/MacStandaloneSupport/UnityEditor.iOS.Extensions.Xcode.dll</HintPath>
