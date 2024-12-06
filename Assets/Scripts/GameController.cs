@@ -447,6 +447,24 @@ public class GameController : MonoBehaviour
 		Pause();
 	}
 
+	public void UseSkill(SKILL skill)
+	{
+		switch (skill)
+		{
+			case SKILL.CHANGE_COLOR:
+				snake.ChangeCubeType(NodeType.A);
+				break;
+			case SKILL.DESTROY_TAIL:
+				snake.DestroyTail();
+				break;
+			case SKILL.BOOST_SPEED:
+				gameData.Energy = GameConfig.MAX_ENERGY;
+				uiController.OnGameStart (gameData);
+				snake.Revive ();
+				break;
+		}
+	}
+
 	void HandleOnGameDataChange (GameData gamedata)
 	{
 		backgroundController.ChangePlane (gameData.Level);

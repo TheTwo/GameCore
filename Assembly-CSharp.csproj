@@ -135,6 +135,7 @@
     <Compile Include="Assets/JsonFx.Json/IDataWriter.cs" />
     <Compile Include="Assets/JsonFx.Json/XmlDataReader.cs" />
     <Compile Include="Assets/JsonFx.Json/About.cs" />
+    <Compile Include="Assets/Scripts/Skill/SkillController.cs" />
     <Compile Include="Assets/Scripts/Tags.cs" />
     <Compile Include="Assets/Scripts/Utils.cs" />
     <Compile Include="Assets/Scripts/Tutorial/MoveTip.cs" />

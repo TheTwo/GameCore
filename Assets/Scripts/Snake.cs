@@ -647,6 +647,19 @@ public class Snake : MonoBehaviour
         CancelInvoke();
     }
 
+    public void ChangeColor()
+    {
+        
+    }
+    
+    public void DestroyTail()
+    {
+        if (snakeNodes.Count > 1)
+        {
+            StartCoroutine(ChangeToBlack(false));
+        }
+    }
+
     IEnumerator ChangeToBlack(bool fromHead)
     {
         snakeNodes.Sort(delegate(Node x, Node y)
@@ -704,5 +717,43 @@ public class Snake : MonoBehaviour
                 GameOver(false);
             }
         }
+    }
+
+    public void ChangeCubeType(NodeType targetType, bool fromHead = true)
+    {
+        StartCoroutine(ChangeToType(targetType, fromHead));
+    }
+
+    IEnumerator ChangeToType(NodeType targetType, bool fromHead)
+    {
+        // 根据fromHead参数决定变换顺序
+        snakeNodes.Sort(delegate(Node x, Node y)
+        {
+            if(fromHead)
+            {
+                return y.transform.position.sqrMagnitude.CompareTo(x.transform.position.sqrMagnitude);
+            }
+            else
+            {
+                return x.transform.position.sqrMagnitude.CompareTo(y.transform.position.sqrMagnitude);
+            }
+        });
+
+        // 逐个节点改变类型
+        int count = snakeNodes.Count;
+        for (int i = 0; i < snakeNodes.Count; i++)
+        {
+            SoundManager.instance.PlayingSound("Tong", 0.5f, Camera.main.transform.position);
+            
+            // 改变节点类型
+            snakeNodes[i].type = targetType;
+            // 改变对应的颜色
+            snakeNodes[i].ChangeToColor(GameConfig.NODE_COLOR_DIC[targetType]);
+            
+            yield return new WaitForSeconds(0.3f / count);
+        }
+
+        // 变换完成后检查是否可以消除
+        BangTail();
     }
 }

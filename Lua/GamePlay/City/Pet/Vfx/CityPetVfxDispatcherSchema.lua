@@ -1,2 +1,0 @@
-local CityPetVfxDispatcherSchema = {}
-return CityPetVfxDispatcherSchema
