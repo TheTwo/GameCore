@@ -27,15 +27,15 @@ public class SkillController : MonoBehaviour
             OnSkillButtonClick(SKILL.CHANGE_COLOR);
         });
         
-        skillButton0.onClick.AddListener(() =>
+        skillButton1.onClick.AddListener(() =>
         {
-            Debug.Log("Skill 0");
+            Debug.Log("Skill 1");
             OnSkillButtonClick(SKILL.DESTROY_TAIL);
         });
         
-        skillButton0.onClick.AddListener(() =>
+        skillButton2.onClick.AddListener(() =>
         {
-            Debug.Log("Skill 0");
+            Debug.Log("Skill 2");
             OnSkillButtonClick(SKILL.BOOST_SPEED);
         });
     }

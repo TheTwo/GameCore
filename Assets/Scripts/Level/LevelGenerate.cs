@@ -243,7 +243,7 @@ public class LevelGenerate : MonoBehaviour
         nodes.Clear();
     }
 
-    private void AddCubeAt(Vector3 position, int addIndex)
+    public void AddCubeAt(Vector3 position, int addIndex)
     {
         if (invincible)
         {
@@ -286,6 +286,14 @@ public class LevelGenerate : MonoBehaviour
 
 //            AddStar(position);
         }
+    }
+    
+    public Node GenerateNode(NodeType type)
+    {
+        IAutoRestoreObject<GameObject> autoRestoreObjec = pool.Take(type);
+        GameObject cube = autoRestoreObjec.Get();
+        Node node = cube.GetComponent<Node>();
+        return node;
     }
 
     private void AddStar(Vector3 position)

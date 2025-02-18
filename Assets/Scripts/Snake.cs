@@ -656,9 +656,53 @@ public class Snake : MonoBehaviour
     {
         if (snakeNodes.Count > 1)
         {
-            StartCoroutine(ChangeToBlack(false));
+            StartCoroutine(ChangeTailToBlack(true));
         }
     }
+    
+    IEnumerator ChangeTailToBlack(bool fromHead)
+        {
+            snakeNodes.Sort(delegate(Node x, Node y)
+            {
+                if(fromHead)
+                {
+                    return y.transform.position.sqrMagnitude.CompareTo(x.transform.position.sqrMagnitude);
+                }
+                else
+                {
+                    return x.transform.position.sqrMagnitude.CompareTo(y.transform.position.sqrMagnitude);
+                }
+            });
+    
+            int count = snakeNodes.Count;
+            for (int i = 1; i < snakeNodes.Count; i++)
+            {
+                SoundManager.instance.PlayingSound("Tong", 0.5f, Camera.main.transform.position);
+                snakeNodes [i].ChangeToColor(new Color(53f / 255, 49f / 255, 49f / 255));
+                yield return new WaitForSeconds(0.3f / count);
+            }
+    
+            while (snakeNodes.Count > 1)
+            {
+                SoundManager.instance.PlayingSound("Tong", 0.5f, Camera.main.transform.position);
+    
+    //            GameObject atom = GameObject.Instantiate(atomCube) as GameObject;
+    //            atom.transform.position = snakeNodes [0].transform.position;
+    ////            atom.transform.localScale = 0.5f * snakeNodes [0].transform.localScale;           
+    //            atom.GetComponent<AtomCube>().Bomb();
+    
+                levelGenerate.AddAtom(snakeNodes [1].transform.position, new Color(53f / 255, 49f / 255, 49f / 255));
+    
+                GameObject.Destroy(snakeNodes [1].gameObject);
+                snakeNodes.RemoveAt(1);
+    
+                yield return new WaitForSeconds(0.3f / count);
+            }
+    
+            ScreenCapture.CaptureScreenshot("screen.png");
+    
+            yield return new WaitForSeconds(1f);
+        }
 
     IEnumerator ChangeToBlack(bool fromHead)
     {
@@ -719,41 +763,35 @@ public class Snake : MonoBehaviour
         }
     }
 
-    public void ChangeCubeType(NodeType targetType, bool fromHead = true)
+    public void ChangeCubeType(NodeType targetType)
     {
-        StartCoroutine(ChangeToType(targetType, fromHead));
+        StartCoroutine(ChangeToType(targetType));
     }
 
-    IEnumerator ChangeToType(NodeType targetType, bool fromHead)
+    IEnumerator ChangeToType(NodeType targetType)
     {
-        // 根据fromHead参数决定变换顺序
-        snakeNodes.Sort(delegate(Node x, Node y)
-        {
-            if(fromHead)
-            {
-                return y.transform.position.sqrMagnitude.CompareTo(x.transform.position.sqrMagnitude);
-            }
-            else
-            {
-                return x.transform.position.sqrMagnitude.CompareTo(y.transform.position.sqrMagnitude);
-            }
-        });
-
         // 逐个节点改变类型
         int count = snakeNodes.Count;
-        for (int i = 0; i < snakeNodes.Count; i++)
+        
+        // 移除所有节点
+        for (int i = 1; i < count; i++)
+        {
+            var node = snakeNodes[i];
+            node.inSnake = false;
+            node.RemoveFromSnake(this, 0);
+            yield return new WaitForSeconds(0.3f / count);
+        }
+        
+        for (int i = 1; i < count; i++)
         {
             SoundManager.instance.PlayingSound("Tong", 0.5f, Camera.main.transform.position);
             
-            // 改变节点类型
-            snakeNodes[i].type = targetType;
-            // 改变对应的颜色
-            snakeNodes[i].ChangeToColor(GameConfig.NODE_COLOR_DIC[targetType]);
+            var basicNode = levelGenerate.GenerateNode(targetType);
+            snakeNodes.Add(basicNode);
+            basicNode.inSnake = true;
+            basicNode.transform.parent = transform;
             
             yield return new WaitForSeconds(0.3f / count);
         }
-
-        // 变换完成后检查是否可以消除
-        BangTail();
     }
 }
