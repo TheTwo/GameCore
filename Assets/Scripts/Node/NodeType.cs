@@ -11,7 +11,8 @@ public enum NodeType
     HEAD,
     LINEMINE,
     Coin,
-    Atom
+    Atom,
+    SPEED
 }
 
 

@@ -188,4 +188,17 @@ public class EffectManager : MonoBehaviour
     {
         starAddEffect.SetActive(false);
     }
+
+    public void ShowSpeedBoostEffect(Vector3 position)
+    {
+        // 创建加速特效
+        GameObject speedEffect = Instantiate(Resources.Load("Effects/SpeedBoostEffect") as GameObject);
+        speedEffect.transform.position = position;
+        
+        // 设置特效的父物体
+        speedEffect.transform.parent = transform;
+        
+        // 2秒后销毁特效
+        Destroy(speedEffect, 2f);
+    }
 }

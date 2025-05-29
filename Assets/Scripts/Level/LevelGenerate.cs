@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System;
 using Com.Duoyu001.Pool.U3D;
 using Com.Duoyu001.Pool;
+using Random = UnityEngine.Random;
 
 #if UNITY_EDITOR
 using UnityEditor;
@@ -30,7 +31,13 @@ public class LevelGenerate : MonoBehaviour
         {           
             int ramdom = UnityEngine.Random.Range(0, 100);
 
-            Node ret = elements [elements.Count - 1].cube;
+            // 10%的概率生成加速方块
+            if (ramdom < 10)
+            {
+                return elements.Find(e => e.cube.type == NodeType.SPEED)?.cube ?? elements[elements.Count - 1].cube;
+            }
+
+            Node ret = elements[elements.Count - 1].cube;
             int probabilitySum = 0;
 
             for (int i = 0; i < elements.Count; i++)
@@ -258,9 +265,6 @@ public class LevelGenerate : MonoBehaviour
         }
         else if (!nodes.ContainsKey(position))
         {
-//            int index = UnityEngine.Random.Range(0, GameConfig.Instance.Nodes.Length);
-//            NodeType type = GameConfig.Instance.Nodes [index].type;
-
             LevelRole currentRole = null;
 
             for(int i = 0; i < levelRoles.Count; i++)
@@ -272,19 +276,13 @@ public class LevelGenerate : MonoBehaviour
             }
 
             Node generateNode = currentRole.Take();
-
             IAutoRestoreObject<GameObject> autoRestoreObjec = pool.Take(generateNode.type);
-
             GameObject cube = autoRestoreObjec.Get();
-
             cube.transform.parent = level.transform;
-
             Node node = cube.GetComponent<Node>();
             node.SetPosition(position);
             nodes.Add(position, node); 
             node.inSnake = false;
-
-//            AddStar(position);
         }
     }
     

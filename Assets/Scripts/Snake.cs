@@ -30,6 +30,10 @@ public class Snake : MonoBehaviour
 
     private TutorialData tutorialData;
 
+    private float originalSpeed;
+    private float speedBoostEndTime = 0f;
+    private bool isSpeedBoosted = false;
+
     void Start()
     {
         headDirection = directions [1];
@@ -160,7 +164,14 @@ public class Snake : MonoBehaviour
         {
             return;
         }
-      
+
+        // 检查加速效果是否结束
+        if (isSpeedBoosted && Time.time >= speedBoostEndTime)
+        {
+            gameData.NodeSpeed = originalSpeed;
+            isSpeedBoosted = false;
+        }
+
         head.transform.localRotation = Quaternion.Lerp(head.transform.localRotation, targetQuternion, Time.deltaTime * 10);
 
         CheckInput();
@@ -792,6 +803,32 @@ public class Snake : MonoBehaviour
             basicNode.transform.parent = transform;
             
             yield return new WaitForSeconds(0.3f / count);
+        }
+    }
+
+    public void MeetSpeedNode(SpeedNode speedNode)
+    {
+        if (!isSpeedBoosted)
+        {
+            // 保存原始速度
+            originalSpeed = gameData.NodeSpeed;
+            // 应用加速效果
+            gameData.NodeSpeed *= speedNode.GetSpeedBoostMultiplier();
+            // 设置加速结束时间
+            speedBoostEndTime = Time.time + speedNode.GetSpeedBoostDuration();
+            // 设置加速状态
+            isSpeedBoosted = true;
+            // 显示加速特效
+            EffectManager.Instance.ShowSpeedBoostEffect(transform.position);
+        }
+
+        // 销毁加速块
+        speedNode.gameObject.SetActive(false);
+        // 从LevelGenerate的nodes字典中移除
+        LevelGenerate levelGenerate = FindObjectOfType<LevelGenerate>();
+        if (levelGenerate != null)
+        {
+            levelGenerate.Restore(speedNode);
         }
     }
 }
