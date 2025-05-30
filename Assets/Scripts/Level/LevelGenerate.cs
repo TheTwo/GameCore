@@ -69,6 +69,10 @@ public class LevelGenerate : MonoBehaviour
 
     private Snake snake;   
 
+    private DynamicBorder leftBorder;
+    private DynamicBorder rightBorder;
+    private float currentPathWidth = 10f;  // 初始路径宽度
+
     public void Init()
     {
         level = GameObject.Find("Level");
@@ -79,10 +83,52 @@ public class LevelGenerate : MonoBehaviour
         StarPoll = GetComponent<U3DAutoRestoreObjectPool>();
         StarPoll.Init();
         
+        // 初始化动态边界
+        leftBorder = new DynamicBorder(5f, 10f, currentPathWidth);
+        rightBorder = new DynamicBorder(5f, 10f, currentPathWidth);
+        
+        // 生成初始边界
+        GenerateInitialBorders();
+        
         for (int i = 10; i < 20; i++)
         {
             AddLevel(i);
         }
+    }
+
+    // 生成初始边界
+    private void GenerateInitialBorders()
+    {
+        Vector3 startPos = new Vector3(-GameConfig.X_COUNT, 0, 0);
+        Vector3 direction = Vector3.forward;
+        
+        // 生成左右边界
+        for (int i = 0; i < 20; i++)  // 生成20个边界点
+        {
+            leftBorder.GenerateBorderPoint(startPos, direction);
+            rightBorder.GenerateBorderPoint(startPos + Vector3.right * currentPathWidth, direction);
+            
+            // 随机调整方向
+            direction = Quaternion.Euler(0, Random.Range(-15f, 15f), 0) * direction;
+        }
+    }
+
+    // 动态扩展边界
+    public void ExtendBorders()
+    {
+        // 获取最后一个边界点
+        Vector3 lastLeftPoint = leftBorder.GetLastPoint();
+        Vector3 lastRightPoint = rightBorder.GetLastPoint();
+        
+        // 计算新的方向
+        Vector3 direction = (lastRightPoint - lastLeftPoint).normalized;
+        
+        // 生成新的边界点
+        leftBorder.GenerateBorderPoint(lastLeftPoint, direction);
+        rightBorder.GenerateBorderPoint(lastRightPoint, direction);
+        
+        // 更新路径宽度（可以随机变化）
+        currentPathWidth = Mathf.Clamp(currentPathWidth + Random.Range(-1f, 1f), 8f, 12f);
     }
 
     public void HideLevel()
@@ -99,23 +145,41 @@ public class LevelGenerate : MonoBehaviour
 
     public void AddLevel(int addIndex)
     {      
-        Line a = new Line(1, GameConfig.X_COUNT - 1);
-        Line b = new Line(1, -GameConfig.X_COUNT -1);
-        Line c = new Line(-1, 1.414f * addIndex);
-
-        Vector2 pointTop = Line.Cross(a, c);
-        Vector2 pointBottom = Line.Cross(b, c);
-
-        int min = Mathf.FloorToInt(pointTop.x);
-        int max = Mathf.CeilToInt(pointBottom.x);
-
-        for(int i = min; i < max; i++)
+        // 计算当前层级的中心点
+        float levelRadius = 10f; // 每层的生成半径
+        Vector3 centerPoint = new Vector3(addIndex, 0, addIndex);
+        
+        // 在圆形区域内生成方块
+        float stepSize = 1.5f; // 增大步长，减少遍历点
+        float angleStep = 20f; // 增大角度步长，减少遍历点
+        float minDistance = 1.5f; // 增大元素之间的最小距离
+        
+        // 在圆形区域内生成方块
+        for (float radius = 0; radius < levelRadius; radius += stepSize)
         {
-            int y = (int)c.Y(i);
-
-            if (UnityEngine.Random.value < 0.2f)
+            for (float angle = 0; angle < 360; angle += angleStep)
             {
-                AddCubeAt(new Vector3(i, 0, y), addIndex);
+                // 计算当前点的位置并四舍五入到整数
+                float x = Mathf.Round(centerPoint.x + radius * Mathf.Cos(angle * Mathf.Deg2Rad));
+                float z = Mathf.Round(centerPoint.z + radius * Mathf.Sin(angle * Mathf.Deg2Rad));
+                Vector3 position = new Vector3(x, 0, z);
+                
+                // 检查是否与现有元素重叠
+                bool canPlace = true;
+                foreach (var node in nodes.Values)
+                {
+                    if (Vector3.Distance(position, node.transform.position) < minDistance)
+                    {
+                        canPlace = false;
+                        break;
+                    }
+                }
+                
+                // 如果位置合适且满足生成概率，则生成新元素
+                if (canPlace && Random.value < 0.1f) // 降低生成概率
+                {
+                    AddCubeAt(position, addIndex);
+                }
             }
         }
     }
@@ -356,35 +420,39 @@ public class LevelGenerate : MonoBehaviour
         }
     }
 
-    private static void GenerateBorder()
+    // 获取指定层级的左边界点
+    public Vector3 GetLeftBorderPoint(int level)
     {
-        Line left = new Line(1, GameConfig.X_COUNT * 2);
-        Line right = new Line(1, - GameConfig.X_COUNT * 2);
-        GameObject landscape = GameObject.Find("Landscape");
-
-        GameObject prefab = Resources.Load("Landmine") as GameObject;
-
-        for (float x = -25; x < 55f; x++)
-        {
-            GameObject landmine = Instantiate(prefab) as GameObject;
-            landmine.transform.position = new Vector3(x, 0, left.Y(x));
-            landmine.transform.localScale = Vector3.one;
-            landmine.transform.parent = landscape.transform;
-        }
-
-        for (float x = -20; x < 65f; x++)
-        {
-            GameObject landmine = Instantiate(prefab) as GameObject;
-            landmine.transform.position = new Vector3(x, 0, right.Y(x));
-            landmine.transform.localScale = Vector3.one;
-            landmine.transform.parent = landscape.transform;
-        }
+        return leftBorder.GetPointAt(level);
     }
+
+    // 获取指定层级的右边界点
+    public Vector3 GetRightBorderPoint(int level)
+    {
+        return rightBorder.GetPointAt(level);
+    }
+
+    // 检查位置是否在边界内
+    public bool IsPositionInBounds(Vector3 position)
+    {
+        int currentLevel = (int)(Mathf.Max(position.x, position.z) * 1.414f);
+        Vector3 leftPoint = GetLeftBorderPoint(currentLevel);
+        Vector3 rightPoint = GetRightBorderPoint(currentLevel);
+        
+        // 计算点到边界的距离
+        float distanceToLeft = Vector3.Distance(position, leftPoint);
+        float distanceToRight = Vector3.Distance(position, rightPoint);
+        
+        // 如果距离小于某个阈值，认为超出边界
+        return distanceToLeft >= 0.5f && distanceToRight >= 0.5f;
+    }
+
 #if UNITY_EDITOR
     [MenuItem("Tools/AddBorder")]
     public static void AddBorder()
     {
-        GenerateBorder();
+        // 移除旧的边界生成方法
+        // GenerateBorder();
     }
 
     [MenuItem("Tools/AddGrid")]
