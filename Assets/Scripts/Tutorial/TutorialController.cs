@@ -26,6 +26,9 @@ public class TutorialController : MonoBehaviour
     {
         gameController = FindObjectOfType<GameController>();
 
+        // Always create the tutorialData object so it's never null
+        tutorialData = new TutorialData();
+
         if (gameController.GameData.HighScore < GameConfig.TUTORIAL_END_SCORE)
         {
             tips = new List<ITip>();
@@ -37,7 +40,6 @@ public class TutorialController : MonoBehaviour
             tips.Add(new RemoveTip());
             tips.Add(new LevelTip());
             
-            tutorialData = new TutorialData();
             tutorialData.OnTutorialDataChange += OnTutorialDataChange;
             
             currentTipIndex = 0;

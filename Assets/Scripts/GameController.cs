@@ -57,8 +57,8 @@ public class GameController : MonoBehaviour
 
 		cubePool.Init();
 		effectManager.Init();
-		// levelGenerate.PreInit(); // We will call Init later
-		snake.PreInit(this, levelGenerate); // New PreInit call for dependency injection
+		snake.PreInit(this, levelGenerate);
+		levelGenerate.PreInit(cubePool);
 
 		uiController.OnGameInit (gameData);
 

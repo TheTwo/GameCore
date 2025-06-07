@@ -532,52 +532,56 @@ public class Snake : MonoBehaviour
     }
 
     private void BangTail()
-    {       
-        Node last = snakeNodes [0];
+    {
+        // --- FIX for incorrect tail logic (v4 - Final) ---
 
-        for (int i = 1; i < snakeNodes.Count; i++)
+        // 1. Update the lastNode reference to be the actual tail.
+        if (snakeNodes.Count > 0)
         {
-            if (snakeNodes [i].gameObject.activeSelf && snakeNodes [i].transform.position.x < last.transform.position.x || snakeNodes [i].transform.position.z < last.transform.position.z)
-            {
-                last = snakeNodes [i];
-            }
+            lastNode = snakeNodes[snakeNodes.Count - 1];
         }
-
-        lastNode = last;
-
+        else
+        {
+            return; // No nodes to process
+        }
+        
+        // 2. We need at least 3 body nodes (plus the head) to form a match of 3.
         if (snakeNodes.Count < 4)
         {
             return;
         }
 
-        Node checkingNode = snakeNodes [snakeNodes.IndexOf(last) - 1];
-        NodeType checkingType = checkingNode.type;
-        NodeType lastType = last.type;
-
-        if (checkingType == lastType)
+        // 3. Check for a streak of 3 or more nodes of the same type at the tail end.
+        NodeType tailType = lastNode.type;
+        int streakCount = 0;
+        
+        // Iterate backwards from the tail to count the streak.
+        for (int i = snakeNodes.Count - 1; i >= 1; i--) // Stop at index 1 (never check the head)
         {
-            return;
-        }
-
-        List<Node> remove = new List<Node>();
-        remove.Add(checkingNode);
-        for (int i = snakeNodes.IndexOf(checkingNode) - 1; i >= 0; i--)
-        {
-            if (snakeNodes [i].type == checkingType)
+            if(snakeNodes[i].type == tailType)
             {
-                remove.Add(snakeNodes [i]);
+                streakCount++;
             }
             else
             {
-                break;
+                break; // Streak broken
             }
         }
 
-        if (remove.Count >= 3)
+        // 4. If a streak of 3 or more is found, remove them.
+        if (streakCount >= 3)
         {
-            int addScore = 0;
-            foreach (Node node in remove)
+            List<Node> nodesToRemove = new List<Node>();
+            // Collect the nodes to be removed from the tail end.
+            for(int i = 0; i < streakCount; i++)
             {
+                nodesToRemove.Add(snakeNodes[snakeNodes.Count - 1 - i]);
+            }
+
+            int addScore = 0;
+            foreach (Node node in nodesToRemove)
+            {
+                snakeNodes.Remove(node); // Remove from the snake's list
                 if (node.inSnake)
                 {
                     node.inSnake = false;
@@ -622,12 +626,34 @@ public class Snake : MonoBehaviour
         }
         else
         {
+            // --- FIX for incorrect body position (v2) ---
+            
+            // 1. Get the actual tail node, which is the last element in the list.
+            Node currentTail = snakeNodes[snakeNodes.Count - 1];
+            
+            // 2. Store the original world position of the node being eaten.
+            Vector3 originalPosition = basicNode.transform.position;
+
+            // 3. Immediately move the new node to the current tail's position.
+            //    The movement logic in Update() will then handle creating the space.
+            basicNode.transform.position = currentTail.transform.position;
+            
+            // 4. Add the node to the snake's body list. It is now the new tail.
             headNode.SetEyeColor(basicNode.GetComponent<Renderer>().material.color);
             snakeNodes.Add(basicNode);
+            lastNode = basicNode; // Explicitly update lastNode to be the new tail.
+
             basicNode.inSnake = true;
             basicNode.transform.parent = transform;
-            LevelNodes.Remove(basicNode.transform.position);
+
+            // 5. Remove the node from the level dictionary using its ORIGINAL position.
+            if (LevelNodes.ContainsKey(originalPosition))
+            {
+                LevelNodes.Remove(originalPosition); 
+            }
+
             basicNode.gameObject.name = "snake_" + snakeNodes.Count;
+            // --- END FIX ---
 
             gameController.AddScore(basicNode.score);
 

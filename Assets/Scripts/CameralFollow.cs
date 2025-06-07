@@ -30,7 +30,23 @@ public class CameralFollow : MonoBehaviour
     
     void LateUpdate()
     {
-        if (target == null || (gc != null && gc.paused))
+        // --- FIX: Continuously search for the target if it's missing ---
+        if (target == null)
+        {
+            Snake snake = FindObjectOfType<Snake>();
+            if (snake != null && snake.headNode != null)
+            {
+                target = snake.headNode.transform;
+                Debug.Log("Camera has found and locked onto the snake head.");
+            }
+            else
+            {
+                // If the snake or its head doesn't exist yet, do nothing.
+                return;
+            }
+        }
+        
+        if (gc != null && gc.paused)
         {
             return;
         }

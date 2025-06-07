@@ -69,18 +69,19 @@ public class LevelGenerate : MonoBehaviour
     private readonly LinkedList<Vector3> activeChunkCenters = new LinkedList<Vector3>();
     private Vector3 lastGeneratedChunkCenter;
     private int chunksGenerated = 0;
+    private Vector3 positionAtLastGeneration; // For the new, more robust trigger mechanism
 
     [Header("Dynamic Generation Settings")]
-    public float generationDistance = 40f; // When to generate the next chunk, relative to the player.
+    public float generationDistance = 10f; // This will now control the distance *traveled* by the snake
     public float destructionDistance = 60f; // When to destroy old chunks, relative to the player.
     public float chunkSize = 20f; // The forward distance each new chunk represents.
     private Vector3 currentGenerationDirection = Vector3.forward;
     // --- End of new fields ---
 
-    public void PreInit()
+    public void PreInit(CubePool cubePool)
     {
         level = GameObject.Find("Level");
-        pool = FindObjectOfType<CubePool>();
+        pool = cubePool; // Use the injected reference instead of FindObjectOfType
         
         // Initialize the StarPoll here to prevent NullReferenceException
         StarPoll = GetComponent<U3DAutoRestoreObjectPool>();
@@ -137,6 +138,11 @@ public class LevelGenerate : MonoBehaviour
         {
             GenerateNextChunk();
         }
+        // After initial generation, set the snake's starting position for the trigger check.
+        if (snakeHead != null)
+        {
+            positionAtLastGeneration = snakeHead.position;
+        }
         // --- End of new initialization logic ---
     }
 
@@ -163,8 +169,13 @@ public class LevelGenerate : MonoBehaviour
     // This public method is now the entry point for triggering generation.
     public void RequestGenerationCheck(Vector3 futurePosition)
     {
-        if (Vector3.Distance(futurePosition, lastGeneratedChunkCenter) < generationDistance)
+        // --- NEW, MORE ROBUST TRIGGER LOGIC ---
+        float distanceTraveled = Vector3.Distance(futurePosition, positionAtLastGeneration);
+        Debug.Log($"[MapGen] Check: Distance traveled since last gen: {distanceTraveled:F1} / {generationDistance} ");
+
+        if (distanceTraveled > generationDistance)
         {
+            Debug.LogWarning("[MapGen] TRIGGERED! Traveled far enough. Generating new chunk.");
             GenerateNextChunk();
         }
     }
@@ -172,6 +183,13 @@ public class LevelGenerate : MonoBehaviour
     // --- New Chunk Management Methods ---
     private void GenerateNextChunk()
     {
+        // When a new chunk is generated, update the position from which we measure travel distance.
+        if (snakeHead != null)
+        {
+            positionAtLastGeneration = snakeHead.position;
+        }
+
+        Debug.Log($"[MapGen] Called GenerateNextChunk. Current chunk count: {chunksGenerated}.");
         // Create a winding path by slightly altering the direction for each new chunk.
         currentGenerationDirection = Quaternion.Euler(0, Random.Range(-15f, 15f), 0) * currentGenerationDirection;
         Vector3 nextChunkCenter = lastGeneratedChunkCenter + currentGenerationDirection.normalized * chunkSize;
@@ -182,6 +200,7 @@ public class LevelGenerate : MonoBehaviour
         lastGeneratedChunkCenter = nextChunkCenter;
         activeChunkCenters.AddLast(nextChunkCenter);
         chunksGenerated++;
+        Debug.Log($"[MapGen] Finished generating chunk. New count: {chunksGenerated}. New center: {lastGeneratedChunkCenter}");
     }
 
     private void DestroyChunk(Vector3 chunkCenter)

@@ -16262,6 +16262,12 @@ SpriteRenderer:
   m_WasSpriteAssigned: 0
   m_MaskInteraction: 0
   m_SpriteSortPoint: 0
+--- !u!1 &671994399 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 156208, guid: 515503785812f4041ac5b8a99c57d73e,
+    type: 3}
+  m_PrefabInstance: {fileID: 2145148020}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &674641001
 GameObject:
   m_ObjectHideFlags: 0
@@ -21122,7 +21128,7 @@ MonoBehaviour:
     - cube: {fileID: 11475896, guid: 8edaec86027be4c40a61d25e03913e4f, type: 3}
       probability: 25
   gameController: {fileID: 1250882882}
-  generationDistance: 40
+  generationDistance: 10
   destructionDistance: 60
   chunkSize: 20
 --- !u!114 &883689958
@@ -21137,10 +21143,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6d16bf641ba41d946927f71fba314ad3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  prefab: {fileID: 129194, guid: 69fe92b80d9554f08acb209cd322a963, type: 3}
-  parent: {fileID: 1831875055}
-  maxNum: 20
-  initNum: 10
+  prefab: {fileID: 671994399}
+  parent: {fileID: 0}
+  maxNum: 100
+  initNum: 20
 --- !u!1 &884399436
 GameObject:
   m_ObjectHideFlags: 0
