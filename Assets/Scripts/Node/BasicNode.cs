@@ -13,14 +13,14 @@ public class BasicNode : Node
 
     Color[] colors = new Color[]{Color.blue, Color.red, Color.black, Color.white, Color.green};
 
-    void Start()
+    // The Start() method is no longer reliable for dynamically pooled objects.
+    // We replace it with an explicit Init method.
+    public void Init(LevelGenerate levelRef, GameController gcRef)
     {
         status = NodeStatus.NONE;
-        level = GameObject.Find("Level").GetComponent<LevelGenerate>();
+        level = levelRef;
+        gameController = gcRef;
         scaleFactor += Random.value / 100;
-//        jellyMesh = GetComponent<JellyMesh>();
-        gameController = FindObjectOfType<GameController>();
-
     }
 
     void Update()
@@ -30,7 +30,15 @@ public class BasicNode : Node
     
     public override void OnUpdate()
     {
-        if (gameController.startCheckingRestore && Camera.main.WorldToScreenPoint(transform.position).y < -5 && !inSnake)
+        // --- Safety Check ---
+        // Add null checks to prevent crashes and provide clear error messages.
+        if (gameController == null || level == null)
+        {
+            Debug.LogError("BasicNode " + gameObject.name + " is not initialized! GameController or Level is null.");
+            return;
+        }
+
+        if (gameController.startCheckingRestore && Camera.main != null && Camera.main.WorldToScreenPoint(transform.position).y < -5 && !inSnake)
         {
             level.Restore(this);
         }

@@ -11,6 +11,11 @@ public class GameController : MonoBehaviour
 {
 	public UIController uiController;
 	public Snake snake;
+	public LevelGenerate levelGenerate;
+	public CameralFollow cameralFollow;
+	public CubePool cubePool;
+	public BackgroundController backgroundController;
+	public EffectManager effectManager;
 	public bool startCheckingRestore;
 	public bool inTutorial = false;
 	public bool paused = false;
@@ -26,10 +31,6 @@ public class GameController : MonoBehaviour
 	private GameData gameData;
 	private TutorialData tutorialData;
 
-	private BackgroundController backgroundController;
-
-	public CameralFollow cameralFollow;
-	
 	private static WXRewardedVideoAd videoAd;
 	private static WXCustomAd customAdBottom;
 	private static WXCustomAd customAdTop;
@@ -43,14 +44,21 @@ public class GameController : MonoBehaviour
 		gameData = GameData.Instance;
 
 		startCheckingRestore = false;
-		backgroundController = FindObjectOfType<BackgroundController> ();
 		backgroundController.Init();
 
 		gameData.OnGameDataChange += HandleOnGameDataChange;
 		Application.targetFrameRate = 60;
 
-		FindObjectOfType<CubePool> ().Init ();
-		FindObjectOfType<LevelGenerate> ().Init ();
+		// Make sure Snake and LevelGenerate are assigned in the Inspector
+		if (snake == null || levelGenerate == null || effectManager == null) {
+			Debug.LogError("Snake, LevelGenerate, or EffectManager is not assigned in the Inspector!");
+			return;
+		}
+
+		cubePool.Init();
+		effectManager.Init();
+		// levelGenerate.PreInit(); // We will call Init later
+		snake.PreInit(this, levelGenerate); // New PreInit call for dependency injection
 
 		uiController.OnGameInit (gameData);
 
@@ -153,10 +161,15 @@ public class GameController : MonoBehaviour
 
 	public void StartGame ()
 	{
+		// New, ordered initialization
+		snake.Init(); // 1. Initialize Snake (creates head)
+		levelGenerate.Init(); // 2. Initialize Level (can now safely use snake.headNode)
+		snake.RealStart(); // 3. Start the game logic in Snake
+
 		cameralFollow.OnGameStart ();
         
 		uiController.OnGameStart (gameData);
-		snake.OnStartGame (gameData);
+		// snake.OnStartGame (gameData, this, levelGenerate); // Old call removed
         
 		startCheckingRestore = true;
         
@@ -167,10 +180,15 @@ public class GameController : MonoBehaviour
 
 	public void OnTutorialFinish ()
 	{
+		// New, ordered initialization
+		snake.Init();
+		levelGenerate.Init();
+		snake.RealStart();
+
 		cameralFollow.OnGameStart ();
         
 		uiController.OnGameStart (gameData);
-		snake.OnStartGame (gameData);
+		// snake.OnStartGame (gameData, this, levelGenerate); // Old call removed
         
 		startCheckingRestore = true;
 

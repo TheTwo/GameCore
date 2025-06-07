@@ -4772,9 +4772,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   snakeNodes: []
-  level: {fileID: 883689957}
   lastNode: {fileID: 0}
-  gameController: {fileID: 1250882882}
 --- !u!1 &202212900
 GameObject:
   m_ObjectHideFlags: 0
@@ -21071,6 +21069,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   atomCube: {fileID: 188528, guid: 6bd94763fc4ef4a429b3f377a1dfe963, type: 3}
+  snake: {fileID: 196789626}
   StarPrefab: {fileID: 129194, guid: 69fe92b80d9554f08acb209cd322a963, type: 3}
   levelRoles:
   - start: 0
@@ -21122,6 +21121,10 @@ MonoBehaviour:
       probability: 20
     - cube: {fileID: 11475896, guid: 8edaec86027be4c40a61d25e03913e4f, type: 3}
       probability: 25
+  gameController: {fileID: 1250882882}
+  generationDistance: 40
+  destructionDistance: 60
+  chunkSize: 20
 --- !u!114 &883689958
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29048,7 +29051,6 @@ GameObject:
   - component: {fileID: 1250882882}
   - component: {fileID: 1250882888}
   - component: {fileID: 1250882887}
-  - component: {fileID: 1250882884}
   - component: {fileID: 1250882885}
   m_Layer: 0
   m_Name: GameController
@@ -29071,13 +29073,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   uiController: {fileID: 702820197}
   snake: {fileID: 196789626}
+  levelGenerate: {fileID: 883689957}
+  cameralFollow: {fileID: 1261295727}
+  cubePool: {fileID: 1430119231}
+  backgroundController: {fileID: 1101345805}
+  effectManager: {fileID: 1872944711}
   startCheckingRestore: 0
   inTutorial: 0
   paused: 0
-  tutorialController: {fileID: 1250882884}
+  tutorialController: {fileID: 0}
   ranking: {fileID: 702820200}
   inTutorialMode: 0
-  cameralFollow: {fileID: 1261295727}
 --- !u!4 &1250882883
 Transform:
   m_ObjectHideFlags: 0
@@ -29094,18 +29100,6 @@ Transform:
   - {fileID: 1261295726}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1250882884
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1250882881}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: fd37ebf5e90bd486f95d4207cfd8c328, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!114 &1250882885
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -29503,7 +29497,7 @@ Transform:
   m_GameObject: {fileID: 1261295721}
   serializedVersion: 2
   m_LocalRotation: {x: 0.3535534, y: 0.3535534, z: -0.14644663, w: 0.85355335}
-  m_LocalPosition: {x: -7, y: 16.68, z: -7}
+  m_LocalPosition: {x: -7, y: 14.8, z: -7}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -29522,8 +29516,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   target: {fileID: 0}
-  offset: 12
-  Speed: 1
+  followSpeed: 5
 --- !u!114 &1261295728
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -33679,6 +33672,50 @@ MonoBehaviour:
   - {fileID: 11448556, guid: b4720453b63f74a29af774fe1bdf6fa6, type: 3}
   - {fileID: 11453784, guid: e14d2f8d5223c4da8bee8ce109f44278, type: 3}
   - {fileID: 7430205769642586466, guid: 1268e37dc6cfc40ac8481a56c3010b20, type: 3}
+--- !u!1 &1433851226
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1433851228}
+  - component: {fileID: 1433851227}
+  m_Layer: 0
+  m_Name: TutorialController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1433851227
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1433851226}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: fd37ebf5e90bd486f95d4207cfd8c328, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+--- !u!4 &1433851228
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1433851226}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1433991939
 GameObject:
   m_ObjectHideFlags: 0
@@ -49938,3 +49975,4 @@ SceneRoots:
   - {fileID: 1765318420}
   - {fileID: 1872944712}
   - {fileID: 702820195}
+  - {fileID: 1433851228}

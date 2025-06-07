@@ -36,7 +36,7 @@ public class EffectManager : MonoBehaviour
 
     private UIController uiController;
 
-    void Start()
+    public void Init()
     {
         uiController = FindObjectOfType<UIController>();
 

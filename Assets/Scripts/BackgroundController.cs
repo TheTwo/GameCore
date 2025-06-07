@@ -30,13 +30,13 @@ public class BackgroundController : MonoBehaviour
             }
         }              
      
-        Sprite tree = treeSprites [(lv - 1) % 3];
-        foreach (var t in trees)
-        {
-            SpriteRenderer sprite = t.GetComponent<SpriteRenderer> ();
+        // Sprite tree = treeSprites [(lv - 1) % 3];
+        // foreach (var t in trees)
+        // {
+        //     SpriteRenderer sprite = t.GetComponent<SpriteRenderer> ();
 
-            if (sprite == null) continue;
-            sprite.sprite = Random.value < 0.3f ? roundTree : tree;
-        }
+        //     if (sprite == null) continue;
+        //     sprite.sprite = Random.value < 0.3f ? roundTree : tree;
+        // }
     }
 }

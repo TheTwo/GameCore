@@ -1,0 +1,9 @@
+---
+description: 
+globs: 
+alwaysApply: true
+---
+[prompt.txt](mdc:prompt.txt) 记录会话上下文在此文件, 保持每次会话都基于过往的内容持续.
+
+
+以后在会话过程中, 有哪些可以总结到 cursorrule 中的内容, 请确认添加.

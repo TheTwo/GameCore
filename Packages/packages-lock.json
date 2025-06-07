@@ -16,6 +16,15 @@
       },
       "hash": "33f9b150dff94817b3734f24c6e3782724d8fa45"
     },
+    "com.boxqkrtm.ide.cursor": {
+      "version": "https://github.com/boxqkrtm/com.unity.ide.cursor.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {
+        "com.unity.test-framework": "1.1.9"
+      },
+      "hash": "38fecf55e4fd94ccfe58a92ed8ad1a529ba1694e"
+    },
     "com.qq.weixin.minigame": {
       "version": "file:com.qq.weixin.minigame@65b7e86611",
       "depth": 0,

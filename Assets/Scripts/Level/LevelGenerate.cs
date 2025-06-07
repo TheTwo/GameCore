@@ -12,6 +12,7 @@ using UnityEditor;
 public class LevelGenerate : MonoBehaviour
 {
     public GameObject atomCube;
+    public Snake snake; // Make public to be assigned in Inspector
 
     [Serializable]
     public class LevelRoleElement
@@ -30,12 +31,6 @@ public class LevelGenerate : MonoBehaviour
         public Node Take()
         {           
             int ramdom = UnityEngine.Random.Range(0, 100);
-
-            // 10%的概率生成加速方块
-            if (ramdom < 10)
-            {
-                return elements.Find(e => e.cube.type == NodeType.SPEED)?.cube ?? elements[elements.Count - 1].cube;
-            }
 
             Node ret = elements[elements.Count - 1].cube;
             int probabilitySum = 0;
@@ -56,6 +51,7 @@ public class LevelGenerate : MonoBehaviour
 
     public GameObject StarPrefab;
     public List<LevelRole> levelRoles;// = new List<LevelRole>();
+    public GameController gameController; // Add a public reference to GameController
 
 
     private Dictionary<Vector3, Node> nodes;
@@ -67,92 +63,175 @@ public class LevelGenerate : MonoBehaviour
 
     private bool invincible = false;
 
-    private Snake snake;   
+    private Transform snakeHead; // The actual moving part of the snake
 
-    private DynamicBorder leftBorder;
-    private DynamicBorder rightBorder;
-    private float currentPathWidth = 10f;  // 初始路径宽度
+    // --- Start of new fields for dynamic generation ---
+    private readonly LinkedList<Vector3> activeChunkCenters = new LinkedList<Vector3>();
+    private Vector3 lastGeneratedChunkCenter;
+    private int chunksGenerated = 0;
 
-    public void Init()
+    [Header("Dynamic Generation Settings")]
+    public float generationDistance = 40f; // When to generate the next chunk, relative to the player.
+    public float destructionDistance = 60f; // When to destroy old chunks, relative to the player.
+    public float chunkSize = 20f; // The forward distance each new chunk represents.
+    private Vector3 currentGenerationDirection = Vector3.forward;
+    // --- End of new fields ---
+
+    public void PreInit()
     {
         level = GameObject.Find("Level");
         pool = FindObjectOfType<CubePool>();
-        nodes = new Dictionary<Vector3, Node>(100);
-        snake = FindObjectOfType<Snake>();
         
+        // Initialize the StarPoll here to prevent NullReferenceException
         StarPoll = GetComponent<U3DAutoRestoreObjectPool>();
-        StarPoll.Init();
-        
-        // 初始化动态边界
-        leftBorder = new DynamicBorder(5f, 10f, currentPathWidth);
-        rightBorder = new DynamicBorder(5f, 10f, currentPathWidth);
-        
-        // 生成初始边界
-        GenerateInitialBorders();
-        
-        for (int i = 10; i < 20; i++)
+        if (StarPoll != null)
         {
-            AddLevel(i);
+            StarPoll.Init();
+        }
+        else
+        {
+            Debug.LogError("LevelGenerate is missing the U3DAutoRestoreObjectPool component for stars!");
         }
     }
 
-    // 生成初始边界
-    private void GenerateInitialBorders()
+    public void Init()
     {
-        Vector3 startPos = new Vector3(-GameConfig.X_COUNT, 0, 0);
-        Vector3 direction = Vector3.forward;
-        
-        // 生成左右边界
-        for (int i = 0; i < 20; i++)  // 生成20个边界点
+        // level and pool are already initialized in PreInit
+        nodes = new Dictionary<Vector3, Node>(2000); // Increased capacity for dynamic loading
+        if (snake != null && snake.headNode != null)
         {
-            leftBorder.GenerateBorderPoint(startPos, direction);
-            rightBorder.GenerateBorderPoint(startPos + Vector3.right * currentPathWidth, direction);
-            
-            // 随机调整方向
-            direction = Quaternion.Euler(0, Random.Range(-15f, 15f), 0) * direction;
+            snakeHead = snake.headNode.transform;
+        }
+        else
+        {
+            Debug.LogError("Could not find the snake's head node!");
+        }
+        
+        // StarPoll = GetComponent<U3DAutoRestoreObjectPool>(); // This line is now in PreInit
+        // StarPoll.Init(); // This line is now in PreInit
+        
+        // --- Start of new initialization logic ---
+        // Clear previous state
+        foreach (var node in nodes.Values)
+        {
+            pool.Restore(node);
+        }
+        nodes.Clear();
+        activeChunkCenters.Clear();
+        chunksGenerated = 0;
+
+        // Set starting point for generation just behind the snake's initial position
+        if (snakeHead != null)
+        {
+            lastGeneratedChunkCenter = snakeHead.position - Vector3.forward * 10f;
+        }
+        else
+        {
+            lastGeneratedChunkCenter = Vector3.zero - Vector3.forward * 10f;
+            Debug.LogError("Snake object not found! Starting generation at world origin.");
+        }
+        currentGenerationDirection = Vector3.forward;
+
+        // Generate the initial set of chunks so the player has a starting area
+        for (int i = 0; i < 3; i++)
+        {
+            GenerateNextChunk();
+        }
+        // --- End of new initialization logic ---
+    }
+
+    // --- New Update method for dynamic management ---
+    // Update is now only responsible for destruction. Generation is triggered by the snake.
+    void Update()
+    {
+        if (snakeHead == null || !snake.gameObject.activeInHierarchy) return;
+
+        // Dynamic Destruction
+        if (activeChunkCenters.Count > 0)
+        {
+            Vector3 oldestChunkCenter = activeChunkCenters.First.Value;
+            if (Vector3.Distance(snakeHead.position, oldestChunkCenter) > destructionDistance)
+            {
+                if (Vector3.Dot((snakeHead.position - oldestChunkCenter).normalized, Vector3.forward) > 0)
+                {
+                    DestroyChunk(oldestChunkCenter);
+                }
+            }
         }
     }
 
-    // 动态扩展边界
-    public void ExtendBorders()
+    // This public method is now the entry point for triggering generation.
+    public void RequestGenerationCheck(Vector3 futurePosition)
     {
-        // 获取最后一个边界点
-        Vector3 lastLeftPoint = leftBorder.GetLastPoint();
-        Vector3 lastRightPoint = rightBorder.GetLastPoint();
+        if (Vector3.Distance(futurePosition, lastGeneratedChunkCenter) < generationDistance)
+        {
+            GenerateNextChunk();
+        }
+    }
+    
+    // --- New Chunk Management Methods ---
+    private void GenerateNextChunk()
+    {
+        // Create a winding path by slightly altering the direction for each new chunk.
+        currentGenerationDirection = Quaternion.Euler(0, Random.Range(-15f, 15f), 0) * currentGenerationDirection;
+        Vector3 nextChunkCenter = lastGeneratedChunkCenter + currentGenerationDirection.normalized * chunkSize;
+
+        // Use chunksGenerated for difficulty scaling, similar to the old 'addIndex'
+        GenerateChunk(nextChunkCenter, chunksGenerated);
+
+        lastGeneratedChunkCenter = nextChunkCenter;
+        activeChunkCenters.AddLast(nextChunkCenter);
+        chunksGenerated++;
+    }
+
+    private void DestroyChunk(Vector3 chunkCenter)
+    {
+        float chunkDestroyRadius = chunkSize; // Use a radius larger than generation radius to ensure cleanup.
+        List<Vector3> nodesToRemove = new List<Vector3>();
+
+        // Find all nodes within the chunk's area
+        foreach (var pair in nodes)
+        {
+            if (Vector3.Distance(pair.Key, chunkCenter) < chunkDestroyRadius)
+            {
+                nodesToRemove.Add(pair.Key);
+                pool.Restore(pair.Value); // Return the node to the object pool
+            }
+        }
+
+        // Remove the nodes from the active dictionary
+        foreach (var pos in nodesToRemove)
+        {
+            nodes.Remove(pos);
+        }
+
+        if (activeChunkCenters.Count > 0)
+        {
+            activeChunkCenters.RemoveFirst();
+        }
         
-        // 计算新的方向
-        Vector3 direction = (lastRightPoint - lastLeftPoint).normalized;
-        
-        // 生成新的边界点
-        leftBorder.GenerateBorderPoint(lastLeftPoint, direction);
-        rightBorder.GenerateBorderPoint(lastRightPoint, direction);
-        
-        // 更新路径宽度（可以随机变化）
-        currentPathWidth = Mathf.Clamp(currentPathWidth + Random.Range(-1f, 1f), 8f, 12f);
+        Debug.Log($"Destroyed chunk centered at {chunkCenter}. Active chunks: {activeChunkCenters.Count}");
     }
 
     public void HideLevel()
     {
-        level.SetActive(false);
-        snake.gameObject.SetActive(false);
+        if(level != null) level.SetActive(false);
+        if(snake != null && snake.gameObject != null) snake.gameObject.SetActive(false);
     }
 
     public void ShowLevel()
     {
-        level.SetActive(true);
-        snake.gameObject.SetActive(true);
+        if(level != null) level.SetActive(true);
+        if(snake != null && snake.gameObject != null) snake.gameObject.SetActive(true);
     }
 
-    public void AddLevel(int addIndex)
+    public void GenerateChunk(Vector3 centerPoint, int difficultyIndex)
     {      
-        // 计算当前层级的中心点
-        float levelRadius = 10f; // 每层的生成半径
-        Vector3 centerPoint = new Vector3(addIndex, 0, addIndex);
-        
-        // 在圆形区域内生成方块
+        float levelRadius = chunkSize / 2f; // Generate in a radius related to chunk size
         float stepSize = 1.5f; // 增大步长，减少遍历点
         float angleStep = 20f; // 增大角度步长，减少遍历点
         float minDistance = 1.5f; // 增大元素之间的最小距离
+        int generatedInChunk = 0;
         
         // 在圆形区域内生成方块
         for (float radius = 0; radius < levelRadius; radius += stepSize)
@@ -160,28 +239,25 @@ public class LevelGenerate : MonoBehaviour
             for (float angle = 0; angle < 360; angle += angleStep)
             {
                 // 计算当前点的位置并四舍五入到整数
-                float x = Mathf.Round(centerPoint.x + radius * Mathf.Cos(angle * Mathf.Deg2Rad));
-                float z = Mathf.Round(centerPoint.z + radius * Mathf.Sin(angle * Mathf.Deg2Rad));
-                Vector3 position = new Vector3(x, 0, z);
+                float x = centerPoint.x + radius * Mathf.Cos(angle * Mathf.Deg2Rad);
+                float z = centerPoint.z + radius * Mathf.Sin(angle * Mathf.Deg2Rad);
+                Vector3 position = new Vector3(Mathf.Round(x), 0, Mathf.Round(z));
                 
-                // 检查是否与现有元素重叠
-                bool canPlace = true;
-                foreach (var node in nodes.Values)
+                // Check if a node already exists at this rounded position to prevent overlap.
+                if (nodes.ContainsKey(position))
                 {
-                    if (Vector3.Distance(position, node.transform.position) < minDistance)
-                    {
-                        canPlace = false;
-                        break;
-                    }
+                    continue;
                 }
                 
                 // 如果位置合适且满足生成概率，则生成新元素
-                if (canPlace && Random.value < 0.1f) // 降低生成概率
+                if (Random.value < 0.25f) // 降低生成概率
                 {
-                    AddCubeAt(position, addIndex);
+                    AddCubeAt(position, difficultyIndex);
+                    generatedInChunk++;
                 }
             }
         }
+        Debug.Log($"Generated chunk at {centerPoint} with {generatedInChunk} elements. Total nodes: {nodes.Count}");
     }
 
     public void AddInvinsibleLevel(int startIndex)
@@ -265,11 +341,11 @@ public class LevelGenerate : MonoBehaviour
                 checkKey.x = x;
                 checkKey.z = z;
 
-                if(Nodes.ContainsKey(checkKey))
+                if(nodes.ContainsKey(checkKey))
                 {
                     if(snake != null)
                     {
-                        snake.MeetBacisNode(Nodes[checkKey]);
+                        snake.MeetBacisNode(nodes[checkKey]);
                     }
                 }
             }
@@ -290,7 +366,7 @@ public class LevelGenerate : MonoBehaviour
 
     private void ChangeCubeToCoin()
     {
-        foreach (KeyValuePair<Vector3, Node> pair in Nodes)
+        foreach (KeyValuePair<Vector3, Node> pair in nodes)
         {
             if(pair.Value != null)
             {
@@ -329,24 +405,53 @@ public class LevelGenerate : MonoBehaviour
         }
         else if (!nodes.ContainsKey(position))
         {
-            LevelRole currentRole = null;
+            LevelRole role = null;
 
-            for(int i = 0; i < levelRoles.Count; i++)
+            for (int i = 0; i < levelRoles.Count; i++)
             {
-                if(addIndex > levelRoles[i].start)
+                if (addIndex >= levelRoles[i].start)
                 {
-                    currentRole = levelRoles[i];
+                    role = levelRoles[i];
                 }
             }
 
-            Node generateNode = currentRole.Take();
-            IAutoRestoreObject<GameObject> autoRestoreObjec = pool.Take(generateNode.type);
-            GameObject cube = autoRestoreObjec.Get();
-            cube.transform.parent = level.transform;
-            Node node = cube.GetComponent<Node>();
-            node.SetPosition(position);
-            nodes.Add(position, node); 
-            node.inSnake = false;
+            // If no specific role was found (e.g., at the very beginning of the level),
+            // default to the first role in the list as a fallback.
+            if (role == null && levelRoles.Count > 0)
+            {
+                role = levelRoles[0];
+            }
+
+            // If levelRoles is empty or something went wrong, prevent crash.
+            if (role == null)
+            {
+                Debug.LogError("Cannot generate cube: No suitable LevelRole found and levelRoles list is empty.");
+                return;
+            }
+            
+            // The 'Take()' method on the role returns a prefab/template for the node.
+            Node nodePrefab = role.Take();
+            
+            // Use the NodeType from the prefab to get an actual GameObject from the pool.
+            IAutoRestoreObject<GameObject> pooledObjectContainer = pool.Take(nodePrefab.type);
+            GameObject cubeGO = pooledObjectContainer.Get();
+
+            // Initialize the node immediately after getting it from the pool, BEFORE setting its position or parent.
+            var basicNode = cubeGO.GetComponent<BasicNode>();
+            if (basicNode != null)
+            {
+                basicNode.Init(this, gameController);
+            }
+
+            cubeGO.transform.parent = level.transform; // Set parent first
+
+            // Get the Node component from the pooled GameObject and configure it.
+            Node cube = cubeGO.GetComponent<Node>();
+            cube.transform.position = position;
+            cube.transform.rotation = Quaternion.identity;
+            
+            nodes.Add(position, cube); 
+            cube.inSnake = false;
         }
     }
     
@@ -398,9 +503,11 @@ public class LevelGenerate : MonoBehaviour
 
     public void Restore(Node node)
     {
-        pool.Restore(node);
-        Nodes.Remove(node.transform.position);
-        node.transform.parent = level.transform;
+        if(nodes.ContainsKey(node.transform.position))
+        {
+            nodes.Remove(node.transform.position);
+            pool.Restore(node);
+        }
     }
 
     private void Remove(int removeIndex)
@@ -420,61 +527,31 @@ public class LevelGenerate : MonoBehaviour
         }
     }
 
-    // 获取指定层级的左边界点
-    public Vector3 GetLeftBorderPoint(int level)
-    {
-        return leftBorder.GetPointAt(level);
-    }
-
-    // 获取指定层级的右边界点
-    public Vector3 GetRightBorderPoint(int level)
-    {
-        return rightBorder.GetPointAt(level);
-    }
-
-    // 检查位置是否在边界内
+    // This method is obsolete as we are not using the old border system.
+    // However, it's called by Snake.cs. We'll temporarily return a wide bound.
+    // TODO: Refactor Snake.cs to not depend on this, or implement new bounds logic.
     public bool IsPositionInBounds(Vector3 position)
     {
-        int currentLevel = (int)(Mathf.Max(position.x, position.z) * 1.414f);
-        Vector3 leftPoint = GetLeftBorderPoint(currentLevel);
-        Vector3 rightPoint = GetRightBorderPoint(currentLevel);
-        
-        // 计算点到边界的距离
-        float distanceToLeft = Vector3.Distance(position, leftPoint);
-        float distanceToRight = Vector3.Distance(position, rightPoint);
-        
-        // 如果距离小于某个阈值，认为超出边界
-        return distanceToLeft >= 0.5f && distanceToRight >= 0.5f;
+        // For now, let's assume a generous width around the center-line (x=0)
+        // This is a temporary measure to allow compilation.
+        return true; // Mathf.Abs(position.x) < 20f; 
     }
 
 #if UNITY_EDITOR
     [MenuItem("Tools/AddBorder")]
     public static void AddBorder()
     {
-        // 移除旧的边界生成方法
-        // GenerateBorder();
+        // This is an editor tool for the old system and is no longer needed for dynamic generation.
+        Debug.LogWarning("'AddBorder' is an obsolete tool from the old level generation system.");
     }
 
     [MenuItem("Tools/AddGrid")]
     public static void DrawGrid()
     {
-        LineRenderer line = (Resources.Load("Line") as GameObject).GetComponent<LineRenderer>();
-
-        for(int i = -10; i < 100; i++)
-        {
-            LineRenderer newline = Instantiate(line) as LineRenderer;
-            newline.SetPosition(0, new Vector3(0.5f+ i, -0.5f, 100f));
-            newline.SetPosition(1, new Vector3(0.5f+ i, -0.5f, -100f));
-            
-            newline.SetWidth(0.2f, 0.2f);
-            
-            LineRenderer newline2 = Instantiate(line) as LineRenderer;
-            newline2.SetPosition(0, new Vector3(100f, -0.5f, 0.5f+ i));
-            newline2.SetPosition(1, new Vector3(-100f, -0.5f, 0.5f+ i));
-            
-            newline2.SetWidth(0.2f, 0.2f);
-        }
+        // This is an editor tool for the old system and is no longer needed for dynamic generation.
+        Debug.LogWarning("'DrawGrid' is an obsolete tool from the old level generation system.");
     }
 
 #endif
 }
+

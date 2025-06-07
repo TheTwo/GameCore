@@ -5,9 +5,7 @@ using System.Collections.Generic;
 public class Snake : MonoBehaviour
 {
     public List<Node> snakeNodes;
-    public LevelGenerate level;
     public Node lastNode;
-    public GameController gameController;
 
     private HeadNode head;
     private Vector3[] directions = {new Vector3(1, 0, 0),new Vector3(0, 0, 1)};
@@ -17,7 +15,6 @@ public class Snake : MonoBehaviour
     private GameData gameData;
     private Quaternion targetQuternion = Quaternion.identity;
     private int addScore = 1;
-    private LevelGenerate levelGenerate;
     private Vector3 gameOverPlace;
 
     private Animator headAnimator;
@@ -34,15 +31,43 @@ public class Snake : MonoBehaviour
     private float speedBoostEndTime = 0f;
     private bool isSpeedBoosted = false;
 
-    void Start()
+    private LevelGenerate levelGenerate;
+    private GameController gameController;
+
+    public void PreInit(GameController gc, LevelGenerate lg)
     {
-        headDirection = directions [1];
+        this.gameController = gc;
+        this.levelGenerate = lg;
+        this.gameData = gc.GameData;
 
-        levelGenerate = GameObject.Find("Level").GetComponent<LevelGenerate>();
+        headDirection = directions[1];
 
-        tutorialData = FindObjectOfType<TutorialController>().TutorialData;
+        Debug.Log("Attempting to find TutorialController...");
+        TutorialController tutorialController = FindObjectOfType<TutorialController>();
 
+        if (tutorialController == null)
+        {
+            Debug.Log("TutorialController is NULL. Skipping tutorial data setup.");
+        }
+        else
+        {
+            Debug.Log("TutorialController was FOUND. GameObject name: " + tutorialController.gameObject.name);
+            tutorialData = tutorialController.TutorialData;
+            if (tutorialData == null)
+            {
+                Debug.Log("tutorialController.TutorialData returned NULL.");
+            }
+        }
+        
+        gameData.OnLevelUp += HandleOnLevelUp;
+        gameData.OnGameDataChange += GameData_OnGameDataChange;
+    }
+
+    public void Init()
+    {
+        Debug.Log("Snake.Init() called.");
         UpdateHead();
+        Debug.Log("UpdateHead() finished in Snake.Init().");
     }
 
     public void Revive()
@@ -142,7 +167,7 @@ public class Snake : MonoBehaviour
                 iTween.ShakePosition(Camera.main.gameObject, iTween.Hash("y", 0.2f, "x", 0.2f, "time", 0.2f));
             }
 
-            level.Shake(head.transform.position);
+            levelGenerate.Shake(head.transform.position);
             gameController.UpdateLevelSlider();
         }
         
@@ -189,27 +214,60 @@ public class Snake : MonoBehaviour
         }
 
         CheckOutOfScreen();
-
-        if (!gameData.isSnakeInvinciable && (head.transform.position.x > head.transform.position.z + GameConfig.X_COUNT || head.transform.position.x < head.transform.position.z - GameConfig.X_COUNT))
-        {
-            GameOver();
-        }
     }
 
     public void InitHead(Vector3 position)
     {
-        if (head != null && head.role != PlayerPrefs.GetInt("role"))
-        {
-            snakeNodes.Remove(head);
-            Destroy(head.gameObject); 
-            head = null;
-        }
+        Debug.Log("InitHead called. Current head is " + (head == null ? "null" : "not null"));
 
-        if (head == null || head.role != PlayerPrefs.GetInt("role"))
+        int role = PlayerPrefs.GetInt("role");
+        Debug.Log("PlayerPrefs role is: " + role);
+
+        if (head == null || head.role != role)
         {
-            string path = "Head/Head" + PlayerPrefs.GetInt("role");
-            GameObject g = Instantiate(Resources.Load(path)) as GameObject;
+            if (head != null)
+            {
+                Debug.Log("Existing head role " + head.role + " does not match new role " + role + ". Destroying old head.");
+                snakeNodes.Remove(head);
+                Destroy(head.gameObject);
+                head = null;
+            }
+
+            string path = "Head/Head" + role;
+            Debug.Log("Attempting to load prefab from path: " + path);
+
+            Object prefab = Resources.Load(path);
+            if (prefab == null)
+            {
+                Debug.LogError("FATAL: Failed to load head prefab from path: " + path + ". Make sure the prefab exists at this path in a Resources folder.");
+                return; 
+            }
+            
+            GameObject g = Instantiate(prefab) as GameObject;
+            if (g == null)
+            {
+                Debug.LogError("FATAL: Failed to instantiate prefab from path: " + path);
+                return;
+            }
+            
+            Debug.Log("Prefab instantiated successfully.");
+            
             head = g.GetComponent<HeadNode>();
+            if (head == null) {
+                Debug.LogError("FATAL: Instantiated prefab does not have a HeadNode component!");
+                return;
+            }
+            Debug.Log("HeadNode component found successfully.");
+
+
+            var basicNodeComponent = g.GetComponent<BasicNode>();
+            if (basicNodeComponent != null)
+            {
+                Debug.Log("BasicNode component found, calling its Init.");
+                basicNodeComponent.Init(levelGenerate, gameController);
+            } else {
+                Debug.LogWarning("Instantiated head prefab is missing a BasicNode component.");
+            }
 
             g.transform.position = position;
             g.transform.localScale = Vector3.one;
@@ -218,9 +276,10 @@ public class Snake : MonoBehaviour
             g.transform.parent = transform;
 
             headAnimator = g.GetComponent<Animator>();
+            Debug.Log("InitHead finished successfully.");
+        } else {
+            Debug.Log("Skipping head creation because a valid head already exists.");
         }
-
-//        headAnimator.enabled = false;
     }
 
     public void UpdateHead()
@@ -238,11 +297,11 @@ public class Snake : MonoBehaviour
             return;
         }
 
-        if (Camera.main.WorldToScreenPoint(head.transform.position).y > Screen.height)
-        {
-            Debug.Log("out of screen ======");
-            GameOver();
-        }
+        // if (Camera.main.WorldToScreenPoint(head.transform.position).y > Screen.height)
+        // {
+        //     Debug.Log("out of screen ======");
+        //     GameOver();
+        // }
     }
 
     private void CheckInput()
@@ -285,13 +344,9 @@ public class Snake : MonoBehaviour
         }
     }
 
-    public void OnStartGame(GameData gameData)
+    void HandleOnLevelUp(int level)
     {
-        this.gameData = gameData;
-        Invoke("RealStart", 0.01f);
-
-        gameData.OnLevelUp += HandleOnLevelUp;
-        gameData.OnGameDataChange += GameData_OnGameDataChange;
+        StartInvincible(GameConfig.INVINSIBLE_TIME);
     }
 
     void GameData_OnGameDataChange (GameData gamedata)
@@ -301,15 +356,10 @@ public class Snake : MonoBehaviour
             Vector3 position = head.position;
 
             snakeNodes.Remove(head);
-            Destroy(head);
+            Destroy(head.gameObject);
 
             InitHead(position);
         }
-    }
-
-    void HandleOnLevelUp(int level)
-    {
-        StartInvincible(GameConfig.INVINSIBLE_TIME);
     }
 
     public HeadNode headNode
@@ -335,7 +385,7 @@ public class Snake : MonoBehaviour
     {
         get
         {
-            return level.Nodes;
+            return levelGenerate.Nodes;
         }
     }
 
@@ -424,6 +474,12 @@ public class Snake : MonoBehaviour
         
         Vector3 targetPosition = StablePostion(head.transform.position + headDirection);
 
+        // --- Start of New Generation and Movement Logic ---
+
+        // 1. Tell the level generator to check if it needs to generate based on our FUTURE position.
+        levelGenerate.RequestGenerationCheck(targetPosition);
+
+        // 2. Check for collisions at the future position.
 		if (gameData.isSnakeInvinciable)
         {
             if (head.transform.position.x > head.transform.position.z + GameConfig.X_COUNT)
@@ -452,40 +508,27 @@ public class Snake : MonoBehaviour
                 headAnimator.SetTrigger("Eat");
             }
         }
-
+        
+        // 3. Move the snake bodies first.
         Vector3 lastPostion = head.transform.position;
-
-        if (!transforming)
-        {
-            head.MoveBy(headDirection, this, gameData);    
-        }
-      
         for (int i = 1; i < snakeNodes.Count; i++)
         {
             Vector3 temp = snakeNodes [i].transform.position;
-            snakeNodes [i].Fllow(lastPostion, this, gameData);
+            // Replace iTween with a direct, predictable movement
+            snakeNodes[i].transform.position = Vector3.MoveTowards(snakeNodes[i].transform.position, lastPostion, gameData.NodeSpeed * Time.deltaTime);
             lastPostion = temp;
         }
 
-        addLevel();     
+        // 4. Finally, move the head.
+        // Replace iTween with a direct, predictable movement
+        head.transform.position = Vector3.MoveTowards(head.transform.position, targetPosition, gameData.NodeSpeed * Time.deltaTime);
+        
+        // --- End of New Generation and Movement Logic ---
     }
 
     private Vector3 StablePostion(Vector3 position)
     {
         return new Vector3(Mathf.RoundToInt(position.x), 0, Mathf.RoundToInt(position.z));
-    }
-
-    private void addLevel()
-    {
-        int targetRow = (int)(head.transform.position.z);
-        int targetCol = (int)(head.transform.position.x);
-
-        int checkingLevel = (int)(Mathf.Max(targetCol, targetRow) * 1.414f) + 20;
-        if (checkingLevel > currentLevel)
-        {
-            currentLevel = checkingLevel;
-            level.AddLevel(currentLevel);
-        }
     }
 
     private void BangTail()
@@ -574,7 +617,7 @@ public class Snake : MonoBehaviour
 //            EffectManager.Instance.AddScoreEffect(basicNode.transform.position);
             EffectManager.Instance.ShowScoreFlare();
                         
-            level.Restore(basicNode);
+            levelGenerate.Restore(basicNode);
             gameController.AddScore(addScore);
         }
         else
@@ -611,7 +654,7 @@ public class Snake : MonoBehaviour
     {
         gameController.AddStar(1);
 
-        level.Restore(node);
+        levelGenerate.Restore(node);
     }
 
     public void MeetBadNode(Node badNode)

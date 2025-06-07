@@ -47,7 +47,7 @@ public class UIController : MonoBehaviour
         Reposition(StartUI);
 
         StartUI.GetComponent<StartUIController>().UpdateUI(gameData);
-        levelGenerate.ShowLevel();
+        levelGenerate.HideLevel();
 
         gameController = FindObjectOfType<GameController>();
     }
@@ -60,7 +60,7 @@ public class UIController : MonoBehaviour
 
         StartUI.GetComponent<StartUIController>().UpdateUI(gameData);
 
-        levelGenerate.ShowLevel();
+        levelGenerate.HideLevel();
 
         gameController.snake.UpdateHead();
     }
